@@ -1,0 +1,109 @@
+/* Minimal custom styles - let 98.css handle the Windows 98 styling */
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #fcfbf4; /* Creamish white background */
+}
+
+win98-desktop {
+  background-color: #fcfbf4;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vanilla:hover {
+  filter: drop-shadow(0 0 2em #f7df1eaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Button styles are handled by 98.css and win-button components */
+
+/* Start Menu Styles */
+#start-menu {
+  box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#start-menu .window-body ul li {
+  user-select: none;
+  transition: background-color 0.1s, color 0.1s;
+}
+
+#start-menu .window-body ul li:hover {
+  background-color: #000080 !important;
+  color: #fff !important;
+}
+
+/* Window body overflow fix - ensures scrollbars appear when content overflows */
+/* Note: Keep styles minimal to not interfere with win98-window component functionality */
+win98-window {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+win98-window .window-body {
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  min-height: 0;
+  /* Ensure content outside viewport is completely hidden */
+  position: relative;
+}
+
+/* Typography adjustments for compact layout */
+win98-window .window-body p {
+  font-size: 0.85em;
+}
+
+win98-window .window-body li {
+  font-size: 0.85em;
+}
+
+win98-window .window-body h3 {
+  font-size: 0.9em;
+}
+
+win98-window .window-body h4 {
+  font-size: 0.9em;
+}
+
+/* Color scheme is handled by 98.css */
