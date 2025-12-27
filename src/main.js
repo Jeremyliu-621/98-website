@@ -236,7 +236,7 @@ function initApp() {
       </div>
 
       <!-- About Me Window - Left -->
-      <win98-window title="About Me.exe" resizable style="top: 22px; left: 340px; width: 300px; height: calc(100vh - 100px);">
+      <win98-window title="About Me.exe" resizable style="bottom: 14vh; left: 27vh; width: 320px; height: 70vh;">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
           <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;">${
             content.aboutMe.name
@@ -247,21 +247,21 @@ function initApp() {
           <p style="margin: 5px 0; line-height: 1.3;">${content.aboutMe.bio}</p>
           <img src="${
             getImageUrl("cruisesunset") || ""
-          }" alt="Cruise Sunset" style="width: 100%; height: 270px; margin: 8px 0; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; margin-bottom: 8px;">
+          }" alt="Cruise Sunset" style="width: 100%; height: 170px; margin: 8px 0; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px;">
             <a href="https://www.linkedin.com/in/jmyl" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">🔗</span> LinkedIn</a>
             <a href="mailto:jeremyliu621@gmail.com" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">✉️</span> Email</a>
             <a href="https://github.com/Jeremyliu-621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">💻</span> Github</a>
             <a href="./assets/Jeremy_Liu_final_resume.pdf" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">📄</span> Resume</a>
             <a href="https://instagram.com/jeremyliu.621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">📷</span> Instagram</a>
-            <a href="https://devpost.com/jeremyliu621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">⚡</span> Devpost</a>
+            <a href="https://devpost.com/jeremyliu621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; text-align: center;"><span style="font-size: 1.2em;">⚡</span> Devpost</a>
           </div>
         </div>
       </win98-window>
 
       <!-- Skills Window - Middle Top -->
-      <win98-window title="Skills.exe" resizable style="top: 20px; left: 660px; width: 300px; height: calc(65vh - 60px);">
-        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+      <win98-window title="Skills.exe" resizable style="bottom: 43vh; left: 155vh; width: 300px; height: calc(35vh);">
+        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px; font-weight: bold; font-size: 1.4em;">Languages</h3>
           <p style="margin: 3px 0;">${content.skills.languages}</p>
           
@@ -278,24 +278,26 @@ function initApp() {
           <hr style="margin: 8px 0;">
           
           <h3 style="margin-top: 8px; margin-bottom: 5px; font-weight: bold; font-size: 1.4em;">Currently improving by:</h3>
-          <ul style="text-align: left; margin: 3px 0; padding-left: 20px; line-height: 1.4;">
+          <ul style="text-align: left; margin: 3px 0 0 0; padding-left: 20px; line-height: 1.4;">
             ${improvingHTML}
           </ul>
         </div>
       </win98-window>
 
       <!-- Hobbies Window - Middle Bottom -->
-      <win98-window title="Hobbies.exe" resizable style="top: calc(65vh - 20px); left: 660px; width: 300px; height: calc(35vh - 60px);">
-        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+      <win98-window title="Hobbies.exe" resizable style="bottom: 15vh; left: 157vh; width: 300px; height: calc(35vh - 60px);">
+        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px;">Outside of Academics</h3>
           <p style="margin: 5px 0; line-height: 1.3;">${content.hobbies}</p>
+          <img src="${
+            getImageUrl("conormcgregor") || ""
+          }" alt="Conor McGregor" style="max-width: 100px; width: 40px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
         </div>
-        
       </win98-window>
 
       <!-- Projects Window - Right -->
-      <win98-window title="My Projects.exe" resizable style="top: 20px; left: 970px; width: calc(100vw - 1000px); height: calc(100vh - 100px);">
-        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+      <win98-window title="My Projects.exe" resizable style="top: 20px; left: 75.5vh; width: calc(100vw - 1000px); height: calc(100vh - 100px);">
+        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px;">My Projects</h3>
           ${projectsHTML}
         </div>
@@ -303,7 +305,7 @@ function initApp() {
 
       <!-- Image Gallery Window - Initially Hidden -->
       <win98-window title="Image Gallery.exe" resizable style="display: none; top: 50px; left: 50px; width: 400px; height: 350px;">
-        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column; gap: 10px;">
+        <div class="window-body" style="padding: 8px 8px 2px 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column; gap: 10px;">
           <p style="margin: 0 0 5px 0;">A collection of my captured moments and project screenshots.</p>
           ${Object.values(images)
             .map(
@@ -315,7 +317,7 @@ function initApp() {
       </win98-window>
 
       <!-- Interactive Window -->
-      <win98-window title="Interactive.exe" resizable style="bottom: 15vh; left: 12vh; width: 200px; height: 130px;">
+      <win98-window title="Interactive.exe" resizable style="bottom: 5vh; left: 36vh; width: 200px; height: 120px;">
         <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; display: flex; align-items: center; gap: 10px;">
           <p style="margin: 0; font-size: 1.15em; flex: 1;">you can interact with windows!</p>
           <img src="${
@@ -412,6 +414,207 @@ function initApp() {
         subtree: true,
       });
     }
+
+    // ============================================
+    // UNDO/REDO FEATURE FOR WINDOW RESIZING
+    // ============================================
+    // Track window state history for undo/redo functionality
+    const windowHistory = {
+      undoStack: [], // Array of window states to undo
+      redoStack: [], // Array of window states to redo
+      isTracking: true, // Flag to prevent tracking during undo/redo
+    };
+
+    // Function to capture current state of all windows
+    function captureWindowState() {
+      if (!windowHistory.isTracking) return;
+
+      const windows = document.querySelectorAll("win98-window");
+      const state = {};
+      windows.forEach((window) => {
+        const title = window.getAttribute("title");
+        if (title) {
+          // Get the actual style attribute value to capture all properties
+          const styleAttr = window.getAttribute("style") || "";
+          const styleObj = window.style;
+
+          // Capture all position and size properties
+          state[title] = {
+            top: styleObj.top || "",
+            left: styleObj.left || "",
+            right: styleObj.right || "",
+            bottom: styleObj.bottom || "",
+            width: styleObj.width || "",
+            height: styleObj.height || "",
+          };
+
+          // Ensure we capture empty strings as empty strings (not undefined)
+          // This is important for proper restoration
+          Object.keys(state[title]).forEach((key) => {
+            if (state[title][key] === undefined) {
+              state[title][key] = "";
+            }
+          });
+        }
+      });
+
+      // Add to undo stack (limit to last 50 states to prevent memory issues)
+      windowHistory.undoStack.push(state);
+      if (windowHistory.undoStack.length > 50) {
+        windowHistory.undoStack.shift();
+      }
+
+      // Clear redo stack when new action is performed
+      windowHistory.redoStack = [];
+    }
+
+    // Function to restore window state
+    function restoreWindowState(state) {
+      windowHistory.isTracking = false; // Prevent tracking during restore
+
+      Object.keys(state).forEach((title) => {
+        const window = document.querySelector(`win98-window[title="${title}"]`);
+        if (window && state[title]) {
+          const savedState = state[title];
+
+          // Always restore all properties that were saved
+          // This ensures complete restoration of position and size
+          const properties = [
+            "top",
+            "left",
+            "right",
+            "bottom",
+            "width",
+            "height",
+          ];
+          properties.forEach((prop) => {
+            if (savedState.hasOwnProperty(prop)) {
+              window.style[prop] = savedState[prop] || "";
+            }
+          });
+        }
+      });
+
+      // Re-enable tracking after a short delay
+      setTimeout(() => {
+        windowHistory.isTracking = true;
+      }, 100);
+    }
+
+    // Function to undo last window resize/move
+    function undoWindowChange() {
+      if (windowHistory.undoStack.length < 2) return; // Need at least 2 states (current + previous)
+
+      const currentState = windowHistory.undoStack.pop();
+      const previousState =
+        windowHistory.undoStack[windowHistory.undoStack.length - 1];
+
+      // Add current state to redo stack
+      windowHistory.redoStack.push(currentState);
+
+      // Restore previous state
+      if (previousState) {
+        restoreWindowState(previousState);
+      }
+    }
+
+    // Function to redo window change
+    function redoWindowChange() {
+      if (windowHistory.redoStack.length === 0) return;
+
+      const stateToRestore = windowHistory.redoStack.pop();
+      restoreWindowState(stateToRestore);
+
+      // Add back to undo stack
+      windowHistory.undoStack.push(stateToRestore);
+    }
+
+    // Monitor window resize/move events
+    let resizeTimeout = null;
+    const windows = document.querySelectorAll("win98-window");
+    windows.forEach((window) => {
+      // Use MutationObserver to detect style changes (resize/move)
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.type === "attributes" &&
+            mutation.attributeName === "style"
+          ) {
+            // Debounce: capture state 300ms after last change
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+              captureWindowState();
+            }, 300);
+          }
+        });
+      });
+
+      observer.observe(window, {
+        attributes: true,
+        attributeFilter: ["style"],
+      });
+    });
+
+    // Also monitor dynamically added windows
+    const resizeObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (
+            node.nodeName === "WIN98-WINDOW" ||
+            node.querySelector?.("win98-window")
+          ) {
+            // New window added, set up observer for it
+            const newWindows =
+              node.nodeName === "WIN98-WINDOW"
+                ? [node]
+                : node.querySelectorAll("win98-window");
+
+            newWindows.forEach((window) => {
+              const observer = new MutationObserver(() => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                  captureWindowState();
+                }, 300);
+              });
+
+              observer.observe(window, {
+                attributes: true,
+                attributeFilter: ["style"],
+              });
+            });
+          }
+        });
+      });
+    });
+
+    if (desktop) {
+      resizeObserver.observe(desktop, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    // Keyboard shortcuts for undo/redo
+    document.addEventListener("keydown", (e) => {
+      // Check for Ctrl+Z (Windows/Linux) or Cmd+Z (Mac) for undo
+      if ((e.ctrlKey || e.metaKey) && e.key === "z" && !e.shiftKey) {
+        e.preventDefault();
+        undoWindowChange();
+      }
+      // Check for Ctrl+Shift+Z or Ctrl+Y (Windows/Linux) or Cmd+Shift+Z (Mac) for redo
+      else if (
+        ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "z") ||
+        ((e.ctrlKey || e.metaKey) && e.key === "y")
+      ) {
+        e.preventDefault();
+        redoWindowChange();
+      }
+    });
+
+    // Capture initial state
+    setTimeout(() => {
+      captureWindowState();
+    }, 500);
 
     // Start menu functionality
     const startMenu = document.querySelector("#start-menu");
@@ -882,7 +1085,7 @@ function initApp() {
           // Create blog window HTML (horizontal/larger window)
           const windowHTML = `
             <win98-window title="Blog.exe" resizable style="top: 50px; left: 50px; width: 900px; height: 650px; z-index: 1000;">
-              <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+              <div class="window-body" style="padding: 12px 12px 2px 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
                 <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.5em;">My Blog</h2>
                 <div style="max-width: 100%;">
                   ${postsHTML}
