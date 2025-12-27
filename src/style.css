@@ -137,22 +137,24 @@ win98-window .window-body {
 }
 
 /* Typography adjustments for better legibility */
+/* default font sizes */
+
 win98-window .window-body p {
-  font-size: 1.15em;
+  font-size: 1.25em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 win98-window .window-body li {
-  font-size: 1.15em;
+  font-size: 1.25em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 win98-window .window-body h3 {
-  font-size: 1.25em;
+  font-size: 1.35em;
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -160,7 +162,7 @@ win98-window .window-body h3 {
 }
 
 win98-window .window-body h4 {
-  font-size: 1.25em;
+  font-size: 1.29em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -376,7 +378,7 @@ win98-window {
 }
 
 /* Large desktops (1619px and above) */
-@media screen and (min-width: 1619px) {
+@media screen and (min-width: 1620px) and (max-width: 1919px) {
   /* Increase font sizes for readability */
   win98-window .window-body {
     font-size: 1.15em;
@@ -402,6 +404,7 @@ win98-window {
   /* Make windows wider on large screens */
   win98-window[title="About Me.exe"] {
     width: 400px !important;
+    left: 30vh !important;
   }
 
   win98-window[title="Skills.exe"] {
@@ -413,7 +416,72 @@ win98-window {
   }
 
   win98-window[title="My Projects.exe"] {
-    width: calc(100vw - 1200px) !important;
+    width: 600px !important;
+    left: 85vh !important;
+  }
+
+  win98-window[title="Interactive.exe"] {
+    width: 250px !important;
+  }
+
+  /* Larger desktop icon text */
+  .desktop-folder {
+    font-size: 1em !important;
+  }
+
+  /* Larger tab text */
+  .project-tab {
+    font-size: 1.1em !important;
+  }
+
+  /* Larger social button text */
+  .social-btn {
+    font-size: 1.25em !important;
+  }
+}
+
+/* Larger desktops (1920px to 2559px) */
+@media screen and (min-width: 1920px) and (max-width: 2303px) {
+  /* Increase font sizes for readability */
+  win98-window .window-body {
+    font-size: 1.35em;
+  }
+
+  win98-window .window-body p,
+  win98-window .window-body li {
+    font-size: 1.25em;
+  }
+
+  win98-window .window-body h2 {
+    font-size: 3.2em !important;
+  }
+
+  win98-window .window-body h3 {
+    font-size: 1.7em;
+  }
+
+  win98-window .window-body h4 {
+    font-size: 1.6em;
+  }
+
+  /* Make windows wider on large screens */
+  win98-window[title="About Me.exe"] {
+    width: 400px !important;
+    height: 600px !important;
+    left: 25vh !important;
+  }
+
+  win98-window[title="Skills.exe"] {
+    width: 380px !important;
+  }
+
+  win98-window[title="Hobbies.exe"] {
+    width: 380px !important;
+  }
+
+  win98-window[title="My Projects.exe"] {
+    width: 750px !important;
+    left: 77vh !important;
   }
 
   win98-window[title="Interactive.exe"] {
@@ -437,7 +505,7 @@ win98-window {
 }
 
 /* Very large desktops (2560px and above) */
-@media screen and (min-width: 2560px) {
+@media screen and (min-width: 2304px) {
   /* Even larger font sizes */
   win98-window .window-body {
     font-size: 2.3em;
