@@ -120,6 +120,7 @@ h1 {
 win98-window {
   display: flex;
   flex-direction: column;
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
 }
 
 win98-window .window-body {
@@ -169,6 +170,7 @@ win98-window .window-body h4 {
 .social-btn {
   transition: all 0.1s;
   user-select: none;
+  text-align: center !important;
 }
 
 .social-btn:hover {
@@ -223,6 +225,26 @@ a[href*="github"]:hover {
 a[href*="github"]:active {
   border: 2px inset #c0c0c0 !important;
   background: #a0a0a0 !important;
+}
+
+/* Remove extra bottom margin from last elements in window bodies (except My Projects) */
+win98-window:not([title="My Projects.exe"]) .window-body > *:last-child,
+win98-window:not([title="My Projects.exe"])
+  .window-body
+  > div:last-child
+  > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Specifically target Hobbies window to remove all bottom spacing */
+win98-window[title="Hobbies.exe"] .window-body > div:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+win98-window[title="Hobbies.exe"] .window-body img:last-child {
+  margin-bottom: 0 !important;
 }
 
 /* Color scheme is handled by 98.css */
