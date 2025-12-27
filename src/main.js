@@ -314,7 +314,7 @@ function initApp() {
         <img src="${
           getImageUrl("directory_computer") || ""
         }" alt="Folder" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
-        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Click Me!</span>
+        <span style="display: block; font-size: 1em; color: #000; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; word-break: break-word; line-height: 1.1; font-family: 'Jersey 10', sans-serif;">Click Me!</span>
       </div>
 
       <!-- Desktop Blog Icon -->
@@ -322,7 +322,7 @@ function initApp() {
         <img src="${
           getImageUrl("user-world") || ""
         }" alt="Blog" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
-        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Blog</span>
+        <span style="display: block; font-size: 1em; color: #000; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; word-break: break-word; line-height: 1.1; font-family: 'Jersey 10', sans-serif;">Blog</span>
       </div>
 
       <!-- Desktop Chatbox Icon -->
@@ -330,7 +330,7 @@ function initApp() {
         <img src="${
           getImageUrl("user-chatbox") || ""
         }" alt="Chatbox" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
-        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Chatbox</span>
+        <span style="display: block; font-size: 1em; color: #000; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; word-break: break-word; line-height: 1.1; font-family: 'Jersey 10', sans-serif;">Chatbox</span>
       </div>
 
       <!-- Desktop Theme Editor Icon -->
@@ -338,15 +338,15 @@ function initApp() {
         <img src="${
           getImageUrl("paint_old") || ""
         }" alt="Theme Editor" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
-        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Theme Editor</span>
+        <span style="display: block; font-size: 1em; color: #000; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; word-break: break-word; line-height: 1.1; font-family: 'Jersey 10', sans-serif;">Theme Editor</span>
       </div>
 
       <!-- Desktop Thanks Icon -->
       <div class="desktop-folder" id="desktop-thanks" style="position: absolute; top: 560px; left: 20px; width: 80px; cursor: pointer; text-align: center; padding: 4px; user-select: none;">
         <img src="${
           getImageUrl("picture-painting") || ""
-        }" alt="Blog" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
-        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Thank you!</span>
+        }" alt="Blog" style="width: 48px; height: 48px; font-family: 'Jersey 10', sans-serif; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
+        <span style="display: block; font-size: 1em; color: #000; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; word-break: break-word; line-height: 1.1; font-family: 'Jersey 10', sans-serif;">Thank you!</span>
       </div>
 
       <!-- About Me Window - Left -->
