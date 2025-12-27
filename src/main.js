@@ -285,13 +285,32 @@ function initApp() {
       </win98-window>
 
       <!-- Hobbies Window - Middle Bottom -->
-      <win98-window title="Hobbies.exe" resizable style="bottom: 15vh; left: 157vh; width: 300px; height: calc(35vh - 60px);">
+      <win98-window title="Hobbies.exe" resizable style="bottom: 15vh; left: 157vh; width: 300px; height: calc(18vh);">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px;">Outside of Academics</h3>
           <p style="margin: 5px 0; line-height: 1.3;">${content.hobbies}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+           <img src="${
+             getImageUrl("conormcgregor") || ""
+           }" alt="Conor McGregor" style="max-width: 100px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
           <img src="${
-            getImageUrl("conormcgregor") || ""
-          }" alt="Conor McGregor" style="max-width: 100px; width: 40px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+            getImageUrl("animation") || ""
+          }" alt="Pretty Animation" style="max-width: 100px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          <img src="${
+            getImageUrl("bjj-grappling") || ""
+          }" alt="BJJ Grappling" style="max-width: 100px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          <img src="${
+            getImageUrl("Happy") || ""
+          }" alt="Charles Oliviera" style="max-width: 200px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          <img src="${
+            getImageUrl("Rodney") || ""
+          }" alt="Skating" style="max-width: 100px; width: 40px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          <img src="${
+            getImageUrl("stop") || ""
+          }" alt="graffiti" style="max-width: 100px; width: 40px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          
+          </div>
+      
         </div>
       </win98-window>
 
