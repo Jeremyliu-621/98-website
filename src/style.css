@@ -131,6 +131,15 @@ win98-window {
   box-shadow: 4.5px 4.5px 8px rgba(0, 0, 0, 0.25);
 }
 
+/* Increase resize handle area for easier window resizing */
+/* Set CSS custom properties to increase resize handle size */
+win98-window[resizable] {
+  --resize-handle-size: 12px;
+  --resize-grip-size: 12px;
+  --resize-zone-size: 12px;
+  --resize-border-width: 12px;
+}
+
 win98-window .window-body {
   box-sizing: border-box;
   overflow-y: auto;
@@ -306,10 +315,6 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
   border-left: 1px solid #808080 !important;
   border-bottom: 2px solid #000 !important;
   border-right: 1px solid #808080 !important;
-}
-
-.project-tab p {
-  margin-bottom: 100;
 }
 
 /* ============================================

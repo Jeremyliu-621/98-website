@@ -212,8 +212,8 @@ function createProjectHTML(project, index) {
   let html = `
     <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #e0e0e0; display: flex; gap: 8px; align-items: flex-start;">
       <div style="flex: 1; min-width: 0;">
-        <h4 style="margin-top: 0; margin-bottom: 3px; font-weight: bold;">${project.title}</h4>
-        <p style="margin: 2px 0;">${project.description}</p>`;
+        <h3 style="margin-top: 0; margin-bottom: 3px; font-weight: bold;">${project.title}</h4>
+        <p style="margin: 8px 0;">${project.description}</p>`;
 
   if (project.front || project.back) {
     html += `
@@ -604,6 +604,47 @@ function initApp() {
     document.addEventListener("mouseup", () => {
       isDragging = false;
       constrainWindowPositions(); // Final check on release
+    });
+
+    // Expand resize handle area for resizable windows
+    // This increases the interactive area around window edges/corners for easier resizing
+    const RESIZE_ZONE_SIZE = 12; // Size in pixels for the expanded resize area
+
+    const expandResizeHandles = () => {
+      const resizableWindows = document.querySelectorAll(
+        "win98-window[resizable]"
+      );
+      resizableWindows.forEach((window) => {
+        // Skip if already processed
+        if (window.dataset.resizeExpanded === "true") return;
+        window.dataset.resizeExpanded = "true";
+
+        // Try to set CSS custom properties that the component might support
+        // These will only work if the component uses these CSS variables
+        window.style.setProperty(
+          "--resize-handle-size",
+          `${RESIZE_ZONE_SIZE}px`
+        );
+        window.style.setProperty("--resize-grip-size", `${RESIZE_ZONE_SIZE}px`);
+        window.style.setProperty("--resize-zone-size", `${RESIZE_ZONE_SIZE}px`);
+        window.style.setProperty(
+          "--resize-border-width",
+          `${RESIZE_ZONE_SIZE}px`
+        );
+      });
+    };
+
+    // Expand resize handles on initial load
+    setTimeout(expandResizeHandles, 100);
+
+    // Monitor for dynamically added windows and expand their resize handles
+    const resizeHandleObserver = new MutationObserver(() => {
+      setTimeout(expandResizeHandles, 50);
+    });
+
+    resizeHandleObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
 
     // Monitor for dynamically added windows
@@ -1061,7 +1102,6 @@ function initApp() {
             { name: "style.css", description: "Custom styles and overrides" },
             { name: "index.html", description: "Main HTML file" },
             { name: "package.json", description: "Project dependencies" },
-            { name: "counter.js", description: "Counter component" },
           ];
 
           // Build images HTML with data attributes for navigation
@@ -1096,7 +1136,7 @@ function initApp() {
           // Create window HTML
           const windowHTML = `
             <win98-window title="Folder.exe" resizable style="top: 100px; left: 100px; width: 600px; height: 500px; z-index: 1000;">
-              <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+              <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; border: 2px solid #808080;">
                 <h3 style="margin-top: 0; margin-bottom: 8px; font-weight: bold;">Images</h3>
                 <div style="margin-bottom: 20px; padding: 8px; background: #e0e0e0; border: 1px solid #c0c0c0;">
                   ${imagesHTML}
@@ -1395,7 +1435,7 @@ function initApp() {
           // Create blog window HTML (horizontal/larger window)
           const windowHTML = `
             <win98-window title="Blog.exe" resizable style="top: 50px; left: 50px; width: 800px; height: 550px; z-index: 1000;">
-              <div class="window-body" style="padding: 12px 12px 2px 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+              <div class="window-body" style="padding: 12px 12px 2px 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; border: 2px solid #808080;">
                 <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.5em;">My Blog</h2>
                 <div style="max-width: 100%;">
                   ${postsHTML}
@@ -1640,7 +1680,7 @@ function initApp() {
           // Create thanks window HTML
           const windowHTML = `
             <win98-window title="Thank you!.exe" resizable style="top: 50px; left: 50px; width: 600px; height: 500px; z-index: 1000;">
-              <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+              <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; border: 2px solid #808080;">
                 <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.8em; text-align: center;">Thank You!</h2>
                 <div style="max-width: 100%;">
                   ${thanksHTML}
@@ -1979,64 +2019,6 @@ function initApp() {
       }
 
       bringWindowToFront(helpWindow);
-    };
-
-    // Function to randomly open a window
-    const openRandomWindow = () => {
-      const openableWindows = [
-        "My Projects.exe",
-        "About Me.exe",
-        "Skills.exe",
-        "Hobbies.exe",
-        "Blog.exe",
-        "Folder.exe",
-        "Chatbox.exe",
-        "Thank you!.exe",
-        "Help.exe",
-        "Settings.exe",
-      ];
-
-      // Filter to only windows that exist
-      const existingWindows = openableWindows.filter((title) => {
-        const win = document.querySelector(`win98-window[title="${title}"]`);
-        return win !== null;
-      });
-
-      if (existingWindows.length === 0) {
-        alert("No windows available to open!");
-        return;
-      }
-
-      const randomTitle =
-        existingWindows[Math.floor(Math.random() * existingWindows.length)];
-      const randomWindow = document.querySelector(
-        `win98-window[title="${randomTitle}"]`
-      );
-
-      // If window doesn't exist yet, trigger its creation
-      if (!randomWindow) {
-        // Try to trigger creation based on title
-        if (randomTitle === "Blog.exe") {
-          const blogIcon = document.querySelector("#desktop-blog");
-          if (blogIcon) blogIcon.dispatchEvent(new MouseEvent("dblclick"));
-        } else if (randomTitle === "Folder.exe") {
-          const folderIcon = document.querySelector("#desktop-folder");
-          if (folderIcon) folderIcon.dispatchEvent(new MouseEvent("dblclick"));
-        } else if (randomTitle === "Chatbox.exe") {
-          const chatboxIcon = document.querySelector("#desktop-chatbox");
-          if (chatboxIcon)
-            chatboxIcon.dispatchEvent(new MouseEvent("dblclick"));
-        } else if (randomTitle === "Thank you!.exe") {
-          const thanksIcon = document.querySelector("#desktop-thanks");
-          if (thanksIcon) thanksIcon.dispatchEvent(new MouseEvent("dblclick"));
-        } else if (randomTitle === "Help.exe") {
-          openHelpWindow();
-        } else if (randomTitle === "Settings.exe") {
-          openSettingsWindow();
-        }
-      } else {
-        bringWindowToFront(randomWindow);
-      }
     };
 
     // Start menu item click handlers
