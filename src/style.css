@@ -1,5 +1,14 @@
 /* Minimal custom styles - let 98.css handle the Windows 98 styling */
 
+/* Font smoothing for all text elements */
+*,
+*::before,
+*::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -17,10 +26,41 @@ body {
   overflow: hidden;
   background-color: #fcfbf4;
   /* Creamish white background */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: "Jersey 10", sans-serif;
+  cursor: default !important;
+}
+
+/* Apply Windows 98 cursor to all elements */
+* {
+  cursor: default !important;
+}
+
+/* Keep pointer cursor for clickable elements */
+a,
+button,
+.social-btn,
+[role="button"],
+[onclick],
+a:hover,
+button:hover,
+.social-btn:hover {
+  cursor: pointer !important;
 }
 
 win98-desktop {
   background-color: #fcfbf4;
+  cursor: default !important;
+}
+
+#app {
+  cursor: default !important;
+}
+
+html {
+  cursor: default !important;
 }
 
 h1 {
@@ -90,23 +130,99 @@ win98-window .window-body {
   min-height: 0;
   /* Ensure content outside viewport is completely hidden */
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Typography adjustments for better legibility */
 win98-window .window-body p {
-  font-size: 1.35em;
+  font-size: 1.15em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 win98-window .window-body li {
-  font-size: 1.35em;
+  font-size: 1.15em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 win98-window .window-body h3 {
-  font-size: 1.4em;
+  font-size: 1.25em;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 win98-window .window-body h4 {
-  font-size: 1.4em;
+  font-size: 1.25em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Social buttons styling */
+.social-btn {
+  transition: all 0.1s;
+  user-select: none;
+}
+
+.social-btn:hover {
+  background: #d4d4d4 !important;
+}
+
+.social-btn:active {
+  border-top: 2px solid #808080 !important;
+  border-left: 2px solid #808080 !important;
+  border-bottom: 2px solid #ffffff !important;
+  border-right: 2px solid #ffffff !important;
+  background: #a0a0a0 !important;
+}
+
+/* Desktop Folder Icon */
+.desktop-folder {
+  transition: background-color 0.1s;
+}
+
+.desktop-folder:hover {
+  background-color: rgba(0, 0, 128, 0.3) !important;
+}
+
+.desktop-folder:active,
+.desktop-folder.selected {
+  background-color: #000080 !important;
+}
+
+.desktop-folder img {
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.3));
+}
+
+/* Folder Image Items */
+.folder-image-item {
+  transition: background-color 0.1s;
+  border-radius: 2px;
+}
+
+.folder-image-item:hover {
+  background-color: rgba(0, 0, 128, 0.3) !important;
+}
+
+/* GitHub Button Styling */
+a[href*="github"] {
+  transition: all 0.1s;
+}
+
+a[href*="github"]:hover {
+  background: #d4d4d4 !important;
+}
+
+a[href*="github"]:active {
+  border: 2px inset #c0c0c0 !important;
+  background: #a0a0a0 !important;
 }
 
 /* Color scheme is handled by 98.css */
