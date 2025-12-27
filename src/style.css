@@ -120,7 +120,7 @@ h1 {
 win98-window {
   display: flex;
   flex-direction: column;
-  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 4.5px 4.5px 8px rgba(0, 0, 0, 0.25);
 }
 
 win98-window .window-body {
@@ -245,6 +245,52 @@ win98-window[title="Hobbies.exe"] .window-body > div:last-child {
 
 win98-window[title="Hobbies.exe"] .window-body img:last-child {
   margin-bottom: 0 !important;
+}
+
+/* Projects Window Tabs */
+.projects-tabs {
+  user-select: none;
+  /* Hide horizontal scrollbar but keep scrolling functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Hide horizontal scrollbar in WebKit browsers (Chrome, Safari, Opera) */
+.projects-tabs::-webkit-scrollbar:horizontal {
+  display: none !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+.projects-tabs::-webkit-scrollbar {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+.project-tab {
+  transition: background-color 0.1s;
+}
+
+.project-tab:hover {
+  background: #d4d4d4 !important;
+}
+
+.project-tab.active {
+  background: #c0c0c0 !important;
+  border-bottom: 2px solid #000 !important;
+  font-weight: bold;
+}
+
+.project-tab:active {
+  background: #a0a0a0 !important;
+  border-top: 1px solid #808080 !important;
+  border-left: 1px solid #808080 !important;
+  border-bottom: 2px solid #000 !important;
+  border-right: 1px solid #808080 !important;
 }
 
 /* Color scheme is handled by 98.css */

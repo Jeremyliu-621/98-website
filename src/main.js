@@ -199,6 +199,51 @@ function createProjectHTML(project) {
   return html;
 }
 
+// Function to create HTML for a single project view (for tabs)
+function createSingleProjectHTML(project) {
+  const imgUrl = project.image ? getImageUrl(project.image) : null;
+
+  let html = `
+    <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #f0f0f0;">
+      <h2 style="margin-top: 0; margin-bottom: 8px; font-weight: bold; font-size: 1.5em;">${project.title}</h2>`;
+
+  // Image
+  if (imgUrl) {
+    html += `
+      <img src="${imgUrl}" style="width: 100%; max-width: 500px; height: auto; border: 2px solid #808080; margin-bottom: 12px; display: block; object-fit: cover;" alt="${project.title}">`;
+  }
+
+  // Stack (Front/Back)
+  if (project.front || project.back) {
+    html += `
+      <div style="margin-bottom: 12px;">
+        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.2em;">Stack</h3>
+        <p style="margin: 2px 0; color: #000;">
+          ${project.front ? `<strong>Front:</strong> ${project.front}<br>` : ""}
+          ${project.back ? `<strong>Back:</strong> ${project.back}` : ""}
+        </p>
+      </div>`;
+  }
+
+  // Description
+  html += `
+      <div style="margin-bottom: 12px;">
+        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.2em;">Description</h3>
+        <p style="margin: 2px 0; line-height: 1.4;">${project.description}</p>
+      </div>`;
+
+  // GitHub button
+  if (project.github) {
+    html += `
+      <a href="${project.github}" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 8px; padding: 6px 16px; background: #c0c0c0; border: 2px outset #c0c0c0; color: #000; text-decoration: none; font-size: 1em; cursor: pointer; text-align: center;">
+        View on GitHub
+      </a>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
 // Function to initialize the app
 function initApp() {
   const app = document.querySelector("#app");
@@ -235,8 +280,16 @@ function initApp() {
         <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Blog</span>
       </div>
 
+      <!-- Desktop Chatbox Icon -->
+      <div class="desktop-folder" id="desktop-chatbox" style="position: absolute; top: 200px; left: 20px; width: 80px; cursor: pointer; text-align: center; padding: 4px; user-select: none;">
+        <img src="${
+          getImageUrl("user-chatbox") || ""
+        }" alt="Chatbox" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
+        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Chatbox</span>
+      </div>
+
       <!-- About Me Window - Left -->
-      <win98-window title="About Me.exe" resizable style="bottom: 14vh; left: 27vh; width: 320px; height: 70vh;">
+      <win98-window title="About Me.exe" resizable style="bottom: 14vh; left: 37vh; width: 320px; height: 70vh;">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
           <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;">${
             content.aboutMe.name
@@ -260,7 +313,7 @@ function initApp() {
       </win98-window>
 
       <!-- Skills Window - Middle Top -->
-      <win98-window title="Skills.exe" resizable style="bottom: 43vh; left: 155vh; width: 300px; height: calc(35vh);">
+      <win98-window title="Skills.exe" resizable style="bottom: 43vh; left: 165vh; width: 300px; height: calc(35vh);">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px; font-weight: bold; font-size: 1.4em;">Languages</h3>
           <p style="margin: 3px 0;">${content.skills.languages}</p>
@@ -285,7 +338,7 @@ function initApp() {
       </win98-window>
 
       <!-- Hobbies Window - Middle Bottom -->
-      <win98-window title="Hobbies.exe" resizable style="bottom: 15vh; left: 157vh; width: 300px; height: calc(18vh);">
+      <win98-window title="Hobbies.exe" resizable style="bottom: 20vh; left: 167vh; width: 300px; height: 19vh;">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px;">Outside of Academics</h3>
           <p style="margin: 5px 0; line-height: 1.3;">${content.hobbies}</p>
@@ -315,28 +368,52 @@ function initApp() {
       </win98-window>
 
       <!-- Projects Window - Right -->
-      <win98-window title="My Projects.exe" resizable style="top: 20px; left: 75.5vh; width: calc(100vw - 1000px); height: calc(100vh - 100px);">
-        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
-          <h3 style="margin-top: 0; margin-bottom: 5px;">My Projects</h3>
-          ${projectsHTML}
-        </div>
-      </win98-window>
-
-      <!-- Image Gallery Window - Initially Hidden -->
-      <win98-window title="Image Gallery.exe" resizable style="display: none; top: 50px; left: 50px; width: 400px; height: 350px;">
-        <div class="window-body" style="padding: 8px 8px 2px 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column; gap: 10px;">
-          <p style="margin: 0 0 5px 0;">A collection of my captured moments and project screenshots.</p>
-          ${Object.values(images)
-            .map(
-              (mod) =>
-                `<div style="border: 1px solid #fff; box-shadow: 1px 1px 0 #000; padding: 2px; background: #c0c0c0;"><img src="${mod.default}" style="width: 100%; display: block;" loading="lazy"></div>`
-            )
-            .join("")}
+      <win98-window title="My Projects.exe" resizable style="top: 20px; left: 85.5vh; width: calc(100vw - 1000px); height: calc(100vh - 100px);">
+        <div class="window-body" style="padding: 0; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; min-height: 0; display: flex; flex-direction: column;">
+          <!-- Tabs -->
+          <div class="projects-tabs" style="display: flex; background: #c0c0c0; border-bottom: 1px solid #808080; overflow-x: auto; overflow-y: hidden; flex-shrink: 0;">
+            <button class="project-tab active" data-tab="all" style="padding: 6px 12px; background: #c0c0c0; border: none; border-right: 1px solid #808080; border-bottom: 2px solid #000; cursor: pointer; font-family: 'Jersey 10', sans-serif; font-size: 1em; white-space: nowrap; min-width: 60px;">
+              All
+            </button>
+            ${content.projects
+              .map(
+                (project, index) => `
+              <button class="project-tab" data-tab="${index}" style="padding: 6px 12px; background: #c0c0c0; border: none; border-right: 1px solid #808080; cursor: pointer; font-family: 'Jersey 10', sans-serif; font-size: 1em; white-space: nowrap; min-width: 80px;">
+                ${
+                  project.title.length > 15
+                    ? project.title.substring(0, 15) + "..."
+                    : project.title
+                }
+              </button>
+            `
+              )
+              .join("")}
+          </div>
+          
+          <!-- Tab Content -->
+          <div class="projects-tab-content" style="flex: 1; overflow-y: auto; padding: 8px; box-sizing: border-box;">
+            <!-- All Projects Tab (default) -->
+            <div class="tab-pane active" data-tab-content="all">
+              <h3 style="margin-top: 0; margin-bottom: 5px;">My Projects</h3>
+              ${projectsHTML}
+            </div>
+            
+            <!-- Individual Project Tabs -->
+            ${content.projects
+              .map(
+                (project, index) => `
+              <div class="tab-pane" data-tab-content="${index}" style="display: none;">
+                ${createSingleProjectHTML(project)}
+              </div>
+            `
+              )
+              .join("")}
+          </div>
         </div>
       </win98-window>
 
       <!-- Interactive Window -->
-      <win98-window title="Interactive.exe" resizable style="bottom: 5vh; left: 36vh; width: 200px; height: 120px;">
+      <win98-window title="Interactive.exe" resizable style="bottom: 5vh; left: 46vh; width: 200px; height: 120px;">
         <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; display: flex; align-items: center; gap: 10px;">
           <p style="margin: 0; font-size: 1.15em; flex: 1;">you can interact with windows!</p>
           <img src="${
@@ -358,7 +435,6 @@ function initApp() {
         <ul style="list-style: none; padding: 0; margin: 0;">
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-programs">📁 Programs</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-documents">📄 Documents</li>
-          <li style="padding: 4px 8px; cursor: pointer;" id="menu-gallery">🖼️ Image Gallery</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-settings">⚙️ Settings</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-find">🔍 Find</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-help">❓ Help</li>
@@ -705,6 +781,66 @@ function initApp() {
         }
       }
     });
+
+    // Projects window tab switching
+    setTimeout(() => {
+      const projectTabs = document.querySelectorAll(".project-tab");
+      const tabPanes = document.querySelectorAll(".tab-pane");
+      const tabsContainer = document.querySelector(".projects-tabs");
+
+      // Enable horizontal scrolling via mouse wheel even without visible scrollbar
+      if (tabsContainer) {
+        tabsContainer.addEventListener(
+          "wheel",
+          (e) => {
+            if (Math.abs(e.deltaY) > 0) {
+              e.preventDefault();
+              tabsContainer.scrollLeft += e.deltaY;
+            }
+          },
+          { passive: false }
+        );
+      }
+
+      // Initialize active tab styling
+      projectTabs.forEach((tab) => {
+        if (tab.classList.contains("active")) {
+          tab.style.borderBottom = "2px solid #000";
+        } else {
+          tab.style.borderBottom = "1px solid #808080";
+        }
+      });
+
+      projectTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const tabId = tab.getAttribute("data-tab");
+
+          // Remove active class from all tabs and panes
+          projectTabs.forEach((t) => {
+            t.classList.remove("active");
+            t.style.background = "#c0c0c0";
+            t.style.borderBottom = "1px solid #808080";
+          });
+          tabPanes.forEach((p) => {
+            p.classList.remove("active");
+            p.style.display = "none";
+          });
+
+          // Add active class to clicked tab and corresponding pane
+          tab.classList.add("active");
+          tab.style.background = "#c0c0c0";
+          tab.style.borderBottom = "2px solid #000";
+
+          const activePane = document.querySelector(
+            `.tab-pane[data-tab-content="${tabId}"]`
+          );
+          if (activePane) {
+            activePane.classList.add("active");
+            activePane.style.display = "block";
+          }
+        });
+      });
+    }, 100);
 
     // Desktop folder icon click handling
     const desktopFolder = document.querySelector("#desktop-folder");
@@ -1103,7 +1239,7 @@ function initApp() {
 
           // Create blog window HTML (horizontal/larger window)
           const windowHTML = `
-            <win98-window title="Blog.exe" resizable style="top: 50px; left: 50px; width: 900px; height: 650px; z-index: 1000;">
+            <win98-window title="Blog.exe" resizable style="top: 50px; left: 50px; width: 800px; height: 550px; z-index: 1000;">
               <div class="window-body" style="padding: 12px 12px 2px 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
                 <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.5em;">My Blog</h2>
                 <div style="max-width: 100%;">
@@ -1147,6 +1283,103 @@ function initApp() {
       });
     }
 
+    // Desktop chatbox icon click handling
+    const desktopChatbox = document.querySelector("#desktop-chatbox");
+    if (desktopChatbox) {
+      let clickTimer = null;
+      let isSelected = false;
+
+      // Single click - select/deselect
+      desktopChatbox.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        if (clickTimer) {
+          clearTimeout(clickTimer);
+          clickTimer = null;
+          // Double click detected - open chatbox window
+          desktopChatbox.classList.add("selected");
+          openChatboxWindow();
+        } else {
+          clickTimer = setTimeout(() => {
+            // Single click - toggle selection
+            if (isSelected) {
+              desktopChatbox.classList.remove("selected");
+              isSelected = false;
+            } else {
+              // Deselect other icons first
+              document.querySelectorAll(".desktop-folder").forEach((f) => {
+                f.classList.remove("selected");
+              });
+              desktopChatbox.classList.add("selected");
+              isSelected = true;
+            }
+            clickTimer = null;
+          }, 250);
+        }
+      });
+
+      function openChatboxWindow() {
+        // Check if window already exists
+        let chatboxWindow = document.querySelector(
+          'win98-window[title="Chatbox.exe"]'
+        );
+
+        if (!chatboxWindow) {
+          // Create chatbox window HTML
+          const windowHTML = `
+            <win98-window title="Chatbox.exe" resizable style="top: 100px; left: 100px; width: 600px; height: 550px; z-index: 1000;">
+              <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box;">
+                <iframe src="https://www3.cbox.ws/box/?boxid=3551058&boxtag=a6HwaA" width="100%" height="100%" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="border: 1px solid #808080; background: #fff;"></iframe>
+              </div>
+            </win98-window>
+          `;
+
+          // Insert window into desktop
+          const desktop = document.querySelector("win98-desktop");
+          if (desktop) {
+            desktop.insertAdjacentHTML("beforeend", windowHTML);
+            chatboxWindow = document.querySelector(
+              'win98-window[title="Chatbox.exe"]'
+            );
+          }
+
+          // Show and bring to front
+          if (chatboxWindow) {
+            chatboxWindow.style.display = "block";
+            chatboxWindow.style.zIndex = "1000";
+            // Bring to front by increasing z-index
+            const allWindows = document.querySelectorAll("win98-window");
+            let maxZ = 0;
+            allWindows.forEach((w) => {
+              const z = parseInt(w.style.zIndex) || 0;
+              if (z > maxZ) maxZ = z;
+            });
+            chatboxWindow.style.zIndex = (maxZ + 1).toString();
+          }
+        } else {
+          // Window exists, just show and bring to front
+          chatboxWindow.style.display = "block";
+          chatboxWindow.style.zIndex = "1000";
+          // Bring to front by increasing z-index
+          const allWindows = document.querySelectorAll("win98-window");
+          let maxZ = 0;
+          allWindows.forEach((w) => {
+            const z = parseInt(w.style.zIndex) || 0;
+            if (z > maxZ) maxZ = z;
+          });
+          chatboxWindow.style.zIndex = (maxZ + 1).toString();
+        }
+      }
+
+      // Deselect when clicking elsewhere
+      document.addEventListener("click", (e) => {
+        if (!desktopChatbox.contains(e.target)) {
+          desktopChatbox.classList.remove("selected");
+          isSelected = false;
+        }
+      });
+    }
+
     // Start menu item click handlers
     const menuItems = {
       "menu-programs": () => {
@@ -1167,16 +1400,6 @@ function initApp() {
         if (skillsWindow) {
           skillsWindow.style.display = "block";
           skillsWindow.style.zIndex = "1000";
-        }
-      },
-      "menu-gallery": () => {
-        // Open Gallery window
-        const galleryWindow = document.querySelector(
-          'win98-window[title="Image Gallery.exe"]'
-        );
-        if (galleryWindow) {
-          galleryWindow.style.display = "block";
-          galleryWindow.style.zIndex = "1000";
         }
       },
       "menu-settings": () => alert("Settings - Coming soon!"),
