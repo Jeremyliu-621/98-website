@@ -6,6 +6,19 @@ import "98.css";
 // Register 98-components web components + styles
 import "98-components";
 
+// Import all images from src/images
+const images = import.meta.glob('./images/*.*', { eager: true });
+
+// Helper to get image URL by filename (partial match)
+function getImageUrl(filename) {
+  for (const path in images) {
+    if (path.includes(filename)) {
+      return images[path].default;
+    }
+  }
+  return null;
+}
+
 // ============================================
 // EDIT YOUR CONTENT HERE - Everything below is easy to customize!
 // ============================================
@@ -39,26 +52,32 @@ const content = {
         "An Arduino setup that tracks you with OpenCV that triggers a water sprayer and prompts email.js.",
       front: "React, Vite, TypeScript",
       back: "Python + Flask, OpenCV, PySerial, Pygame",
+      image: "stop_dont_go_on",
     },
     {
       title: "Binder",
       description: "Makes thrifting a swipe-based interface.",
+      image: "binder_action",
     },
     {
       title: "UFC Elo Calculator",
       description: "Calculates and displays UFC elos and stats.",
+      image: "ufc_elo",
     },
     {
       title: "RREF Calculator",
       description: "A helping hand to linear algebra.",
+      image: "rref_calculator",
     },
     {
       title: "Portfolio Website",
       description: "A page that displays everything about me.",
+      image: "portfolio-website-cover",
     },
     {
       title: "Cookie Clicker Bot",
       description: "Bot that clicks cookies and buys upgrades!",
+      image: "do you even",
     },
   ],
   hobbies:
@@ -67,10 +86,13 @@ const content = {
 
 // Helper function to create project HTML
 function createProjectHTML(project) {
+  const imgUrl = project.image ? getImageUrl(project.image) : null;
+
   let html = `
-    <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #f0f0f0;">
-      <h4 style="margin-top: 0; margin-bottom: 3px; font-size: 0.85em; font-weight: bold;">${project.title}</h4>
-      <p style="margin: 2px 0; font-size: 0.8em;">${project.description}</p>`;
+    <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #f0f0f0; display: flex; gap: 8px; align-items: flex-start;">
+      <div style="flex: 1; min-width: 0;">
+        <h4 style="margin-top: 0; margin-bottom: 3px; font-size: 0.85em; font-weight: bold;">${project.title}</h4>
+        <p style="margin: 2px 0; font-size: 0.8em;">${project.description}</p>`;
 
   if (project.front || project.back) {
     html += `
@@ -78,6 +100,12 @@ function createProjectHTML(project) {
         ${project.front ? `<strong>Front:</strong> ${project.front}<br>` : ""}
         ${project.back ? `<strong>Back:</strong> ${project.back}` : ""}
       </p>`;
+  }
+
+  html += `</div>`;
+
+  if (imgUrl) {
+    html += `<img src="${imgUrl}" style="width: 80px; height: auto; border: 1px solid #808080; object-fit: cover;" alt="${project.title}">`;
   }
 
   html += `</div>`;
@@ -110,6 +138,7 @@ function initApp() {
           <h2 style="margin-top: 0; font-size: 1.3em; font-weight: bold; margin-bottom: 3px;">${content.aboutMe.name}</h2>
           <p style="font-weight: bold; margin: 3px 0; font-size: 0.9em;">${content.aboutMe.title}</p>
           <p style="margin: 5px 0; line-height: 1.3; font-size: 0.8em;">${content.aboutMe.bio}</p>
+          <img src="${getImageUrl('cruisesunset') || ''}" alt="Cruise Sunset" style="width: 100%; margin: 8px 0; border: 2px solid #808080; box-sizing: border-box; display: block;">
           <hr style="margin: 5px 0;">
           <h3 style="margin-top: 5px; margin-bottom: 3px; font-size: 0.85em;">I am currently:</h3>
           <ul style="text-align: left; margin: 3px 0; padding-left: 16px; line-height: 1.2; font-size: 0.8em;">
@@ -159,6 +188,14 @@ function initApp() {
         </div>
       </win98-window>
 
+      <!-- Image Gallery Window - Initially Hidden -->
+      <win98-window title="Image Gallery.exe" resizable style="display: none; top: 50px; left: 50px; width: 400px; height: 350px;">
+        <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column; gap: 10px;">
+          <p style="margin: 0 0 5px 0; font-size: 0.85em;">A collection of my captured moments and project screenshots.</p>
+          ${Object.values(images).map(mod => `<div style="border: 1px solid #fff; box-shadow: 1px 1px 0 #000; padding: 2px; background: #c0c0c0;"><img src="${mod.default}" style="width: 100%; display: block;" loading="lazy"></div>`).join('')}
+        </div>
+      </win98-window>
+
       <!-- Taskbar at the bottom -->
       <win98-taskbar slot="taskbar"></win98-taskbar>
     </win98-desktop>
@@ -172,6 +209,7 @@ function initApp() {
         <ul style="list-style: none; padding: 0; margin: 0;">
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-programs">📁 Programs</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-documents">📄 Documents</li>
+          <li style="padding: 4px 8px; cursor: pointer;" id="menu-gallery">🖼️ Image Gallery</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-settings">⚙️ Settings</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-find">🔍 Find</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-help">❓ Help</li>
@@ -279,6 +317,16 @@ function initApp() {
         if (skillsWindow) {
           skillsWindow.style.display = "block";
           skillsWindow.style.zIndex = "1000";
+        }
+      },
+      "menu-gallery": () => {
+        // Open Gallery window
+        const galleryWindow = document.querySelector(
+          'win98-window[title="Image Gallery.exe"]'
+        );
+        if (galleryWindow) {
+          galleryWindow.style.display = "block";
+          galleryWindow.style.zIndex = "1000";
         }
       },
       "menu-settings": () => alert("Settings - Coming soon!"),
