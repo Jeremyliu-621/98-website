@@ -92,21 +92,21 @@ win98-window .window-body {
   position: relative;
 }
 
-/* Typography adjustments for compact layout */
+/* Typography adjustments for better legibility */
 win98-window .window-body p {
-  font-size: 0.85em;
+  font-size: 1.35em;
 }
 
 win98-window .window-body li {
-  font-size: 0.85em;
+  font-size: 1.35em;
 }
 
 win98-window .window-body h3 {
-  font-size: 0.9em;
+  font-size: 1.4em;
 }
 
 win98-window .window-body h4 {
-  font-size: 0.9em;
+  font-size: 1.4em;
 }
 
 /* Color scheme is handled by 98.css */
