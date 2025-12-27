@@ -108,7 +108,49 @@ const content = {
       title: "Welcome to My Blog",
       date: "January 2025",
       image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.",
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
+    },
+    {
+      title: "Welcome to My Blog",
+      date: "January 2025",
+      image: null, // Set to image filename (without extension) or null for no image
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
+    },
+    {
+      title: "Welcome to My Blog",
+      date: "January 2025",
+      image: null, // Set to image filename (without extension) or null for no image
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
+    },
+    {
+      title: "Welcome to My Blog",
+      date: "January 2025",
+      image: null, // Set to image filename (without extension) or null for no image
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
+    },
+    {
+      title: "Welcome to My Blog",
+      date: "January 2025",
+      image: null, // Set to image filename (without extension) or null for no image
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
+    },
+    {
+      title: "Welcome to My Blog",
+      date: "January 2025",
+      image: null, // Set to image filename (without extension) or null for no image
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
+    },
+    {
+      title: "Welcome to My Blog",
+      date: "January 2025",
+      image: null, // Set to image filename (without extension) or null for no image
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
+    },
+    {
+      title: "Welcome to My Blog",
+      date: "January 2025",
+      image: null, // Set to image filename (without extension) or null for no image
+      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
     },
     // Add more posts below by copying the structure above
     // Example:
@@ -194,7 +236,7 @@ function initApp() {
       </div>
 
       <!-- About Me Window - Left -->
-      <win98-window title="About Me.exe" resizable style="top: 20px; left: 300px; width: 300px; height: calc(100vh - 100px);">
+      <win98-window title="About Me.exe" resizable style="top: 22px; left: 340px; width: 300px; height: calc(100vh - 100px);">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
           <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;">${
             content.aboutMe.name
@@ -248,6 +290,7 @@ function initApp() {
           <h3 style="margin-top: 0; margin-bottom: 5px;">Outside of Academics</h3>
           <p style="margin: 5px 0; line-height: 1.3;">${content.hobbies}</p>
         </div>
+        
       </win98-window>
 
       <!-- Projects Window - Right -->
@@ -310,6 +353,65 @@ function initApp() {
   setTimeout(() => {
     // Note: Removed window body update code that was interfering with dragging
     // The inline styles in the HTML should handle overflow correctly
+
+    // Constrain windows from being dragged above the top of the viewport
+    const constrainWindowPositions = () => {
+      const windows = document.querySelectorAll("win98-window");
+      windows.forEach((window) => {
+        const style = window.style;
+        const currentTop = style.top;
+
+        // Parse the top value (handles both px and calc() values)
+        let topValue = 0;
+        if (currentTop) {
+          if (currentTop.includes("calc")) {
+            // For calc values, we'll need to evaluate or set a minimum
+            // For now, we'll just ensure it doesn't go negative
+            return; // Skip calc values as they're usually fine
+          } else {
+            topValue = parseInt(currentTop) || 0;
+          }
+        }
+
+        const minTop = 0; // Minimum top position (can't go above viewport)
+
+        // If window is above the minimum, constrain it
+        if (topValue < minTop) {
+          style.top = `${minTop}px`;
+        }
+      });
+    };
+
+    // Monitor window positions - check frequently during drag
+    let isDragging = false;
+    const checkInterval = setInterval(() => {
+      constrainWindowPositions();
+    }, 16); // Check every ~16ms (60fps) for smooth constraint
+
+    // Also listen for mouse events to detect dragging
+    document.addEventListener("mousedown", (e) => {
+      if (e.target.closest("win98-window")) {
+        isDragging = true;
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+      constrainWindowPositions(); // Final check on release
+    });
+
+    // Monitor for dynamically added windows
+    const windowObserver = new MutationObserver(() => {
+      constrainWindowPositions();
+    });
+
+    const desktop = document.querySelector("win98-desktop");
+    if (desktop) {
+      windowObserver.observe(desktop, {
+        childList: true,
+        subtree: true,
+      });
+    }
 
     // Start menu functionality
     const startMenu = document.querySelector("#start-menu");
@@ -757,10 +859,10 @@ function initApp() {
               const imgUrl = post.image ? getImageUrl(post.image) : null;
               return `
                 <div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #c0c0c0;">
-                  <h3 style="margin-top: 0; margin-bottom: 4px; font-weight: bold; font-size: 1.3em;">${
+                  <h3 style="margin-top: 0; margin-bottom: 4px; font-weight: bold; font-size: 1.75em;">${
                     post.title
                   }</h3>
-                  <p style="margin: 0 0 12px 0; color: #666; font-size: 0.9em;">${
+                  <p style="margin: 0 0 12px 0; color: #666; font-size: 1.5em;">${
                     post.date
                   }</p>
                   ${
@@ -768,7 +870,8 @@ function initApp() {
                       ? `<img src="${imgUrl}" alt="${post.title}" style="max-width: 100%; height: auto; margin: 12px 0; border: 1px solid #808080; display: block;">`
                       : ""
                   }
-                  <div style="margin-top: 12px; line-height: 1.5;">
+                  <!-- Blog post text size --> 
+                  <div style="margin-top: 12px; line-height: 1.5; font-size: 1.3em;">
                     ${post.text}
                   </div>
                 </div>
