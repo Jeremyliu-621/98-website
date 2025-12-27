@@ -9,10 +9,11 @@ import "98-components";
 // Import all images from src/assets
 const images = import.meta.glob("./assets/*.*", { eager: true });
 
-// Helper to get image URL by filename (partial match)
+// Helper to get image URL by filename (partial match, case-insensitive)
 function getImageUrl(filename) {
+  const lowerFilename = filename.toLowerCase();
   for (const path in images) {
-    if (path.includes(filename)) {
+    if (path.toLowerCase().includes(lowerFilename)) {
       return images[path].default;
     }
   }
@@ -161,6 +162,50 @@ const content = {
     //   text: "Here's another post with an image!",
     // },
   ],
+  // ============================================
+  // THANKS & CREDITS - Easy to add more!
+  // ============================================
+  // To add someone or something to thank, copy the structure below and paste it into the array
+  // Each item can have:
+  //   - name: The name of the person, tool, or thing
+  //   - description: What you want to thank them for (can use HTML for formatting)
+  //   - link: Optional URL (leave as null for no link)
+  thanks: [
+    {
+      name: "98-components",
+      description:
+        "For providing the amazing Windows 98 UI components that make this website possible.",
+      link: "https://github.com/jdan/98.css",
+    },
+    {
+      name: "Cursor.ai",
+      description:
+        "For helping me build and iterate on this website with AI assistance.",
+      link: "https://www.cursor.com/",
+    },
+    {
+      name: "win98icons",
+      description: "For providing real art for my project.",
+      link: "https://win98icons.alexmeub.com/",
+    },
+    {
+      name: "lunospace",
+      description: "For giving me inspiration for featuresfor this project.",
+      link: "https://lostlove.neocities.org/",
+    },
+    {
+      name: "buttered_official",
+      description: "For giving me the idea for a windows 98 website.",
+      link: "https://www.instagram.com/buttered_official/",
+    },
+    // Add more thanks below by copying the structure above
+    // Example:
+    // {
+    //   name: "Friend's Name",
+    //   description: "For their support and encouragement.",
+    //   link: "https://example.com", // or null for no link
+    // },
+  ],
 };
 
 // Helper function to create project HTML
@@ -286,6 +331,22 @@ function initApp() {
           getImageUrl("user-chatbox") || ""
         }" alt="Chatbox" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
         <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Chatbox</span>
+      </div>
+
+      <!-- Desktop Theme Editor Icon -->
+      <div class="desktop-folder" id="desktop-theme" style="position: absolute; top: 290px; left: 20px; width: 80px; cursor: pointer; text-align: center; padding: 4px; user-select: none;">
+        <img src="${
+          getImageUrl("paint_old") || ""
+        }" alt="Theme Editor" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
+        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Theme Editor</span>
+      </div>
+
+      <!-- Desktop Thanks Icon -->
+      <div class="desktop-folder" id="desktop-thanks" style="position: absolute; top: 560px; left: 20px; width: 80px; cursor: pointer; text-align: center; padding: 4px; user-select: none;">
+        <img src="${
+          getImageUrl("picture-painting") || ""
+        }" alt="Blog" style="width: 48px; height: 48px; display: block; margin: 0 auto 4px auto; image-rendering: pixelated;">
+        <span style="display: block; font-size: 0.85em; color: #fff; text-shadow: 1px 1px 0 #000; word-break: break-word; line-height: 1.1;">Thank you!</span>
       </div>
 
       <!-- About Me Window - Left -->
@@ -433,12 +494,7 @@ function initApp() {
       </div>
       <div class="window-body">
         <ul style="list-style: none; padding: 0; margin: 0;">
-          <li style="padding: 4px 8px; cursor: pointer;" id="menu-programs">📁 Programs</li>
-          <li style="padding: 4px 8px; cursor: pointer;" id="menu-documents">📄 Documents</li>
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-settings">⚙️ Settings</li>
-          <li style="padding: 4px 8px; cursor: pointer;" id="menu-find">🔍 Find</li>
-          <li style="padding: 4px 8px; cursor: pointer;" id="menu-help">❓ Help</li>
-          <li style="padding: 4px 8px; cursor: pointer;" id="menu-run">▶️ Run...</li>
           <hr style="margin: 4px 0;">
           <li style="padding: 4px 8px; cursor: pointer;" id="menu-shutdown">⏻ Shut Down...</li>
         </ul>
@@ -448,6 +504,60 @@ function initApp() {
 
   // Wait for custom elements to be defined
   setTimeout(() => {
+    // Load saved settings on page load
+    const savedPalette = localStorage.getItem("colorPalette");
+    const savedPaletteColors = localStorage.getItem("paletteColors");
+
+    // If default is selected or no palette is saved, use Windows 98 defaults
+    if (savedPalette === "default" || !savedPalette) {
+      // Apply Windows 98 default colors
+      document.querySelectorAll("win98-window .window-body").forEach((body) => {
+        body.style.backgroundColor = "#f0f0f0";
+        body.style.border = "2px solid #808080"; // Divider between gray frame and content
+      });
+
+      document
+        .querySelectorAll("button, .social-btn, a[href*='github']")
+        .forEach((btn) => {
+          btn.style.backgroundColor = "#c0c0c0";
+          btn.style.color = "#000000";
+        });
+    } else if (savedPaletteColors) {
+      try {
+        const colors = JSON.parse(savedPaletteColors);
+        document.documentElement.style.setProperty(
+          "--palette-color-1",
+          colors[0]
+        );
+        document.documentElement.style.setProperty(
+          "--palette-color-2",
+          colors[1]
+        );
+        document.documentElement.style.setProperty(
+          "--palette-color-3",
+          colors[2]
+        );
+        document.documentElement.style.setProperty(
+          "--palette-color-4",
+          colors[3]
+        );
+        document
+          .querySelectorAll("win98-window .window-body")
+          .forEach((body) => {
+            body.style.backgroundColor = colors[3] || "#f0f0f0";
+            body.style.border = `2px solid ${colors[1] || "#808080"}`; // Divider using medium color
+          });
+        document
+          .querySelectorAll("button, .social-btn, a[href*='github']")
+          .forEach((btn) => {
+            btn.style.backgroundColor = colors[0] || "#c0c0c0"; // Darkest color
+            btn.style.color = colors[3] || "#ffffff"; // Lightest color for text
+          });
+      } catch (e) {
+        console.warn("Failed to load saved color palette:", e);
+      }
+    }
+
     // Note: Removed window body update code that was interfering with dragging
     // The inline styles in the HTML should handle overflow correctly
 
@@ -508,6 +618,20 @@ function initApp() {
         childList: true,
         subtree: true,
       });
+
+      // Set repeating background wallpaper
+      const backgroundImageUrl = getImageUrl("backgroundpixels");
+      if (backgroundImageUrl) {
+        desktop.style.backgroundImage = `url(${backgroundImageUrl})`;
+        desktop.style.backgroundRepeat = "repeat";
+        desktop.style.backgroundPosition = "0 0";
+        desktop.style.backgroundSize = "auto";
+        console.log("Background wallpaper applied:", backgroundImageUrl);
+      } else {
+        console.warn(
+          "Backgroundpixels image not found. Make sure Backgroundpixels.png is in src/assets/"
+        );
+      }
     }
 
     // ============================================
@@ -840,6 +964,34 @@ function initApp() {
             activePane.classList.add("active");
             activePane.style.display = "block";
           }
+
+          // Reapply theme colors to buttons after tab switch
+          setTimeout(() => {
+            const savedPalette = localStorage.getItem("colorPalette");
+            if (savedPalette && savedPalette !== "default") {
+              const savedPaletteColors = localStorage.getItem("paletteColors");
+              if (savedPaletteColors) {
+                try {
+                  const colors = JSON.parse(savedPaletteColors);
+                  document
+                    .querySelectorAll("button, .social-btn, a[href*='github']")
+                    .forEach((btn) => {
+                      btn.style.backgroundColor = colors[0] || "#c0c0c0";
+                      btn.style.color = colors[3] || "#ffffff";
+                    });
+                } catch (e) {
+                  console.warn("Failed to reapply theme:", e);
+                }
+              }
+            } else {
+              document
+                .querySelectorAll("button, .social-btn, a[href*='github']")
+                .forEach((btn) => {
+                  btn.style.backgroundColor = "#c0c0c0";
+                  btn.style.color = "#000000";
+                });
+            }
+          }, 10);
         });
       });
     }, 100);
@@ -1052,8 +1204,10 @@ function initApp() {
           const viewerHTML = `
             <win98-window title="Image Viewer.exe" resizable style="top: 150px; left: 200px; width: 700px; height: 600px; z-index: 2000;">
               <div class="window-body" style="padding: 8px; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column;">
-                <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #c0c0c0; border: 2px inset #c0c0c0; margin-bottom: 8px; position: relative; overflow: hidden;">
+                <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #c0c0c0; margin-bottom: 8px; position: relative; overflow: hidden; padding: 8px;">
+                  <div style="background: #fff; border: 1px solid #808080; padding: 8px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; box-sizing: border-box;">
                   <img id="viewer-main-image" src="${currentUrl}" alt="${currentName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                  </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 0;">
                   <button id="viewer-prev-btn" style="padding: 4px 12px; font-size: 0.9em;">◀ Previous</button>
@@ -1382,53 +1536,521 @@ function initApp() {
       });
     }
 
-    // Start menu item click handlers
-    const menuItems = {
-      "menu-programs": () => {
-        // Open Projects window
-        const projectsWindow = document.querySelector(
-          'win98-window[title="My Projects.exe"]'
-        );
-        if (projectsWindow) {
-          projectsWindow.style.display = "block";
-          projectsWindow.style.zIndex = "1000";
+    // Desktop theme editor icon click handling
+    const desktopTheme = document.querySelector("#desktop-theme");
+    if (desktopTheme) {
+      let clickTimer = null;
+      let isSelected = false;
+
+      // Single click - select/deselect
+      desktopTheme.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        if (clickTimer) {
+          clearTimeout(clickTimer);
+          clickTimer = null;
+          // Double click detected - open settings window
+          desktopTheme.classList.add("selected");
+          openSettingsWindow();
+        } else {
+          clickTimer = setTimeout(() => {
+            // Single click - toggle selection
+            if (isSelected) {
+              desktopTheme.classList.remove("selected");
+              isSelected = false;
+            } else {
+              // Deselect other icons first
+              document.querySelectorAll(".desktop-folder").forEach((f) => {
+                f.classList.remove("selected");
+              });
+              desktopTheme.classList.add("selected");
+              isSelected = true;
+            }
+            clickTimer = null;
+          }, 250);
         }
-      },
-      "menu-documents": () => {
-        // Open Skills window
-        const skillsWindow = document.querySelector(
-          'win98-window[title="Skills.exe"]'
-        );
-        if (skillsWindow) {
-          skillsWindow.style.display = "block";
-          skillsWindow.style.zIndex = "1000";
+      });
+
+      // Deselect when clicking elsewhere
+      document.addEventListener("click", (e) => {
+        if (!desktopTheme.contains(e.target)) {
+          desktopTheme.classList.remove("selected");
+          isSelected = false;
         }
-      },
-      "menu-settings": () => alert("Settings - Coming soon!"),
-      "menu-find": () => {
-        const search = prompt("What would you like to find?");
-        if (search) {
-          alert(
-            `Searching for: ${search}\n(Search functionality coming soon!)`
+      });
+    }
+
+    // Desktop thanks icon click handling
+    const desktopThanks = document.querySelector("#desktop-thanks");
+    if (desktopThanks) {
+      let clickTimer = null;
+      let isSelected = false;
+
+      // Single click - select/deselect
+      desktopThanks.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        if (clickTimer) {
+          clearTimeout(clickTimer);
+          clickTimer = null;
+          // Double click detected - open thanks window
+          desktopThanks.classList.add("selected");
+          openThanksWindow();
+        } else {
+          clickTimer = setTimeout(() => {
+            // Single click - toggle selection
+            if (isSelected) {
+              desktopThanks.classList.remove("selected");
+              isSelected = false;
+            } else {
+              // Deselect other icons first
+              document.querySelectorAll(".desktop-folder").forEach((f) => {
+                f.classList.remove("selected");
+              });
+              desktopThanks.classList.add("selected");
+              isSelected = true;
+            }
+            clickTimer = null;
+          }, 250);
+        }
+      });
+
+      // Function to open thanks window
+      function openThanksWindow() {
+        // Check if window already exists
+        let thanksWindow = document.querySelector(
+          'win98-window[title="Thank you!.exe"]'
+        );
+
+        if (!thanksWindow) {
+          // Build thanks HTML
+          const thanksHTML = content.thanks
+            .map((item) => {
+              const nameHTML = item.link
+                ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: #000080; text-decoration: underline;">${item.name}</a>`
+                : `<strong>${item.name}</strong>`;
+              return `
+                <div style="margin-bottom: 20px; padding: 8px; background: #f0f0f0; border: 1px solid #808080;">
+                  <h3 style="margin-top: 0; margin-bottom: 6px; font-weight: bold; font-size: 1.2em;">${nameHTML}</h3>
+                  <p style="margin: 0; line-height: 1.4; color: #000;">${item.description}</p>
+                </div>
+              `;
+            })
+            .join("");
+
+          // Create thanks window HTML
+          const windowHTML = `
+            <win98-window title="Thank you!.exe" resizable style="top: 50px; left: 50px; width: 600px; height: 500px; z-index: 1000;">
+              <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+                <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.8em; text-align: center;">Thank You!</h2>
+                <div style="max-width: 100%;">
+                  ${thanksHTML}
+                </div>
+              </div>
+            </win98-window>
+          `;
+
+          // Insert window into desktop
+          const desktop = document.querySelector("win98-desktop");
+          if (desktop) {
+            desktop.insertAdjacentHTML("beforeend", windowHTML);
+            thanksWindow = document.querySelector(
+              'win98-window[title="Thank you!.exe"]'
+            );
+          }
+        }
+
+        // Show and bring to front
+        if (thanksWindow) {
+          thanksWindow.style.display = "block";
+          thanksWindow.style.zIndex = "1000";
+          // Bring to front by increasing z-index
+          const allWindows = document.querySelectorAll("win98-window");
+          let maxZ = 0;
+          allWindows.forEach((w) => {
+            const z = parseInt(w.style.zIndex) || 0;
+            if (z > maxZ) maxZ = z;
+          });
+          thanksWindow.style.zIndex = (maxZ + 1).toString();
+        }
+      }
+
+      // Deselect when clicking elsewhere
+      document.addEventListener("click", (e) => {
+        if (!desktopThanks.contains(e.target)) {
+          desktopThanks.classList.remove("selected");
+          isSelected = false;
+        }
+      });
+    }
+
+    // Helper function to bring window to front
+    const bringWindowToFront = (window) => {
+      if (window) {
+        window.style.display = "block";
+        const allWindows = document.querySelectorAll("win98-window");
+        let maxZ = 0;
+        allWindows.forEach((w) => {
+          const z = parseInt(w.style.zIndex) || 0;
+          if (z > maxZ) maxZ = z;
+        });
+        window.style.zIndex = (maxZ + 1).toString();
+      }
+    };
+
+    // Function to open Settings window
+    const openSettingsWindow = () => {
+      let settingsWindow = document.querySelector(
+        'win98-window[title="Settings.exe"]'
+      );
+
+      if (!settingsWindow) {
+        const colorPalettes = {
+          default: {
+            name: "Default",
+            colors: ["#000000", "#808080", "#c0c0c0", "#ffffff"], // Darkest to lightest
+          },
+          retroGreen: {
+            name: "Retro Green",
+            colors: ["#5C6F2B", "#DE802B", "#D8C9A7", "#EEEEEE"], // Darkest to lightest
+          },
+          retroPink: {
+            name: "Retro Pink",
+            colors: ["#132440", "#16476A", "#3B9797", "#FDB5CE"], // Darkest to lightest
+          },
+          calmGreen: {
+            name: "Calm Green",
+            colors: ["#778873", "#A1BC98", "#D2DCB6", "#F1F3E0"], // Darkest to lightest
+          },
+          hazel: {
+            name: "Hazel",
+            colors: ["#957C62", "#B77466", "#E2B59A", "#FFE1AF"], // Darkest to lightest
+          },
+          darkChocolate: {
+            name: "Dark Chocolate",
+            colors: ["#37353E", "#44444E", "#715A5A", "#D3DAD9"], // Darkest to lightest
+          },
+        };
+
+        const paletteHTML = Object.keys(colorPalettes)
+          .map((key) => {
+            const palette = colorPalettes[key];
+            return `
+              <div style="margin-bottom: 12px; padding: 8px; border: 1px solid #808080; background: #f0f0f0; display: flex; align-items: center; gap: 12px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1;">
+                  <input type="radio" name="color-palette" value="${key}" ${
+              key === "default" ? "checked" : ""
+            } style="cursor: pointer;">
+                  <strong>${palette.name}</strong>
+                  <div style="display: flex; gap: 4px; margin-left: auto;">
+                    ${palette.colors
+                      .map(
+                        (color) =>
+                          `<div style="width: 24px; height: 24px; background: ${color}; border: 1px solid #808080;"></div>`
+                      )
+                      .join("")}
+                  </div>
+                </label>
+                <button class="palette-apply-btn" data-palette="${key}" style="padding: 4px 12px; background: #c0c0c0; border: 2px outset #c0c0c0; cursor: pointer; font-size: 0.9em; white-space: nowrap;">Apply</button>
+              </div>
+            `;
+          })
+          .join("");
+
+        const windowHTML = `
+          <win98-window title="Settings.exe" resizable style="top: 100px; left: 100px; width: 500px; height: 650px; z-index: 1000;">
+            <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; padding-bottom: 20px;">
+              <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.5em;">Settings</h2>
+              
+              <div style="margin-bottom: 0;">
+                <h3 style="margin: 0 0 12px 0; font-weight: bold; font-size: 1.2em;">Color Palette</h3>
+                ${paletteHTML}
+              </div>
+            </div>
+          </win98-window>
+        `;
+
+        const desktop = document.querySelector("win98-desktop");
+        if (desktop) {
+          desktop.insertAdjacentHTML("beforeend", windowHTML);
+          settingsWindow = document.querySelector(
+            'win98-window[title="Settings.exe"]'
           );
         }
-      },
-      "menu-help": () => {
-        alert(
-          "Welcome to Jeremy Liu's Portfolio!\n\nUse the Start menu to navigate.\nAll windows are resizable and draggable."
-        );
-      },
-      "menu-run": () => {
-        const command = prompt(
-          "Type the name of a program, folder, document, or Internet resource, and Windows will open it for you."
-        );
-        if (command) {
-          alert(`Running: ${command}\n(Command execution coming soon!)`);
+
+        // Load saved settings for display
+        const savedPalette = localStorage.getItem("colorPalette") || "default";
+
+        // Set saved values in the form
+        setTimeout(() => {
+          const radio = settingsWindow.querySelector(
+            `input[value="${savedPalette}"]`
+          );
+          if (radio) radio.checked = true;
+        }, 100);
+
+        // Function to reapply current theme (useful after dynamic content changes)
+        const reapplyCurrentTheme = () => {
+          const savedPalette = localStorage.getItem("colorPalette");
+          if (
+            savedPalette &&
+            savedPalette !== "default" &&
+            colorPalettes[savedPalette]
+          ) {
+            const colors = colorPalettes[savedPalette].colors;
+            // Apply to buttons and interactive elements - use darker colors (index 0 or 1) with lighter text
+            document
+              .querySelectorAll("button, .social-btn, a[href*='github']")
+              .forEach((btn) => {
+                btn.style.backgroundColor = colors[0] || "#c0c0c0"; // Darkest color
+                btn.style.color = colors[3] || "#ffffff"; // Lightest color for text
+              });
+          } else {
+            // Apply Windows 98 default colors
+            document
+              .querySelectorAll("button, .social-btn, a[href*='github']")
+              .forEach((btn) => {
+                btn.style.backgroundColor = "#c0c0c0";
+                btn.style.color = "#000000";
+              });
+          }
+        };
+
+        // Function to apply color palette
+        const applyColorPalette = (paletteKey) => {
+          if (colorPalettes[paletteKey]) {
+            // For default palette, always use Windows 98 default colors
+            if (paletteKey === "default") {
+              // Reset to Windows 98 defaults
+              localStorage.removeItem("colorPalette");
+              localStorage.removeItem("paletteColors");
+
+              // Apply Windows 98 default colors
+              document
+                .querySelectorAll("win98-window .window-body")
+                .forEach((body) => {
+                  body.style.backgroundColor = "#f0f0f0";
+                  body.style.border = "2px solid #808080"; // Divider between gray frame and content
+                });
+
+              document
+                .querySelectorAll("button, .social-btn, a[href*='github']")
+                .forEach((btn) => {
+                  btn.style.backgroundColor = "#c0c0c0";
+                  btn.style.color = "#000000";
+                });
+            } else {
+              const colors = colorPalettes[paletteKey].colors;
+              // Store in localStorage for persistence
+              localStorage.setItem("colorPalette", paletteKey);
+              localStorage.setItem("paletteColors", JSON.stringify(colors));
+
+              // Apply CSS variables
+              document.documentElement.style.setProperty(
+                "--palette-color-1",
+                colors[0]
+              );
+              document.documentElement.style.setProperty(
+                "--palette-color-2",
+                colors[1]
+              );
+              document.documentElement.style.setProperty(
+                "--palette-color-3",
+                colors[2]
+              );
+              document.documentElement.style.setProperty(
+                "--palette-color-4",
+                colors[3]
+              );
+
+              // Apply to window bodies (background) - use lightest color (index 3)
+              // Add colored divider border between gray frame and colored content
+              document
+                .querySelectorAll("win98-window .window-body")
+                .forEach((body) => {
+                  body.style.backgroundColor = colors[3] || "#f0f0f0";
+                  body.style.border = `2px solid ${colors[1] || "#808080"}`; // Divider using medium color
+                });
+
+              // Apply to buttons and interactive elements - use darker colors (index 0 or 1) with lighter text
+              document
+                .querySelectorAll("button, .social-btn, a[href*='github']")
+                .forEach((btn) => {
+                  btn.style.backgroundColor = colors[0] || "#c0c0c0"; // Darkest color
+                  btn.style.color = colors[3] || "#ffffff"; // Lightest color for text
+                });
+            }
+          }
+        };
+
+        // Add event listeners
+        if (settingsWindow) {
+          // Palette Apply buttons
+          const paletteApplyButtons =
+            settingsWindow.querySelectorAll(".palette-apply-btn");
+          paletteApplyButtons.forEach((btn) => {
+            btn.onclick = () => {
+              const paletteKey = btn.getAttribute("data-palette");
+              // Update radio button
+              const radio = settingsWindow.querySelector(
+                `input[value="${paletteKey}"]`
+              );
+              if (radio) radio.checked = true;
+              // Apply the palette
+              applyColorPalette(paletteKey);
+            };
+          });
         }
-      },
+      }
+
+      bringWindowToFront(settingsWindow);
+    };
+
+    // Function to open Help window
+    const openHelpWindow = () => {
+      let helpWindow = document.querySelector('win98-window[title="Help.exe"]');
+
+      if (!helpWindow) {
+        const socialLinks = [
+          {
+            name: "LinkedIn",
+            url: "https://www.linkedin.com/in/jmyl",
+            icon: "🔗",
+          },
+          { name: "Email", url: "mailto:jeremyliu621@gmail.com", icon: "✉️" },
+          {
+            name: "GitHub",
+            url: "https://github.com/Jeremyliu-621",
+            icon: "💻",
+          },
+          {
+            name: "Resume",
+            url: "./assets/Jeremy_Liu_final_resume.pdf",
+            icon: "📄",
+          },
+          {
+            name: "Instagram",
+            url: "https://instagram.com/jeremyliu.621",
+            icon: "📷",
+          },
+          {
+            name: "Devpost",
+            url: "https://devpost.com/jeremyliu621",
+            icon: "⚡",
+          },
+        ];
+
+        const linksHTML = socialLinks
+          .map(
+            (link) => `
+            <div style="margin-bottom: 12px; padding: 8px; border: 1px solid #808080; background: #f0f0f0;">
+              <a href="${link.url}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #000; font-size: 1.1em;">
+                <span style="font-size: 1.3em;">${link.icon}</span>
+                <strong>${link.name}</strong>
+              </a>
+            </div>
+          `
+          )
+          .join("");
+
+        const windowHTML = `
+          <win98-window title="Help.exe" resizable style="top: 100px; left: 100px; width: 400px; height: 450px; z-index: 1000;">
+            <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
+              <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.5em;">Help & Contact</h2>
+              <p style="margin-bottom: 16px; line-height: 1.4;">Welcome to Jeremy Liu's Portfolio!</p>
+              <p style="margin-bottom: 20px; line-height: 1.4;">Connect with me through any of these platforms:</p>
+              ${linksHTML}
+              <div style="margin-top: 20px; padding: 8px; background: #e8e8e8; border: 1px solid #808080;">
+                <p style="margin: 0; font-size: 0.9em; line-height: 1.4;">
+                  <strong>Tips:</strong><br>
+                  • All windows are resizable and draggable<br>
+                  • Use the Start menu to navigate<br>
+                  • Double-click desktop icons to open windows
+                </p>
+              </div>
+            </div>
+          </win98-window>
+        `;
+
+        const desktop = document.querySelector("win98-desktop");
+        if (desktop) {
+          desktop.insertAdjacentHTML("beforeend", windowHTML);
+          helpWindow = document.querySelector('win98-window[title="Help.exe"]');
+        }
+      }
+
+      bringWindowToFront(helpWindow);
+    };
+
+    // Function to randomly open a window
+    const openRandomWindow = () => {
+      const openableWindows = [
+        "My Projects.exe",
+        "About Me.exe",
+        "Skills.exe",
+        "Hobbies.exe",
+        "Blog.exe",
+        "Folder.exe",
+        "Chatbox.exe",
+        "Thank you!.exe",
+        "Help.exe",
+        "Settings.exe",
+      ];
+
+      // Filter to only windows that exist
+      const existingWindows = openableWindows.filter((title) => {
+        const win = document.querySelector(`win98-window[title="${title}"]`);
+        return win !== null;
+      });
+
+      if (existingWindows.length === 0) {
+        alert("No windows available to open!");
+        return;
+      }
+
+      const randomTitle =
+        existingWindows[Math.floor(Math.random() * existingWindows.length)];
+      const randomWindow = document.querySelector(
+        `win98-window[title="${randomTitle}"]`
+      );
+
+      // If window doesn't exist yet, trigger its creation
+      if (!randomWindow) {
+        // Try to trigger creation based on title
+        if (randomTitle === "Blog.exe") {
+          const blogIcon = document.querySelector("#desktop-blog");
+          if (blogIcon) blogIcon.dispatchEvent(new MouseEvent("dblclick"));
+        } else if (randomTitle === "Folder.exe") {
+          const folderIcon = document.querySelector("#desktop-folder");
+          if (folderIcon) folderIcon.dispatchEvent(new MouseEvent("dblclick"));
+        } else if (randomTitle === "Chatbox.exe") {
+          const chatboxIcon = document.querySelector("#desktop-chatbox");
+          if (chatboxIcon)
+            chatboxIcon.dispatchEvent(new MouseEvent("dblclick"));
+        } else if (randomTitle === "Thank you!.exe") {
+          const thanksIcon = document.querySelector("#desktop-thanks");
+          if (thanksIcon) thanksIcon.dispatchEvent(new MouseEvent("dblclick"));
+        } else if (randomTitle === "Help.exe") {
+          openHelpWindow();
+        } else if (randomTitle === "Settings.exe") {
+          openSettingsWindow();
+        }
+      } else {
+        bringWindowToFront(randomWindow);
+      }
+    };
+
+    // Start menu item click handlers
+    const menuItems = {
+      "menu-settings": () => openSettingsWindow(),
       "menu-shutdown": () => {
         if (confirm("Are you sure you want to shut down?")) {
-          alert("Shutting down...\n\nThanks for visiting!");
+          // Close the website
+          window.close();
+          // If window.close() doesn't work (some browsers block it), redirect
+          if (!document.hidden) {
+            window.location.href = "about:blank";
+          }
         }
       },
     };
