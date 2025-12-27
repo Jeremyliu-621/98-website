@@ -19,6 +19,14 @@ a:hover {
   color: #535bf2;
 }
 
+:root {
+  --custom-font: "Jersey 10", sans-serif;
+  --palette-color-1: #c0c0c0;
+  --palette-color-2: #808080;
+  --palette-color-3: #000000;
+  --palette-color-4: #ffffff;
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -29,7 +37,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-family: "Jersey 10", sans-serif;
+  font-family: var(--custom-font, "Jersey 10", sans-serif);
   cursor: default !important;
 }
 
@@ -51,7 +59,7 @@ button:hover,
 }
 
 win98-desktop {
-  background-color: #fcfbf4;
+  background-color: #fcfbf4; /* Fallback color if image doesn't load */
   cursor: default !important;
 }
 
