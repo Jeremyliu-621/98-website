@@ -349,7 +349,7 @@ function initApp() {
       </div>
 
       <!-- About Me Window - Left -->
-      <win98-window title="About Me.exe" resizable style="top: 12vh; left: 35vh; width: 48vh; height: 495px;">
+      <win98-window title="About Me.exe" resizable style="top: 12vh; left: 28vh; width: 55vh; height: 430px;">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
           <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; color: var(--palette-color-1, #000000);">${
             content.aboutMe.name
@@ -358,14 +358,19 @@ function initApp() {
             content.aboutMe.title
           }</p>
           <p style="margin: 5px 0; line-height: 1.3;">${content.aboutMe.bio}</p>
+          <div style="display: flex; justify-content: center; margin-bottom: 8px;">
           <img src="${
             getImageUrl("cruisesunset") || ""
-          }" alt="Cruise Sunset" style="width: 100%; height: 170px; margin: 8px 0; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
+          }" alt="Cruise Sunset" style="width: 60%; height: 100px; margin: 8px 2px; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
+          <img src="${
+            getImageUrl("armbar") || ""
+          }" alt="Cruise Sunset" style="width: 60%; height: 100px; margin: 8px 2px; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
+          </div>
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px;">
             <a href="https://www.linkedin.com/in/jmyl" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">🔗</span> LinkedIn</a>
             <a href="mailto:jeremyliu621@gmail.com" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">✉️</span> Email</a>
             <a href="https://github.com/Jeremyliu-621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">💻</span> Github</a>
-            <a href="./assets/Jeremy_Liu_final_resume.pdf" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">📄</span> Resume</a>
+            <a href="./assets/Liu_Jeremy_Resume.pdf" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">📄</span> Resume</a>
             <a href="https://instagram.com/jeremyliu.621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">📷</span> Instagram</a>
             <a href="https://devpost.com/jeremyliu621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; text-align: center;"><span style="font-size: 1.2em;">⚡</span> Devpost</a>
           </div>
@@ -473,7 +478,7 @@ function initApp() {
       </win98-window>
 
       <!-- Interactive Window -->
-      <win98-window title="Interactive.exe" resizable style="bottom: 5vh; left: 46vh; width: 200px; height: 120px;">
+      <win98-window title="Interactive.exe" resizable style="bottom: 10vh; left: 48vh; width: 200px; height: 120px;">
         <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; display: flex; align-items: center; gap: 10px;">
           <p style="margin: 0; font-size: 1.15em; flex: 1;">you can interact with windows!</p>
           <img src="${
@@ -1753,21 +1758,25 @@ function initApp() {
             name: "Retro Green",
             colors: ["#5C6F2B", "#DE802B", "#D8C9A7", "#EEEEEE"], // Darkest to lightest
           },
-          retroPink: {
-            name: "Retro Pink",
-            colors: ["#132440", "#16476A", "#3B9797", "#FDB5CE"], // Darkest to lightest
-          },
           calmGreen: {
             name: "Calm Green",
             colors: ["#778873", "#A1BC98", "#D2DCB6", "#F1F3E0"], // Darkest to lightest
           },
-          hazel: {
-            name: "Hazel",
-            colors: ["#957C62", "#B77466", "#E2B59A", "#FFE1AF"], // Darkest to lightest
-          },
           darkChocolate: {
             name: "Dark Chocolate",
             colors: ["#37353E", "#44444E", "#715A5A", "#D3DAD9"], // Darkest to lightest
+          },
+          Cream: {
+            name: "Cream",
+            colors: ["#C9B59C", "#D9CFC7", "#EFE9E3", "#F9F8F6"], // Darkest to lightest
+          },
+          Plum: {
+            name: "Plum",
+            colors: ["#6B3F69", "#8D5F8C", "#A376A2", "#DDC3C3"], // Darkest to lightest
+          },
+          Maroon: {
+            name: "Maroon",
+            colors: ["#334443", "#34656D", "#FAEAB1", "#FAF8F1"], // Darkest to lightest flip this around. maroon and teal
           },
         };
 
