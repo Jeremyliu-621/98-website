@@ -351,7 +351,7 @@ function initApp() {
       <!-- About Me Window - Left -->
       <win98-window title="About Me.exe" resizable style="top: 12vh; left: 35vh; width: 48vh; height: 495px;">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
-          <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;">${
+          <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; color: var(--palette-color-1, #000000);">${
             content.aboutMe.name
           }</h2>
           <p style="font-weight: bold; margin: 3px 0;">${
@@ -375,7 +375,7 @@ function initApp() {
       <!-- Skills Window - Middle Top -->
       <win98-window title="Skills.exe" resizable style="bottom: 43vh; left: 165vh; width: 300px; height: calc(35vh);">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
-          <h3 style="margin-top: 0; margin-bottom: 5px; font-weight: bold; font-size: 1.4em;">Languages</h3>
+          <h3 style="margin-top: 0; margin-bottom: 5px; font-weight: bold; font-size: 1.4em;; color: var(--palette-color-1, #000000">Languages</h3>
           <p style="margin: 3px 0;">${content.skills.languages}</p>
           
           <hr style="margin: 8px 0;">
@@ -398,7 +398,7 @@ function initApp() {
       </win98-window>
 
       <!-- Hobbies Window - Middle Bottom -->
-      <win98-window title="Hobbies.exe" resizable style="bottom: 20vh; left: 167vh; width: 300px; height: 19vh;">
+      <win98-window title="Hobbies.exe" resizable style="bottom: 18vh; left: 167vh; width: 300px; height: 22vh;">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px;">Outside of Academics</h3>
           <p style="margin: 5px 0; line-height: 1.3;">${content.hobbies}</p>
