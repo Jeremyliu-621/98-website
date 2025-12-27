@@ -371,12 +371,12 @@ win98-window {
 }
 
 /* Standard desktops (1025px - 1919px) - default sizes */
-@media screen and (min-width: 1025px) and (max-width: 1919px) {
+@media screen and (min-width: 1025px) and (max-width: 1619px) {
   /* Default font sizes - no changes */
 }
 
-/* Large desktops (1920px and above) */
-@media screen and (min-width: 1920px) {
+/* Large desktops (1619px and above) */
+@media screen and (min-width: 1619px) {
   /* Increase font sizes for readability */
   win98-window .window-body {
     font-size: 1.15em;
@@ -399,6 +399,27 @@ win98-window {
     font-size: 1.4em;
   }
 
+  /* Make windows wider on large screens */
+  win98-window[title="About Me.exe"] {
+    width: 400px !important;
+  }
+
+  win98-window[title="Skills.exe"] {
+    width: 380px !important;
+  }
+
+  win98-window[title="Hobbies.exe"] {
+    width: 380px !important;
+  }
+
+  win98-window[title="My Projects.exe"] {
+    width: calc(100vw - 1200px) !important;
+  }
+
+  win98-window[title="Interactive.exe"] {
+    width: 250px !important;
+  }
+
   /* Larger desktop icon text */
   .desktop-folder {
     font-size: 1em !important;
@@ -419,7 +440,7 @@ win98-window {
 @media screen and (min-width: 2560px) {
   /* Even larger font sizes */
   win98-window .window-body {
-    font-size: 1.3em;
+    font-size: 2.3em;
   }
 
   win98-window .window-body p,
@@ -437,6 +458,27 @@ win98-window {
 
   win98-window .window-body h4 {
     font-size: 1.6em;
+  }
+
+  /* Make windows even wider on very large screens */
+  win98-window[title="About Me.exe"] {
+    width: 500px !important;
+  }
+
+  win98-window[title="Skills.exe"] {
+    width: 480px !important;
+  }
+
+  win98-window[title="Hobbies.exe"] {
+    width: 480px !important;
+  }
+
+  win98-window[title="My Projects.exe"] {
+    width: calc(100vw - 1500px) !important;
+  }
+
+  win98-window[title="Interactive.exe"] {
+    width: 300px !important;
   }
 
   .desktop-folder {
