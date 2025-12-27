@@ -1797,8 +1797,8 @@ function initApp() {
           .join("");
 
         const windowHTML = `
-          <win98-window title="Settings.exe" resizable style="top: 100px; left: 100px; width: 500px; height: 650px; z-index: 1000;">
-            <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; padding-bottom: 20px;">
+          <win98-window title="Settings.exe" resizable style="top: 100px; left: 100px; width: 500px; height: 530px; z-index: 1000;">
+            <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; padding-bottom: 20px; border: 2px solid #808080">
               <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.5em;">Settings</h2>
               
               <div style="margin-bottom: 0;">
