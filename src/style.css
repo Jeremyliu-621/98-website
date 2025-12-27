@@ -508,7 +508,7 @@ win98-window {
 @media screen and (min-width: 2304px) {
   /* Even larger font sizes */
   win98-window .window-body {
-    font-size: 2.3em;
+    font-size: 1.4em;
   }
 
   win98-window .window-body p,
@@ -531,6 +531,9 @@ win98-window {
   /* Make windows even wider on very large screens */
   win98-window[title="About Me.exe"] {
     width: 500px !important;
+    height: 600px !important;
+    left: 20vh !important;
+    bottom: 18vh !important;
   }
 
   win98-window[title="Skills.exe"] {
@@ -542,11 +545,14 @@ win98-window {
   }
 
   win98-window[title="My Projects.exe"] {
-    width: calc(100vw - 1500px) !important;
+    width: 42vw !important;
+    left: 71vh !important;
   }
 
   win98-window[title="Interactive.exe"] {
-    width: 300px !important;
+    width: 400px !important;
+    left: 26vh !important;
+    bottom: 13vh !important;
   }
 
   .desktop-folder {
