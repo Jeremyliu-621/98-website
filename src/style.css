@@ -32,8 +32,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #fcfbf4;
-  /* Creamish white background */
+  background-color: #c0c0c0;
+  /* Softer off-white background */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -59,7 +59,7 @@ button:hover,
 }
 
 win98-desktop {
-  background-color: #fcfbf4; /* Fallback color if image doesn't load */
+  background-color: #c0c0c0; /* Fallback color if image doesn't load */
   cursor: default !important;
 }
 
@@ -72,7 +72,7 @@ html {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3em;
   line-height: 1.1;
 }
 
@@ -306,6 +306,10 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
   border-left: 1px solid #808080 !important;
   border-bottom: 2px solid #000 !important;
   border-right: 1px solid #808080 !important;
+}
+
+.project-tab p {
+  margin-bottom: 100;
 }
 
 /* ============================================
