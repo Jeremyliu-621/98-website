@@ -368,11 +368,11 @@ function initApp() {
       </win98-window>
 
       <!-- Projects Window - Right -->
-      <win98-window title="My Projects.exe" resizable style="top: 20px; left: 85.5vh; width: calc(100vw - 1000px); height: calc(100vh - 100px);">
+      <win98-window title="My Projects.exe" resizable style="top: 20px; left: 85.5vh; width: 35vw; height: 88vh;">
         <div class="window-body" style="padding: 0; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; min-height: 0; display: flex; flex-direction: column;">
           <!-- Tabs -->
           <div class="projects-tabs" style="display: flex; background: #c0c0c0; border-bottom: 1px solid #808080; overflow-x: auto; overflow-y: hidden; flex-shrink: 0;">
-            <button class="project-tab active" data-tab="all" style="padding: 6px 12px; background: #c0c0c0; border: none; border-right: 1px solid #808080; border-bottom: 2px solid #000; cursor: pointer; font-family: 'Jersey 10', sans-serif; font-size: 1em; white-space: nowrap; min-width: 60px;">
+            <button class="project-tab active" data-tab="all" style="padding: 6px 12px; background: #c0c0c0; border: none; border-right: 1px solid #808080; cursor: pointer; font-family: 'Jersey 10', sans-serif; font-size: 1em; white-space: nowrap; min-width: 60px;">
               All
             </button>
             ${content.projects
@@ -802,12 +802,12 @@ function initApp() {
         );
       }
 
-      // Initialize active tab styling
+      // Initialize active tab styling - CSS handles the pressed appearance
       projectTabs.forEach((tab) => {
-        if (tab.classList.contains("active")) {
-          tab.style.borderBottom = "2px solid #000";
-        } else {
-          tab.style.borderBottom = "1px solid #808080";
+        // Remove any inline border styles to let CSS handle it
+        if (!tab.classList.contains("active")) {
+          tab.style.border = "none";
+          tab.style.borderRight = "1px solid #808080";
         }
       });
 
@@ -819,7 +819,8 @@ function initApp() {
           projectTabs.forEach((t) => {
             t.classList.remove("active");
             t.style.background = "#c0c0c0";
-            t.style.borderBottom = "1px solid #808080";
+            t.style.border = "none";
+            t.style.borderRight = "1px solid #808080";
           });
           tabPanes.forEach((p) => {
             p.classList.remove("active");
@@ -829,7 +830,8 @@ function initApp() {
           // Add active class to clicked tab and corresponding pane
           tab.classList.add("active");
           tab.style.background = "#c0c0c0";
-          tab.style.borderBottom = "2px solid #000";
+          // Remove inline border styles - let CSS handle the pressed appearance
+          tab.style.border = "none";
 
           const activePane = document.querySelector(
             `.tab-pane[data-tab-content="${tabId}"]`

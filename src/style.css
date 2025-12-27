@@ -281,8 +281,13 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
 
 .project-tab.active {
   background: #c0c0c0 !important;
-  border-bottom: 2px solid #000 !important;
-  font-weight: bold;
+  /* Pressed/depressed appearance - inset borders */
+  border-top: 1px solid #808080 !important;
+  border-left: 1px solid #808080 !important;
+  border-bottom: 1px solid #ffffff !important;
+  border-right: 1px solid #ffffff !important;
+  /* Remove font-weight bold - text should not be bold */
+  font-weight: normal !important;
 }
 
 .project-tab:active {
@@ -291,6 +296,185 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
   border-left: 1px solid #808080 !important;
   border-bottom: 2px solid #000 !important;
   border-right: 1px solid #808080 !important;
+}
+
+/* ============================================
+   RESPONSIVE TEXT SIZES ONLY
+   Windows maintain fixed sizes, only text scales
+   ============================================ */
+
+/* Base responsive adjustments - windows keep their sizes */
+win98-window {
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+/* Mobile devices (phones) - up to 768px */
+@media screen and (max-width: 768px) {
+  /* Reduce font sizes only */
+  win98-window .window-body {
+    font-size: 0.85em;
+  }
+
+  win98-window .window-body p,
+  win98-window .window-body li {
+    font-size: 0.95em;
+  }
+
+  win98-window .window-body h2 {
+    font-size: 1.6em !important;
+  }
+
+  win98-window .window-body h3 {
+    font-size: 1.05em;
+  }
+
+  win98-window .window-body h4 {
+    font-size: 1.05em;
+  }
+
+  /* Desktop icons - smaller text only */
+  .desktop-folder {
+    font-size: 0.7em !important;
+  }
+
+  /* Tab buttons - smaller text */
+  .project-tab {
+    font-size: 0.85em !important;
+  }
+
+  /* Social buttons - smaller text */
+  .social-btn {
+    font-size: 1em !important;
+  }
+}
+
+/* Tablets and small laptops (768px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Slightly reduce font sizes */
+  win98-window .window-body {
+    font-size: 0.95em;
+  }
+
+  win98-window .window-body p,
+  win98-window .window-body li {
+    font-size: 1.05em;
+  }
+
+  win98-window .window-body h2 {
+    font-size: 2.4em !important;
+  }
+
+  win98-window .window-body h3 {
+    font-size: 1.2em;
+  }
+}
+
+/* Standard desktops (1025px - 1919px) - default sizes */
+@media screen and (min-width: 1025px) and (max-width: 1919px) {
+  /* Default font sizes - no changes */
+}
+
+/* Large desktops (1920px and above) */
+@media screen and (min-width: 1920px) {
+  /* Increase font sizes for readability */
+  win98-window .window-body {
+    font-size: 1.15em;
+  }
+
+  win98-window .window-body p,
+  win98-window .window-body li {
+    font-size: 1.25em;
+  }
+
+  win98-window .window-body h2 {
+    font-size: 3.2em !important;
+  }
+
+  win98-window .window-body h3 {
+    font-size: 1.5em;
+  }
+
+  win98-window .window-body h4 {
+    font-size: 1.4em;
+  }
+
+  /* Larger desktop icon text */
+  .desktop-folder {
+    font-size: 1em !important;
+  }
+
+  /* Larger tab text */
+  .project-tab {
+    font-size: 1.1em !important;
+  }
+
+  /* Larger social button text */
+  .social-btn {
+    font-size: 1.25em !important;
+  }
+}
+
+/* Very large desktops (2560px and above) */
+@media screen and (min-width: 2560px) {
+  /* Even larger font sizes */
+  win98-window .window-body {
+    font-size: 1.3em;
+  }
+
+  win98-window .window-body p,
+  win98-window .window-body li {
+    font-size: 1.4em;
+  }
+
+  win98-window .window-body h2 {
+    font-size: 3.8em !important;
+  }
+
+  win98-window .window-body h3 {
+    font-size: 1.7em;
+  }
+
+  win98-window .window-body h4 {
+    font-size: 1.6em;
+  }
+
+  .desktop-folder {
+    font-size: 1.1em !important;
+  }
+
+  .project-tab {
+    font-size: 1.2em !important;
+  }
+
+  .social-btn {
+    font-size: 1.35em !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .desktop-folder {
+    min-width: 80px !important;
+    min-height: 80px !important;
+    padding: 8px !important;
+  }
+
+  .project-tab {
+    min-height: 44px !important;
+    padding: 8px 12px !important;
+  }
+
+  .social-btn {
+    min-height: 44px !important;
+    padding: 12px 10px !important;
+  }
+
+  /* Prevent text selection on touch */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 /* Color scheme is handled by 98.css */
