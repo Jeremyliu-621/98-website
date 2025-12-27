@@ -289,7 +289,7 @@ function initApp() {
       </div>
 
       <!-- About Me Window - Left -->
-      <win98-window title="About Me.exe" resizable style="bottom: 14vh; left: 37vh; width: 320px; height: 70vh;">
+      <win98-window title="About Me.exe" resizable style="top: 12vh; left: 37vh; width: 320px; height: 495px;">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
           <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;">${
             content.aboutMe.name

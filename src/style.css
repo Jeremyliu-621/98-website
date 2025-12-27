@@ -313,259 +313,38 @@ win98-window {
 
 /* Mobile devices (phones) - up to 768px */
 @media screen and (max-width: 768px) {
-  /* Reduce font sizes only */
-  win98-window .window-body {
-    font-size: 0.85em;
-  }
-
-  win98-window .window-body p,
-  win98-window .window-body li {
-    font-size: 0.95em;
-  }
-
-  win98-window .window-body h2 {
-    font-size: 1.6em !important;
-  }
-
-  win98-window .window-body h3 {
-    font-size: 1.05em;
-  }
-
-  win98-window .window-body h4 {
-    font-size: 1.05em;
-  }
-
-  /* Desktop icons - smaller text only */
-  .desktop-folder {
-    font-size: 0.7em !important;
-  }
-
-  /* Tab buttons - smaller text */
-  .project-tab {
-    font-size: 0.85em !important;
-  }
-
-  /* Social buttons - smaller text */
-  .social-btn {
-    font-size: 1em !important;
-  }
+  /* Adjust positioning only - no size changes */
+  /* Windows stay the same size, just repositioned */
 }
 
-/* Tablets and small laptops (768px - 1024px) */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-  /* Slightly reduce font sizes */
-  win98-window .window-body {
-    font-size: 0.95em;
-  }
-
-  win98-window .window-body p,
-  win98-window .window-body li {
-    font-size: 1.05em;
-  }
-
-  win98-window .window-body h2 {
-    font-size: 2.4em !important;
-  }
-
-  win98-window .window-body h3 {
-    font-size: 1.2em;
-  }
+/* Tablets and small laptops (1100px - 1300px) */
+@media screen and (min-width: 1100px) and (max-width: 1300px) {
+  /* Adjust positioning only - windows and text stay the same size */
+  /* More spacing around windows on smaller screens */
 }
 
-/* Standard desktops (1025px - 1919px) - default sizes */
-@media screen and (min-width: 1025px) and (max-width: 1619px) {
-  /* Default font sizes - no changes */
+/* Tablets and small laptops (1300px - 1500px) */
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+  /* Adjust positioning only - windows and text stay the same size */
+  /* More spacing around windows on medium screens */
 }
 
-/* Large desktops (1619px and above) */
-@media screen and (min-width: 1620px) and (max-width: 1919px) {
-  /* Increase font sizes for readability */
-  win98-window .window-body {
-    font-size: 1.15em;
-  }
-
-  win98-window .window-body p,
-  win98-window .window-body li {
-    font-size: 1.25em;
-  }
-
-  win98-window .window-body h2 {
-    font-size: 3.2em !important;
-  }
-
-  win98-window .window-body h3 {
-    font-size: 1.5em;
-  }
-
-  win98-window .window-body h4 {
-    font-size: 1.4em;
-  }
-
-  /* Make windows wider on large screens */
-  win98-window[title="About Me.exe"] {
-    width: 400px !important;
-    left: 30vh !important;
-  }
-
-  win98-window[title="Skills.exe"] {
-    width: 380px !important;
-  }
-
-  win98-window[title="Hobbies.exe"] {
-    width: 380px !important;
-  }
-
-  win98-window[title="My Projects.exe"] {
-    width: 600px !important;
-    left: 85vh !important;
-  }
-
-  win98-window[title="Interactive.exe"] {
-    width: 250px !important;
-  }
-
-  /* Larger desktop icon text */
-  .desktop-folder {
-    font-size: 1em !important;
-  }
-
-  /* Larger tab text */
-  .project-tab {
-    font-size: 1.1em !important;
-  }
-
-  /* Larger social button text */
-  .social-btn {
-    font-size: 1.25em !important;
-  }
+/* Standard desktops (1500px - 1919px) */
+@media screen and (min-width: 1500px) and (max-width: 1919px) {
+  /* Adjust positioning only - windows and text stay the same size */
+  /* More spacing around windows on larger screens */
 }
 
-/* Larger desktops (1920px to 2559px) */
+/* Larger desktops (1920px to 2303px) */
 @media screen and (min-width: 1920px) and (max-width: 2303px) {
-  /* Increase font sizes for readability */
-  win98-window .window-body {
-    font-size: 1.35em;
-  }
-
-  win98-window .window-body p,
-  win98-window .window-body li {
-    font-size: 1.25em;
-  }
-
-  win98-window .window-body h2 {
-    font-size: 3.2em !important;
-  }
-
-  win98-window .window-body h3 {
-    font-size: 1.7em;
-  }
-
-  win98-window .window-body h4 {
-    font-size: 1.6em;
-  }
-
-  /* Make windows wider on large screens */
-  win98-window[title="About Me.exe"] {
-    width: 400px !important;
-    height: 600px !important;
-    left: 25vh !important;
-  }
-
-  win98-window[title="Skills.exe"] {
-    width: 380px !important;
-  }
-
-  win98-window[title="Hobbies.exe"] {
-    width: 380px !important;
-  }
-
-  win98-window[title="My Projects.exe"] {
-    width: 750px !important;
-    left: 77vh !important;
-  }
-
-  win98-window[title="Interactive.exe"] {
-    width: 250px !important;
-  }
-
-  /* Larger desktop icon text */
-  .desktop-folder {
-    font-size: 1em !important;
-  }
-
-  /* Larger tab text */
-  .project-tab {
-    font-size: 1.1em !important;
-  }
-
-  /* Larger social button text */
-  .social-btn {
-    font-size: 1.25em !important;
-  }
+  /* Adjust positioning only - windows and text stay the same size */
+  /* More spacing around windows on very large screens */
 }
 
-/* Very large desktops (2560px and above) */
+/* Very large desktops (2304px and above) */
 @media screen and (min-width: 2304px) {
-  /* Even larger font sizes */
-  win98-window .window-body {
-    font-size: 1.4em;
-  }
-
-  win98-window .window-body p,
-  win98-window .window-body li {
-    font-size: 1.4em;
-  }
-
-  win98-window .window-body h2 {
-    font-size: 3.8em !important;
-  }
-
-  win98-window .window-body h3 {
-    font-size: 1.7em;
-  }
-
-  win98-window .window-body h4 {
-    font-size: 1.6em;
-  }
-
-  /* Make windows even wider on very large screens */
-  win98-window[title="About Me.exe"] {
-    width: 500px !important;
-    height: 600px !important;
-    left: 20vh !important;
-    bottom: 18vh !important;
-  }
-
-  win98-window[title="Skills.exe"] {
-    width: 480px !important;
-  }
-
-  win98-window[title="Hobbies.exe"] {
-    width: 480px !important;
-  }
-
-  win98-window[title="My Projects.exe"] {
-    width: 42vw !important;
-    left: 71vh !important;
-  }
-
-  win98-window[title="Interactive.exe"] {
-    width: 400px !important;
-    left: 26vh !important;
-    bottom: 13vh !important;
-  }
-
-  .desktop-folder {
-    font-size: 1.1em !important;
-  }
-
-  .project-tab {
-    font-size: 1.2em !important;
-  }
-
-  .social-btn {
-    font-size: 1.35em !important;
-  }
+  /* Adjust positioning only - windows and text stay the same size */
+  /* Maximum spacing around windows on very large screens */
 }
 
 /* Touch device optimizations */
