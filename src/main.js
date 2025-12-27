@@ -49,17 +49,15 @@ const content = {
   projects: [
     {
       title: "stop! don't go on.",
-      description:
-        "An Arduino setup that tracks you with OpenCV that triggers a water sprayer and prompts email.js.",
+      description: "Water Sprayer that stops bad habits.",
       front: "React, Vite, TypeScript",
       back: "Python + Flask, OpenCV, PySerial, Pygame",
-      image: "stop_dont_go_on",
+      image: "stop_dont_go_on_grey",
       github: "https://github.com/Jeremyliu-621/stop-dont-go-on", // Add your GitHub URL here, or leave as null for no button
     },
     {
       title: "Binder",
-      description:
-        "Binder transforms traditional marketplace browsing into an intuitive, swipe-based interface.",
+      description: "A swipe-based interface for thrifting.",
       front: "Next.js, Typescript, Tailwind, Vite",
       back: "Python, Beautifulsoup, Selenium",
       image: "binder_action",
@@ -67,8 +65,7 @@ const content = {
     },
     {
       title: "UFC Index website",
-      description:
-        "A website that shows elos for UFC Fighters. Calculated with pandas with information scraped by Beautifulsoup.",
+      description: "A website that shows scraped stats for UFC Fighters.",
       front: "Next.js, React, Typescript, Tailwind",
       back: "Python, Pandas, BeautifulSoup",
       image: "ufc_elo",
@@ -209,11 +206,11 @@ const content = {
 };
 
 // Helper function to create project HTML
-function createProjectHTML(project) {
+function createProjectHTML(project, index) {
   const imgUrl = project.image ? getImageUrl(project.image) : null;
 
   let html = `
-    <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #f0f0f0; display: flex; gap: 8px; align-items: flex-start;">
+    <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #e0e0e0; display: flex; gap: 8px; align-items: flex-start;">
       <div style="flex: 1; min-width: 0;">
         <h4 style="margin-top: 0; margin-bottom: 3px; font-weight: bold;">${project.title}</h4>
         <p style="margin: 2px 0;">${project.description}</p>`;
@@ -222,14 +219,14 @@ function createProjectHTML(project) {
     html += `
       <p style="margin: 3px 0 0 0; color: #666;">
         ${project.front ? `<strong>Front:</strong> ${project.front}<br>` : ""}
-        ${project.back ? `<strong>Back:</strong> ${project.back}` : ""}
+        ${project.back ? `<strong>BACK.</strong> ${project.back}` : ""}
       </p>`;
   }
 
   // Add GitHub button if github URL is provided
   if (project.github) {
     html += `
-      <a href="${project.github}" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 6px; padding: 4px 12px; background: #c0c0c0; border: 2px outset #c0c0c0; color: #000; text-decoration: none; font-size: 0.9em; cursor: pointer; text-align: center;">
+      <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; margin-top: 6px; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;">
         View on GitHub
       </a>`;
   }
@@ -249,7 +246,7 @@ function createSingleProjectHTML(project) {
   const imgUrl = project.image ? getImageUrl(project.image) : null;
 
   let html = `
-    <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #f0f0f0;">
+    <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #e0e0e0;">
       <h2 style="margin-top: 0; margin-bottom: 8px; font-weight: bold; font-size: 1.5em;">${project.title}</h2>`;
 
   // Image
@@ -265,7 +262,7 @@ function createSingleProjectHTML(project) {
         <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.2em;">Stack</h3>
         <p style="margin: 2px 0; color: #000;">
           ${project.front ? `<strong>Front:</strong> ${project.front}<br>` : ""}
-          ${project.back ? `<strong>Back:</strong> ${project.back}` : ""}
+          ${project.back ? `<strong>BACK.</strong> ${project.back}` : ""}
         </p>
       </div>`;
   }
@@ -280,7 +277,7 @@ function createSingleProjectHTML(project) {
   // GitHub button
   if (project.github) {
     html += `
-      <a href="${project.github}" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 8px; padding: 6px 16px; background: #c0c0c0; border: 2px outset #c0c0c0; color: #000; text-decoration: none; font-size: 1em; cursor: pointer; text-align: center;">
+      <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; margin-top: 8px; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;">
         View on GitHub
       </a>`;
   }
@@ -299,7 +296,9 @@ function initApp() {
   }
 
   // Build the HTML using the content object
-  const projectsHTML = content.projects.map(createProjectHTML).join("");
+  const projectsHTML = content.projects
+    .map((project, index) => createProjectHTML(project, index))
+    .join("");
   const activitiesHTML = content.aboutMe.currentActivities
     .map((activity) => `<li>${activity}</li>`)
     .join("");
@@ -455,7 +454,7 @@ function initApp() {
           <div class="projects-tab-content" style="flex: 1; overflow-y: auto; padding: 8px; box-sizing: border-box;">
             <!-- All Projects Tab (default) -->
             <div class="tab-pane active" data-tab-content="all">
-              <h3 style="margin-top: 0; margin-bottom: 5px;">My Projects</h3>
+              <h1 style="margin-top: 0; margin-bottom: 5px;">My Projects</h1>
               ${projectsHTML}
             </div>
             
@@ -512,7 +511,7 @@ function initApp() {
     if (savedPalette === "default" || !savedPalette) {
       // Apply Windows 98 default colors
       document.querySelectorAll("win98-window .window-body").forEach((body) => {
-        body.style.backgroundColor = "#f0f0f0";
+        body.style.backgroundColor = "#e0e0e0";
         body.style.border = "2px solid #808080"; // Divider between gray frame and content
       });
 
@@ -544,7 +543,7 @@ function initApp() {
         document
           .querySelectorAll("win98-window .window-body")
           .forEach((body) => {
-            body.style.backgroundColor = colors[3] || "#f0f0f0";
+            body.style.backgroundColor = colors[3] || "#e0e0e0";
             body.style.border = `2px solid ${colors[1] || "#808080"}`; // Divider using medium color
           });
         document
@@ -1099,11 +1098,11 @@ function initApp() {
             <win98-window title="Folder.exe" resizable style="top: 100px; left: 100px; width: 600px; height: 500px; z-index: 1000;">
               <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
                 <h3 style="margin-top: 0; margin-bottom: 8px; font-weight: bold;">Images</h3>
-                <div style="margin-bottom: 20px; padding: 8px; background: #f0f0f0; border: 1px solid #c0c0c0;">
+                <div style="margin-bottom: 20px; padding: 8px; background: #e0e0e0; border: 1px solid #c0c0c0;">
                   ${imagesHTML}
                 </div>
                 <h3 style="margin-top: 0; margin-bottom: 8px; font-weight: bold;">Source Code Files</h3>
-                <div style="padding: 8px; background: #f0f0f0; border: 1px solid #c0c0c0;">
+                <div style="padding: 8px; background: #e0e0e0; border: 1px solid #c0c0c0;">
                   ${filesHTML}
                 </div>
               </div>
@@ -1205,7 +1204,7 @@ function initApp() {
             <win98-window title="Image Viewer.exe" resizable style="top: 150px; left: 200px; width: 700px; height: 600px; z-index: 2000;">
               <div class="window-body" style="padding: 8px; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column;">
                 <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #c0c0c0; margin-bottom: 8px; position: relative; overflow: hidden; padding: 8px;">
-                  <div style="background: #fff; border: 1px solid #808080; padding: 8px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; box-sizing: border-box;">
+                  <div style="background: #c0c0c0; border: 1px solid #808080; padding: 8px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; box-sizing: border-box;">
                   <img id="viewer-main-image" src="${currentUrl}" alt="${currentName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                   </div>
                 </div>
@@ -1630,7 +1629,7 @@ function initApp() {
                 ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" style="color: #000080; text-decoration: underline;">${item.name}</a>`
                 : `<strong>${item.name}</strong>`;
               return `
-                <div style="margin-bottom: 20px; padding: 8px; background: #f0f0f0; border: 1px solid #808080;">
+                <div style="margin-bottom: 20px; padding: 8px; background: #e0e0e0; border: 1px solid #808080;">
                   <h3 style="margin-top: 0; margin-bottom: 6px; font-weight: bold; font-size: 1.2em;">${nameHTML}</h3>
                   <p style="margin: 0; line-height: 1.4; color: #000;">${item.description}</p>
                 </div>
@@ -1708,7 +1707,7 @@ function initApp() {
         const colorPalettes = {
           default: {
             name: "Default",
-            colors: ["#000000", "#808080", "#c0c0c0", "#ffffff"], // Darkest to lightest
+            colors: ["#000000", "#808080", "#c0c0c0", "#e0e0e0"], // Darkest to lightest
           },
           retroGreen: {
             name: "Retro Green",
@@ -1736,7 +1735,7 @@ function initApp() {
           .map((key) => {
             const palette = colorPalettes[key];
             return `
-              <div style="margin-bottom: 12px; padding: 8px; border: 1px solid #808080; background: #f0f0f0; display: flex; align-items: center; gap: 12px;">
+              <div style="margin-bottom: 12px; padding: 8px; border: 1px solid #808080; background: #e0e0e0; display: flex; align-items: center; gap: 12px;">
                 <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1;">
                   <input type="radio" name="color-palette" value="${key}" ${
               key === "default" ? "checked" : ""
@@ -1829,7 +1828,7 @@ function initApp() {
               document
                 .querySelectorAll("win98-window .window-body")
                 .forEach((body) => {
-                  body.style.backgroundColor = "#f0f0f0";
+                  body.style.backgroundColor = "#e0e0e0";
                   body.style.border = "2px solid #808080"; // Divider between gray frame and content
                 });
 
@@ -1868,7 +1867,7 @@ function initApp() {
               document
                 .querySelectorAll("win98-window .window-body")
                 .forEach((body) => {
-                  body.style.backgroundColor = colors[3] || "#f0f0f0";
+                  body.style.backgroundColor = colors[3] || "#e0e0e0";
                   body.style.border = `2px solid ${colors[1] || "#808080"}`; // Divider using medium color
                 });
 
@@ -1943,7 +1942,7 @@ function initApp() {
         const linksHTML = socialLinks
           .map(
             (link) => `
-            <div style="margin-bottom: 12px; padding: 8px; border: 1px solid #808080; background: #f0f0f0;">
+            <div style="margin-bottom: 12px; padding: 8px; border: 1px solid #808080; background: #e0e0e0;">
               <a href="${link.url}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #000; font-size: 1.1em;">
                 <span style="font-size: 1.3em;">${link.icon}</span>
                 <strong>${link.name}</strong>
