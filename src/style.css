@@ -246,11 +246,9 @@ a[href*="github"]:active {
   background: #a0a0a0 !important;
 }
 
-/* Remove extra bottom margin from last elements in window bodies (except My Projects and Settings) */
-win98-window:not([title="My Projects.exe"]):not([title="Settings.exe"])
-  .window-body
-  > *:last-child,
-win98-window:not([title="My Projects.exe"]):not([title="Settings.exe"])
+/* Remove extra bottom margin from last elements in window bodies (except My Projects) */
+win98-window:not([title="My Projects.exe"]) .window-body > *:last-child,
+win98-window:not([title="My Projects.exe"])
   .window-body
   > div:last-child
   > *:last-child {
@@ -349,9 +347,10 @@ win98-window {
 }
 
 /* Standard desktops (1500px - 1919px) */
-@media screen and (min-width: 1550px) and (max-width: 1819px) {
+@media screen and (min-width: 1500px) and (max-width: 1919px) {
   /* Adjust positioning only - windows and text stay the same size */
   /* More spacing around windows on larger screens */
+}
 
 /* Larger desktops (1920px to 2303px) */
 @media screen and (min-width: 1920px) and (max-width: 2303px) {
