@@ -205,6 +205,101 @@ const content = {
   ],
 };
 
+// Color palettes - defined at top level so it can be accessed everywhere
+const colorPalettes = {
+  default: {
+    name: "Default",
+    colors: ["#000000", "#808080", "#c0c0c0", "#e0e0e0"], // Darkest to lightest
+  },
+  retroGreen: {
+    name: "Retro Green",
+    colors: ["#5C6F2B", "#DE802B", "#D8C9A7", "#EEEEEE"], // Darkest to lightest
+  },
+  calmGreen: {
+    name: "Calm Green",
+    colors: ["#778873", "#A1BC98", "#D2DCB6", "#F1F3E0"], // Darkest to lightest
+  },
+  darkChocolate: {
+    name: "Dark Chocolate",
+    colors: ["#37353E", "#44444E", "#715A5A", "#D3DAD9"], // Darkest to lightest
+  },
+  Cream: {
+    name: "Cream",
+    colors: ["#C9B59C", "#D9CFC7", "#EFE9E3", "#F9F8F6"], // Darkest to lightest
+  },
+  Plum: {
+    name: "Plum",
+    colors: ["#6B3F69", "#8D5F8C", "#A376A2", "#DDC3C3"], // Darkest to lightest
+  },
+  Maroon: {
+    name: "Maroon",
+    colors: ["#334443", "#34656D", "#FAEAB1", "#FAF8F1"], // Darkest to lightest
+  },
+};
+
+// Helper function to apply color palette (can be used from anywhere)
+function applyColorPalette(paletteKey) {
+  if (colorPalettes[paletteKey]) {
+    // For default palette, always use Windows 98 default colors
+    if (paletteKey === "default") {
+      // Reset to Windows 98 defaults
+      localStorage.removeItem("colorPalette");
+      localStorage.removeItem("paletteColors");
+
+      // Apply Windows 98 default colors
+      document.querySelectorAll("win98-window .window-body").forEach((body) => {
+        body.style.backgroundColor = "#e0e0e0";
+        body.style.border = "2px solid #808080"; // Divider between gray frame and content
+      });
+
+      document
+        .querySelectorAll("button, .social-btn, a[href*='github']")
+        .forEach((btn) => {
+          btn.style.backgroundColor = "#c0c0c0";
+          btn.style.color = "#000000";
+        });
+    } else {
+      const colors = colorPalettes[paletteKey].colors;
+      // Store in localStorage for persistence
+      localStorage.setItem("colorPalette", paletteKey);
+      localStorage.setItem("paletteColors", JSON.stringify(colors));
+
+      // Apply CSS variables
+      document.documentElement.style.setProperty(
+        "--palette-color-1",
+        colors[0]
+      );
+      document.documentElement.style.setProperty(
+        "--palette-color-2",
+        colors[1]
+      );
+      document.documentElement.style.setProperty(
+        "--palette-color-3",
+        colors[2]
+      );
+      document.documentElement.style.setProperty(
+        "--palette-color-4",
+        colors[3]
+      );
+
+      // Apply to window bodies (background) - use lightest color (index 3)
+      // Add colored divider border between gray frame and colored content
+      document.querySelectorAll("win98-window .window-body").forEach((body) => {
+        body.style.backgroundColor = colors[3] || "#e0e0e0";
+        body.style.border = `2px solid ${colors[1] || "#808080"}`; // Divider using medium color
+      });
+
+      // Apply to buttons and interactive elements - use darker colors (index 0 or 1) with lighter text
+      document
+        .querySelectorAll("button, .social-btn, a[href*='github']")
+        .forEach((btn) => {
+          btn.style.backgroundColor = colors[0] || "#c0c0c0"; // Darkest color
+          btn.style.color = colors[3] || "#ffffff"; // Lightest color for text
+        });
+    }
+  }
+}
+
 // Helper function to create project HTML
 function createProjectHTML(project, index) {
   const imgUrl = project.image ? getImageUrl(project.image) : null;
@@ -508,59 +603,14 @@ function initApp() {
 
   // Wait for custom elements to be defined
   setTimeout(() => {
-    // Load saved settings on page load
-    const savedPalette = localStorage.getItem("colorPalette");
-    const savedPaletteColors = localStorage.getItem("paletteColors");
-
-    // If default is selected or no palette is saved, use Windows 98 defaults
-    if (savedPalette === "default" || !savedPalette) {
-      // Apply Windows 98 default colors
-      document.querySelectorAll("win98-window .window-body").forEach((body) => {
-        body.style.backgroundColor = "#e0e0e0";
-        body.style.border = "2px solid #808080"; // Divider between gray frame and content
-      });
-
-      document
-        .querySelectorAll("button, .social-btn, a[href*='github']")
-        .forEach((btn) => {
-          btn.style.backgroundColor = "#c0c0c0";
-          btn.style.color = "#000000";
-        });
-    } else if (savedPaletteColors) {
-      try {
-        const colors = JSON.parse(savedPaletteColors);
-        document.documentElement.style.setProperty(
-          "--palette-color-1",
-          colors[0]
-        );
-        document.documentElement.style.setProperty(
-          "--palette-color-2",
-          colors[1]
-        );
-        document.documentElement.style.setProperty(
-          "--palette-color-3",
-          colors[2]
-        );
-        document.documentElement.style.setProperty(
-          "--palette-color-4",
-          colors[3]
-        );
-        document
-          .querySelectorAll("win98-window .window-body")
-          .forEach((body) => {
-            body.style.backgroundColor = colors[3] || "#e0e0e0";
-            body.style.border = `2px solid ${colors[1] || "#808080"}`; // Divider using medium color
-          });
-        document
-          .querySelectorAll("button, .social-btn, a[href*='github']")
-          .forEach((btn) => {
-            btn.style.backgroundColor = colors[0] || "#c0c0c0"; // Darkest color
-            btn.style.color = colors[3] || "#ffffff"; // Lightest color for text
-          });
-      } catch (e) {
-        console.warn("Failed to load saved color palette:", e);
-      }
-    }
+    // Always pick a random theme on every page load (excluding "default")
+    const paletteKeys = Object.keys(colorPalettes).filter(
+      (key) => key !== "default"
+    );
+    const randomKey =
+      paletteKeys[Math.floor(Math.random() * paletteKeys.length)];
+    // Apply the random theme
+    applyColorPalette(randomKey);
 
     // Note: Removed window body update code that was interfering with dragging
     // The inline styles in the HTML should handle overflow correctly
@@ -1749,37 +1799,7 @@ function initApp() {
       );
 
       if (!settingsWindow) {
-        const colorPalettes = {
-          default: {
-            name: "Default",
-            colors: ["#000000", "#808080", "#c0c0c0", "#e0e0e0"], // Darkest to lightest
-          },
-          retroGreen: {
-            name: "Retro Green",
-            colors: ["#5C6F2B", "#DE802B", "#D8C9A7", "#EEEEEE"], // Darkest to lightest
-          },
-          calmGreen: {
-            name: "Calm Green",
-            colors: ["#778873", "#A1BC98", "#D2DCB6", "#F1F3E0"], // Darkest to lightest
-          },
-          darkChocolate: {
-            name: "Dark Chocolate",
-            colors: ["#37353E", "#44444E", "#715A5A", "#D3DAD9"], // Darkest to lightest
-          },
-          Cream: {
-            name: "Cream",
-            colors: ["#C9B59C", "#D9CFC7", "#EFE9E3", "#F9F8F6"], // Darkest to lightest
-          },
-          Plum: {
-            name: "Plum",
-            colors: ["#6B3F69", "#8D5F8C", "#A376A2", "#DDC3C3"], // Darkest to lightest
-          },
-          Maroon: {
-            name: "Maroon",
-            colors: ["#334443", "#34656D", "#FAEAB1", "#FAF8F1"], // Darkest to lightest flip this around. maroon and teal
-          },
-        };
-
+        // Use the global colorPalettes defined at top level
         const paletteHTML = Object.keys(colorPalettes)
           .map((key) => {
             const palette = colorPalettes[key];
@@ -1864,72 +1884,7 @@ function initApp() {
           }
         };
 
-        // Function to apply color palette
-        const applyColorPalette = (paletteKey) => {
-          if (colorPalettes[paletteKey]) {
-            // For default palette, always use Windows 98 default colors
-            if (paletteKey === "default") {
-              // Reset to Windows 98 defaults
-              localStorage.removeItem("colorPalette");
-              localStorage.removeItem("paletteColors");
-
-              // Apply Windows 98 default colors
-              document
-                .querySelectorAll("win98-window .window-body")
-                .forEach((body) => {
-                  body.style.backgroundColor = "#e0e0e0";
-                  body.style.border = "2px solid #808080"; // Divider between gray frame and content
-                });
-
-              document
-                .querySelectorAll("button, .social-btn, a[href*='github']")
-                .forEach((btn) => {
-                  btn.style.backgroundColor = "#c0c0c0";
-                  btn.style.color = "#000000";
-                });
-            } else {
-              const colors = colorPalettes[paletteKey].colors;
-              // Store in localStorage for persistence
-              localStorage.setItem("colorPalette", paletteKey);
-              localStorage.setItem("paletteColors", JSON.stringify(colors));
-
-              // Apply CSS variables
-              document.documentElement.style.setProperty(
-                "--palette-color-1",
-                colors[0]
-              );
-              document.documentElement.style.setProperty(
-                "--palette-color-2",
-                colors[1]
-              );
-              document.documentElement.style.setProperty(
-                "--palette-color-3",
-                colors[2]
-              );
-              document.documentElement.style.setProperty(
-                "--palette-color-4",
-                colors[3]
-              );
-
-              // Apply to window bodies (background) - use lightest color (index 3)
-              // Add colored divider border between gray frame and colored content
-              document
-                .querySelectorAll("win98-window .window-body")
-                .forEach((body) => {
-                  body.style.backgroundColor = colors[3] || "#e0e0e0";
-                  body.style.border = `2px solid ${colors[1] || "#808080"}`; // Divider using medium color
-                });
-
-              // Apply to buttons and interactive elements - use darker colors (index 0 or 1) with lighter text
-              document
-                .querySelectorAll("button, .social-btn, a[href*='github']")
-                .forEach((btn) => {
-                  btn.style.backgroundColor = colors[0] || "#c0c0c0"; // Darkest color
-                  btn.style.color = colors[3] || "#ffffff"; // Lightest color for text
-                });
-            }
-          }
-        };
+        // Use the global applyColorPalette function
 
         // Add event listeners
         if (settingsWindow) {
