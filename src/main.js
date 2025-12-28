@@ -230,6 +230,11 @@ const content = {
       description: "For giving me cool colour palettes for this project.",
       link: "https://colorhunt.co/",
     },
+    {
+      name: "Kibuns",
+      description: "For their cookie clicker gif online!.",
+      link: "https://github.com/Kibuns/Cookie_Clicker_Bot",
+    },
     // Add more thanks below by copying the structure above
     // Example:
     // {
@@ -364,18 +369,22 @@ function createProjectHTML(project, index) {
         ${
           project.website
             ? `
-          <a href="${project.website}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
-            Website
-          </a>
+          <a href="${
+            project.website
+          }" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};"><img src="${
+                getImageUrl("website-icon") || ""
+              }" alt="Website" style="width: 20px; height: 20px; margin-right: 8px;"> Website</a>
         `
             : ""
         }
         ${
           project.github
             ? `
-          <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
-            GitHub
-          </a>
+          <a href="${
+            project.github
+          }" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};"><img src="${
+                getImageUrl("github-icon") || ""
+              }" alt="GitHub" style="width: 20px; height: 20px; margin-right: 8px;"> GitHub</a>
         `
             : ""
         }
@@ -440,24 +449,28 @@ function createSingleProjectHTML(project) {
   // Website and GitHub buttons
   if (project.website || project.github) {
     const hasBothButtons = project.website && project.github;
-    const buttonWidth = hasBothButtons ? "120px" : "248px"; // 120px + 8px gap + 120px = 248px
+    const buttonWidth = hasBothButtons ? "240px" : "480px"; // 120px + 8px gap + 120px = 248px
     html += `
       <div style="display: flex; gap: 8px; margin-top: 20px;">
         ${
           project.website
             ? `
-          <a href="${project.website}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 20px; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
-            Website
-          </a>
+          <a href="${
+            project.website
+          }" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 20px; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};"><img src="${
+                getImageUrl("website-icon") || ""
+              }" alt="Website" style="width: 20px; height: 20px; margin-right: 8px;"> Website</a>
         `
             : ""
         }
         ${
           project.github
             ? `
-          <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 20px; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
-            GitHub
-          </a>
+          <a href="${
+            project.github
+          }" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 20px; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};"><img src="${
+                getImageUrl("github-icon") || ""
+              }" alt="GitHub" style="width: 20px; height: 20px; margin-right: 8px;"> GitHub</a>
         `
             : ""
         }
@@ -549,12 +562,24 @@ function initApp() {
           }" alt="Cruise Sunset" style="width: 60%; height: 100px; margin: 8px 2px; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
           </div>
           <div class="social-buttons-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(44px, auto); gap: 4px; margin-top: 8px;">
-            <a href="https://www.linkedin.com/in/jmyl" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">LinkedIn</a>
-            <a href="mailto:jeremyliu621@gmail.com" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Email</a>
-            <a href="https://github.com/Jeremyliu-621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Github</a>
-            <a href="https://github.com/Jeremyliu-621/Jeremy-Liu-Resume" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Resume</a>
-            <a href="https://instagram.com/jeremyliu.621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Instagram</a>
-            <a href="https://devpost.com/jeremyliu621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Devpost</a>
+            <a href="https://www.linkedin.com/in/jmyl" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;"><img src="${
+              getImageUrl("linkedin-icon") || ""
+            }" alt="LinkedIn" style="width: 20px; height: 20px; margin-right: 8px;"> LinkedIn</a>
+            <a href="mailto:jeremyliu621@gmail.com" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;"><img src="${
+              getImageUrl("email-icon") || ""
+            }" alt="Email" style="width: 20px; height: 20px; margin-right: 8px;"> Email</a>
+            <a href="https://github.com/Jeremyliu-621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;"><img src="${
+              getImageUrl("github-icon") || ""
+            }" alt="GitHub" style="width: 20px; height: 20px; margin-right: 8px;"> Github</a>
+            <a href="https://github.com/Jeremyliu-621/Jeremy-Liu-Resume" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;"><img src="${
+              getImageUrl("resume-icon") || ""
+            }" alt="Resume" style="width: 20px; height: 20px; margin-right: 8px;"> Resume</a>
+            <a href="https://instagram.com/jeremyliu.621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;"><img src="${
+              getImageUrl("instagram-icon") || ""
+            }" alt="Instagram" style="width: 20px; height: 20px; margin-right: 8px;"> Instagram</a>
+            <a href="https://devpost.com/jeremyliu621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;"><img src="${
+              getImageUrl("devpost-icon") || ""
+            }" alt="Devpost" style="width: 20px; height: 20px; margin-right: 8px;"> Devpost</a>
           </div>
         </div>
       </win98-window>
@@ -664,7 +689,7 @@ function initApp() {
         <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; display: flex; align-items: center; gap: 10px;">
           <p style="margin: 0; font-size: 1.15em; flex: 1;">you can interact with windows!</p>
           <img src="${
-            getImageUrl("bear") || ""
+            getImageUrl("ascii-gif") || ""
           }" alt="Bear" style="max-width: 100px; height: auto; flex-shrink: 0; border: 2px solid #808080;">
         </div>
       </win98-window>

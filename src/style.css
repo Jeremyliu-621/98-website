@@ -246,11 +246,15 @@ a[href*="github"]:active {
   background: #a0a0a0 !important;
 }
 
-/* Remove extra bottom margin from last elements in window bodies (except My Projects and social buttons grid) */
-win98-window:not([title="My Projects.exe"])
+/* Remove extra bottom margin from last elements in window bodies (except My Projects, Settings, Folder, and social buttons grid) */
+win98-window:not([title="My Projects.exe"]):not([title="Settings.exe"]):not(
+    [title="Folder.exe"]
+  )
   .window-body
   > *:last-child:not(.social-buttons-grid),
-win98-window:not([title="My Projects.exe"])
+win98-window:not([title="My Projects.exe"]):not([title="Settings.exe"]):not(
+    [title="Folder.exe"]
+  )
   .window-body
   > div:last-child:not(.social-buttons-grid)
   > *:last-child {
