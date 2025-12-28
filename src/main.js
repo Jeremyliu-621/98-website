@@ -846,6 +846,8 @@ function initApp() {
         window.touchData = {
           touchStartX: 0,
           touchStartY: 0,
+          touchOffsetX: 0, // Offset from touch point to window's left edge
+          touchOffsetY: 0, // Offset from touch point to window's top edge
           initialLeft: 0,
           initialTop: 0,
           initialWidth: 0,
@@ -855,15 +857,42 @@ function initApp() {
           resizeEdge: null,
         };
 
-        const getWindowRect = () => {
-          const rect = window.getBoundingClientRect();
+        const getWindowStylePosition = () => {
           const style = window.style;
-          return {
-            left: parseInt(style.left) || rect.left,
-            top: parseInt(style.top) || rect.top,
-            width: parseInt(style.width) || rect.width,
-            height: parseInt(style.height) || rect.height,
-          };
+          const rect = window.getBoundingClientRect();
+          // Get actual computed position from style, fallback to getBoundingClientRect
+          let left = 0;
+          let top = 0;
+
+          if (style.left) {
+            const leftValue = style.left;
+            if (leftValue.includes("px")) {
+              left = parseFloat(leftValue);
+            } else if (leftValue.includes("vh") || leftValue.includes("vw")) {
+              // For vh/vw units, use getBoundingClientRect
+              left = rect.left;
+            } else {
+              left = parseFloat(leftValue) || rect.left;
+            }
+          } else {
+            left = rect.left;
+          }
+
+          if (style.top) {
+            const topValue = style.top;
+            if (topValue.includes("px")) {
+              top = parseFloat(topValue);
+            } else if (topValue.includes("vh") || topValue.includes("vw")) {
+              // For vh/vw units, use getBoundingClientRect
+              top = rect.top;
+            } else {
+              top = parseFloat(topValue) || rect.top;
+            }
+          } else {
+            top = rect.top;
+          }
+
+          return { left, top, width: rect.width, height: rect.height };
         };
 
         const getTouch = (e) => {
@@ -919,32 +948,38 @@ function initApp() {
           data.touchStartX = touch.clientX;
           data.touchStartY = touch.clientY;
 
+          // Get window's current position
+          const windowRect = window.getBoundingClientRect();
+          const stylePos = getWindowStylePosition();
+
+          // Calculate offset from touch point to window's top-left corner
+          data.touchOffsetX = touch.clientX - windowRect.left;
+          data.touchOffsetY = touch.clientY - windowRect.top;
+
           // Check if we clicked on the title bar area (top portion of window)
-          const rect = getWindowRect();
           const touchY = touch.clientY;
-          const windowTop = window.getBoundingClientRect().top;
+          const windowTop = windowRect.top;
           const titleBarHeight = 30; // Approximate title bar height
 
           if (touchY - windowTop < titleBarHeight && !data.isResizing) {
-            // Starting drag
+            // Starting drag - use getBoundingClientRect for accurate position
             data.isDragging = true;
-            data.initialLeft = rect.left;
-            data.initialTop = rect.top;
+            data.initialLeft = windowRect.left;
+            data.initialTop = windowRect.top;
             e.preventDefault();
           } else {
             // Check if we're on a resize edge
-            const resizeRect = window.getBoundingClientRect();
             data.resizeEdge = getResizeEdge(
               touch.clientX,
               touch.clientY,
-              resizeRect
+              windowRect
             );
             if (data.resizeEdge) {
               data.isResizing = true;
-              data.initialLeft = rect.left;
-              data.initialTop = rect.top;
-              data.initialWidth = rect.width;
-              data.initialHeight = rect.height;
+              data.initialLeft = stylePos.left;
+              data.initialTop = stylePos.top;
+              data.initialWidth = stylePos.width;
+              data.initialHeight = stylePos.height;
               e.preventDefault();
             }
           }
@@ -962,16 +997,17 @@ function initApp() {
 
           e.preventDefault();
 
-          const deltaX = touch.clientX - data.touchStartX;
-          const deltaY = touch.clientY - data.touchStartY;
-
           if (data.isDragging) {
-            // Move window
-            const newLeft = data.initialLeft + deltaX;
-            const newTop = Math.max(0, data.initialTop + deltaY); // Prevent going above viewport
+            // Move window - position based on touch position minus the offset
+            // This ensures the window follows the finger accurately
+            const newLeft = touch.clientX - data.touchOffsetX;
+            const newTop = Math.max(0, touch.clientY - data.touchOffsetY); // Prevent going above viewport
             window.style.left = `${newLeft}px`;
             window.style.top = `${newTop}px`;
           } else if (data.isResizing && data.resizeEdge) {
+            // For resizing, use delta calculation
+            const deltaX = touch.clientX - data.touchStartX;
+            const deltaY = touch.clientY - data.touchStartY;
             // Resize window
             const style = window.style;
             let newWidth = data.initialWidth;
