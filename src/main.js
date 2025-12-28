@@ -54,6 +54,10 @@ const content = {
       back: "Python + Flask, OpenCV, PySerial, Pygame",
       image: "stop_dont_go_on_grey",
       github: "https://github.com/Jeremyliu-621/stop-dont-go-on", // Add your GitHub URL here, or leave as null for no button
+      additionalInfo:
+        "Used Arduino to spray water and email.js to email friends and family to incentivize users away from continuing bad habits." +
+        " Integrated OpenCV with a python backend to the arduino so users could be tracked with precision." +
+        " Created a dynamic UI that allowed user input and real-time computer feedback using React, Vite, and Typescript",
     },
     {
       title: "Binder",
@@ -194,6 +198,11 @@ const content = {
       name: "buttered_official",
       description: "For giving me the idea for a windows 98 website.",
       link: "https://www.instagram.com/buttered_official/",
+    },
+    {
+      name: "colorhunt.co",
+      description: "For giving me cool colour palettes for this project.",
+      link: "https://colorhunt.co/",
     },
     // Add more thanks below by copying the structure above
     // Example:
@@ -369,6 +378,15 @@ function createSingleProjectHTML(project) {
         <p style="margin: 2px 0; line-height: 1.4;">${project.description}</p>
       </div>`;
 
+  // Additional Information
+  if (project.additionalInfo) {
+    html += `
+      <div style="margin-bottom: 12px;">
+        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.2em;">Additional Information</h3>
+        <div style="margin: 2px 0; line-height: 1.4; font-size: 1.2em">${project.additionalInfo}</div>
+      </div>`;
+  }
+
   // GitHub button
   if (project.github) {
     html += `
@@ -461,13 +479,13 @@ function initApp() {
             getImageUrl("armbar") || ""
           }" alt="Cruise Sunset" style="width: 60%; height: 100px; margin: 8px 2px; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
           </div>
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px;">
-            <a href="https://www.linkedin.com/in/jmyl" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">🔗</span> LinkedIn</a>
-            <a href="mailto:jeremyliu621@gmail.com" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">✉️</span> Email</a>
-            <a href="https://github.com/Jeremyliu-621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">💻</span> Github</a>
-            <a href="./assets/Liu_Jeremy_Resume.pdf" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">📄</span> Resume</a>
-            <a href="https://instagram.com/jeremyliu.621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;"><span style="font-size: 1.2em;">📷</span> Instagram</a>
-            <a href="https://devpost.com/jeremyliu621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; text-align: center;"><span style="font-size: 1.2em;">⚡</span> Devpost</a>
+          <div class="social-buttons-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(44px, auto); gap: 4px; margin-top: 8px;">
+            <a href="https://www.linkedin.com/in/jmyl" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">LinkedIn</a>
+            <a href="mailto:jeremyliu621@gmail.com" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Email</a>
+            <a href="https://github.com/Jeremyliu-621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Github</a>
+            <a href="https://github.com/Jeremyliu-621/Jeremy-Liu-Resume" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Resume</a>
+            <a href="https://instagram.com/jeremyliu.621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Instagram</a>
+            <a href="https://devpost.com/jeremyliu621" target="_blank" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; line-height: 1.2;">Devpost</a>
           </div>
         </div>
       </win98-window>
@@ -1918,7 +1936,7 @@ function initApp() {
           {
             name: "LinkedIn",
             url: "https://www.linkedin.com/in/jmyl",
-            icon: "🔗",
+            icon: "🟦",
           },
           { name: "Email", url: "mailto:jeremyliu621@gmail.com", icon: "✉️" },
           {
@@ -1928,7 +1946,7 @@ function initApp() {
           },
           {
             name: "Resume",
-            url: "./assets/Jeremy_Liu_final_resume.pdf",
+            url: "https://github.com/Jeremyliu-621/Jeremy-Liu-Resume",
             icon: "📄",
           },
           {
@@ -1939,7 +1957,7 @@ function initApp() {
           {
             name: "Devpost",
             url: "https://devpost.com/jeremyliu621",
-            icon: "⚡",
+            icon: "💬",
           },
         ];
 

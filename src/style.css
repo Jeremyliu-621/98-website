@@ -246,14 +246,33 @@ a[href*="github"]:active {
   background: #a0a0a0 !important;
 }
 
-/* Remove extra bottom margin from last elements in window bodies (except My Projects) */
-win98-window:not([title="My Projects.exe"]) .window-body > *:last-child,
+/* Remove extra bottom margin from last elements in window bodies (except My Projects and social buttons grid) */
 win98-window:not([title="My Projects.exe"])
   .window-body
-  > div:last-child
+  > *:last-child:not(.social-buttons-grid),
+win98-window:not([title="My Projects.exe"])
+  .window-body
+  > div:last-child:not(.social-buttons-grid)
   > *:last-child {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+}
+
+/* Ensure social buttons grid items align properly - override any last-child rules */
+.social-buttons-grid {
+  align-items: stretch !important;
+  align-content: start !important;
+}
+
+.social-buttons-grid .social-btn {
+  width: 100% !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 10px 8px !important;
+  box-sizing: border-box !important;
 }
 
 /* Specifically target Hobbies window to remove all bottom spacing */
