@@ -66,6 +66,10 @@ const content = {
       back: "Python, Beautifulsoup, Selenium",
       image: "binder_action",
       github: "https://github.com/Jeremyliu-621/binder", // Add your GitHub URL here, or leave as null for no button
+      additionalInfo:
+        "Created a swipe-based website that browses second-hand marketplaces in a more intuitive and engaging way." +
+        " Used Beautiful Soup to scrape for data collection in real-time and leveraged the Gemini AI API for price evaluation." +
+        " Built responsive UI components using React, TypeScript and TailwindCSS.",
     },
     {
       title: "UFC Index website",
@@ -74,24 +78,32 @@ const content = {
       back: "Python, Pandas, BeautifulSoup",
       image: "ufc_elo",
       github: "https://github.com/Jeremyliu-621/UFC-Elo-Calculator", // Add your GitHub URL here, or leave as null for no button
-    },
-    {
-      title: "RREF Calculator",
-      description: "A helping hand to linear algebra.",
-      image: "rref_calculator",
-      github: "https://github.com/Jeremyliu-621/RREF-calculator", // Add your GitHub URL here, or leave as null for no button
+      additionalInfo:
+        "A website that calculates and ranks statistics for UFC Fighters." +
+        " Organized Pandas dataframes with information scraped from the UFC website by Beautifulsoup." +
+        " Used React, Javascript, and TailwindCSS to build an aesthetic UI that interacts with user's cursors.",
     },
     {
       title: "Portfolio Website 1",
       description: "A page that displays everything about me.",
       image: "portfolio-website-cover",
       github: "https://github.com/Jeremyliu-621/portfolio-works", // Add your GitHub URL here, or leave as null for no button
+      additionalInfo:
+        "Built purely using HTML and CSS, using Bootstrap components for some styling." +
+        " My first ever website, and I'm proud of it." +
+        " No AI used.",
     },
     {
       title: "Cookie Clicker Bot",
       description: "Bot that clicks cookies and buys upgrades!",
       image: "do you even",
       github: "https://github.com/Jeremyliu-621/cookie-clicker", // Add your GitHub URL here, or leave as null for no button
+    },
+    {
+      title: "RREF Calculator",
+      description: "A helping hand to linear algebra.",
+      image: "rref_calculator",
+      github: "https://github.com/Jeremyliu-621/RREF-calculator", // Add your GitHub URL here, or leave as null for no button
     },
   ],
   hobbies:
@@ -351,22 +363,25 @@ function createSingleProjectHTML(project) {
 
   let html = `
     <div style="margin: 4px 0; padding: 5px; border: 1px solid #808080; background: #e0e0e0;">
-      <h2 style="margin-top: 0; margin-bottom: 8px; font-weight: bold; font-size: 1.5em;">${project.title}</h2>`;
+      <h1 style="margin-top: 0; margin-bottom: 8px; font-weight: bold; font-size: 2.4em;">${project.title}</h1>`;
 
   // Image
   if (imgUrl) {
     html += `
-      <img src="${imgUrl}" style="width: 100%; max-width: 500px; height: auto; border: 2px solid #808080; margin-bottom: 12px; display: block; object-fit: cover;" alt="${project.title}">`;
+      <img src="${imgUrl}" style="width: 99.3%; max-width: 500px; height: 170px; border: 2px solid #808080; margin-bottom: 12px; display: block; object-fit: cover;" alt="${project.title}">`;
   }
 
   // Stack (Front/Back)
   if (project.front || project.back) {
     html += `
       <div style="margin-bottom: 12px;">
-        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.2em;">Stack</h3>
+        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.6em;">Stack</h3>
+        <br>
         <p style="margin: 2px 0; color: #000;">
-          ${project.front ? `<strong>Front:</strong> ${project.front}<br>` : ""}
-          ${project.back ? `<strong>BACK.</strong> ${project.back}` : ""}
+          ${
+            project.front ? `<strong>Front: </strong> ${project.front}<br>` : ""
+          }
+          ${project.back ? `<strong>Back: </strong> ${project.back}` : ""}
         </p>
       </div>`;
   }
@@ -374,7 +389,7 @@ function createSingleProjectHTML(project) {
   // Description
   html += `
       <div style="margin-bottom: 12px;">
-        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.2em;">Description</h3>
+        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.6em;">Description</h3>
         <p style="margin: 2px 0; line-height: 1.4;">${project.description}</p>
       </div>`;
 
@@ -382,7 +397,7 @@ function createSingleProjectHTML(project) {
   if (project.additionalInfo) {
     html += `
       <div style="margin-bottom: 12px;">
-        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.2em;">Additional Information</h3>
+        <h3 style="margin: 0 0 4px 0; font-weight: bold; font-size: 1.6em;">Additional Information</h3>
         <div style="margin: 2px 0; line-height: 1.4; font-size: 1.2em">${project.additionalInfo}</div>
       </div>`;
   }
@@ -390,7 +405,7 @@ function createSingleProjectHTML(project) {
   // GitHub button
   if (project.github) {
     html += `
-      <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; margin-top: 8px; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;">
+      <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; margin-top: 20px; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; font-size:20px;">
         View on GitHub
       </a>`;
   }
