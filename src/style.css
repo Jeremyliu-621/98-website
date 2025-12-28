@@ -537,13 +537,18 @@ a[href*="github"]:active {
   background: #a0a0a0 !important;
 }
 
-/* Social buttons grid */
+/* Social buttons grid - responsive */
 .social-buttons-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
   grid-auto-rows: minmax(44px, auto);
   gap: 4px;
   margin-top: 8px;
+}
+
+/* For About Me window, use flexible grid that adapts to container width */
+.window-about-me .social-buttons-grid {
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
 }
 
 /* Remove extra bottom margin from last elements in window bodies (except My Projects, Settings, Folder, and social buttons grid) */
@@ -568,8 +573,64 @@ win98-window:not([title="My Projects.exe"]):not([title="Settings.exe"]):not(
   align-content: start !important;
 }
 
+/* Settings window - Color Palette options */
+.palette-option {
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid #808080;
+  background: #e0e0e0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.palette-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.palette-color-swatches {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* When label content needs to wrap, adjust swatches positioning */
+.palette-label strong {
+  flex-shrink: 0;
+}
+
+.palette-color-swatch {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #808080;
+}
+
+.palette-apply-btn {
+  padding: 4px 12px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  cursor: pointer;
+  font-size: 0.9em;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: fit-content;
+}
+
+/* When Settings window is narrow, Apply button wraps below colors automatically */
+/* flex-wrap on .palette-option ensures button wraps when space is limited */
+
 .social-buttons-grid .social-btn {
   width: 100% !important;
+  min-width: 90px !important;
   min-height: 44px !important;
   display: flex !important;
   align-items: center !important;
@@ -577,6 +638,8 @@ win98-window:not([title="My Projects.exe"]):not([title="Settings.exe"]):not(
   margin: 0 !important;
   padding: 10px 8px !important;
   box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
 }
 
 /* Specifically target Hobbies window to remove all bottom spacing */
@@ -1022,6 +1085,111 @@ win98-window {
   * {
     -webkit-tap-highlight-color: transparent;
   }
+}
+
+/* Blog post styles */
+.blog-post {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #c0c0c0;
+}
+
+.blog-post-title {
+  margin-top: 0;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 1.75em;
+}
+
+.blog-post-date {
+  margin: 0 0 12px 0;
+  color: #666;
+  font-size: 1.5em;
+}
+
+.blog-post-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.blog-post-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #808080;
+  display: block;
+  object-fit: cover;
+  flex: 0 1 auto;
+  min-width: 150px;
+}
+
+/* Custom sized images - when width is specified inline */
+.blog-post-image[style*="width"] {
+  flex: 0 0 auto;
+}
+
+/* Image size classes - can be applied individually */
+.blog-post-image-small {
+  flex: 0 1 25%;
+  min-width: 50px;
+  max-width: 100px;
+}
+
+.blog-post-image-medium {
+  flex: 0 1 40%;
+  min-width: 75px;
+  max-width: 150px;
+}
+
+.blog-post-image-large {
+  flex: 0 1 60%;
+  min-width: 120px;
+  max-width: 240px;
+}
+
+.blog-post-image-full {
+  flex: 1 1 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+/* Default behavior when no size class specified - responsive based on number of images */
+.blog-post-images:has(> :only-child)
+  .blog-post-image:not([class*="blog-post-image-"]) {
+  max-width: 50%;
+  flex: 0 1 auto;
+}
+
+.blog-post-images:has(> :nth-child(2):last-child)
+  .blog-post-image:not([class*="blog-post-image-"]) {
+  flex: 1 1 calc(50% - 6px);
+  min-width: 200px;
+}
+
+.blog-post-images:has(> :nth-child(3))
+  .blog-post-image:not([class*="blog-post-image-"]) {
+  flex: 1 1 calc(33.333% - 8px);
+  min-width: 150px;
+}
+
+/* For narrow windows, stack images vertically */
+@media screen and (max-width: 600px) {
+  .blog-post-images {
+    flex-direction: column;
+  }
+
+  .blog-post-images .blog-post-image {
+    max-width: 100% !important;
+    min-width: 100% !important;
+    flex: 1 1 auto !important;
+  }
+}
+
+.blog-post-text {
+  margin-top: 12px;
+  line-height: 1.5;
+  font-size: 1.3em;
 }
 
 /* Color scheme is handled by 98.css */

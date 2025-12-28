@@ -129,57 +129,26 @@ const content = {
   // Each post can have:
   //   - title: The post title
   //   - date: Publication date (any format you want)
-  //   - image: Image filename (without extension, from assets folder) or null
+  //   - image: Single image filename (string) OR array for multiple images
+  //            For multiple images, can be:
+  //              - Array of strings: ["img1", "img2"] (uses default size)
+  //              - Array of objects: [{filename: "img1", size: "large"}, {filename: "img2", width: 300}]
+  //            Size options: "small", "medium", "large", "full" OR numeric pixel width (e.g., 300, "400px")
+  //            You can also specify: {filename: "img", width: 300, height: 200} for exact dimensions
+  //            Images should be in assets folder (without extension), or null for no images
   //   - text: The blog post content (can use HTML for formatting)
   blogPosts: [
     {
       title: "Welcome to My Blog",
       date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
+      image: [
+        { filename: "j-gif-space", size: "small" },
+        { filename: "ascii-gif", size: "small" },
+        { filename: "website-icon", size: "small" },
+      ], // Set to image filename (without extension) or null for no imageimage.png
       text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
     },
-    {
-      title: "Welcome to My Blog",
-      date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
-    },
-    {
-      title: "Welcome to My Blog",
-      date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
-    },
-    {
-      title: "Welcome to My Blog",
-      date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
-    },
-    {
-      title: "Welcome to My Blog",
-      date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
-    },
-    {
-      title: "Welcome to My Blog",
-      date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
-    },
-    {
-      title: "Welcome to My Blog",
-      date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
-    },
-    {
-      title: "Welcome to My Blog",
-      date: "January 2025",
-      image: null, // Set to image filename (without extension) or null for no image
-      text: "Just made this website using 98-components and Windows 98 elements. Aided with Cursor.ai and Gemini.\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays to make up for my bad grades.",
-    },
+
     // Add more posts below by copying the structure above
     // Example:
     // {
@@ -255,25 +224,25 @@ const colorPalettes = {
     name: "Retro Green",
     colors: ["#5C6F2B", "#DE802B", "#D8C9A7", "#EEEEEE"], // Darkest to lightest
   },
-  calmGreen: {
-    name: "Calm Green",
-    colors: ["#778873", "#A1BC98", "#D2DCB6", "#F1F3E0"], // Darkest to lightest
+  Lilac: {
+    name: "Lilac",
+    colors: ["#898AC4", "#A2AADB", "#C0C9EE", "#FFF2E0"], // Darkest to lightest
   },
-  darkChocolate: {
+  Snow: {
+    name: "Snow",
+    colors: ["#89A8B2", "#B3C8CF", "#E5E1DA", "#F1F0E8"], // Darkest to lightest
+  },
+  Chocolate: {
     name: "Dark Chocolate",
-    colors: ["#37353E", "#44444E", "#715A5A", "#D3DAD9"], // Darkest to lightest
+    colors: ["#896C6C", "#E5BEB5", "#EEE6CA", "#e0e0e0"], // Darkest to lightest
   },
   Cream: {
     name: "Cream",
     colors: ["#C9B59C", "#D9CFC7", "#EFE9E3", "#F9F8F6"], // Darkest to lightest
   },
-  Plum: {
-    name: "Plum",
-    colors: ["#6B3F69", "#8D5F8C", "#A376A2", "#DDC3C3"], // Darkest to lightest
-  },
-  Maroon: {
-    name: "Maroon",
-    colors: ["#334443", "#34656D", "#FAEAB1", "#FAF8F1"], // Darkest to lightest
+  calmGreen: {
+    name: "Calm Green",
+    colors: ["#778873", "#A1BC98", "#D2DCB6", "#F1F3E0"], // Darkest to lightest
   },
 };
 
@@ -1856,22 +1825,93 @@ function initApp() {
           // To add more posts, just add objects to content.blogPosts array above
           const postsHTML = content.blogPosts
             .map((post) => {
-              const imgUrl = post.image ? getImageUrl(post.image) : null;
-              return `
-                <div style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #c0c0c0;">
-                  <h3 style="margin-top: 0; margin-bottom: 4px; font-weight: bold; font-size: 1.75em;">${
-                    post.title
-                  }</h3>
-                  <p style="margin: 0 0 12px 0; color: #666; font-size: 1.5em;">${
-                    post.date
-                  }</p>
-                  ${
-                    imgUrl
-                      ? `<img src="${imgUrl}" alt="${post.title}" style="max-width: 100%; height: auto; margin: 12px 0; border: 1px solid #808080; display: block;">`
-                      : ""
+              // Handle both single image (string) and multiple images (array)
+              let images = [];
+              if (post.image) {
+                if (Array.isArray(post.image)) {
+                  // Multiple images - map each to URL with size info
+                  images = post.image
+                    .map((imgData) => {
+                      // Handle both string format and object format
+                      let imgName,
+                        size = "medium",
+                        width = null,
+                        height = null;
+
+                      if (typeof imgData === "string") {
+                        imgName = imgData;
+                      } else if (imgData && imgData.filename) {
+                        imgName = imgData.filename;
+                        // Support both size (string) and width (number/string) properties
+                        if (imgData.size) {
+                          size = imgData.size;
+                        } else if (imgData.width !== undefined) {
+                          // If width is specified, use custom sizing
+                          width =
+                            typeof imgData.width === "number"
+                              ? `${imgData.width}px`
+                              : imgData.width;
+                          size = "custom"; // Mark as custom size
+                        }
+                        if (imgData.height !== undefined) {
+                          height =
+                            typeof imgData.height === "number"
+                              ? `${imgData.height}px`
+                              : imgData.height;
+                        }
+                      } else {
+                        return null;
+                      }
+
+                      const url = getImageUrl(imgName);
+                      return url
+                        ? { url, alt: imgName, size, width, height }
+                        : null;
+                    })
+                    .filter((img) => img !== null);
+                } else {
+                  // Single image - convert to array format
+                  const url = getImageUrl(post.image);
+                  if (url) {
+                    images = [{ url, alt: post.image, size: "medium" }];
                   }
-                  <!-- Blog post text size --> 
-                  <div style="margin-top: 12px; line-height: 1.5; font-size: 1.3em;">
+                }
+              }
+
+              // Generate images HTML
+              const imagesHTML =
+                images.length > 0
+                  ? `
+                  <div class="blog-post-images">
+                    ${images
+                      .map((img) => {
+                        // Build style string for custom dimensions
+                        let style = "";
+                        if (img.size === "custom" && img.width) {
+                          style = `style="width: ${img.width};`;
+                          if (img.height) {
+                            style += ` height: ${img.height};`;
+                          }
+                          style += `"`;
+                        }
+                        // Apply size class unless it's custom
+                        const sizeClass =
+                          img.size === "custom"
+                            ? ""
+                            : ` blog-post-image-${img.size}`;
+                        return `<img src="${img.url}" alt="${img.alt}" class="blog-post-image${sizeClass}" ${style}>`;
+                      })
+                      .join("")}
+                  </div>
+                `
+                  : "";
+
+              return `
+                <div class="blog-post">
+                  <h3 class="blog-post-title">${post.title}</h3>
+                  <p class="blog-post-date">${post.date}</p>
+                  ${imagesHTML}
+                  <div class="blog-post-text">
                     ${post.text}
                   </div>
                 </div>
@@ -1898,6 +1938,26 @@ function initApp() {
             blogWindow = document.querySelector(
               'win98-window[title="Blog.exe"]'
             );
+
+            // Apply current theme colors to the blog window
+            const savedPalette = localStorage.getItem("colorPalette");
+            if (savedPalette && savedPalette !== "default") {
+              const savedColors = localStorage.getItem("paletteColors");
+              if (savedColors) {
+                try {
+                  const colors = JSON.parse(savedColors);
+                  const blogBody = blogWindow.querySelector(".window-body");
+                  if (blogBody) {
+                    blogBody.style.backgroundColor = colors[3] || "#e0e0e0";
+                    blogBody.style.border = `2px solid ${
+                      colors[1] || "#808080"
+                    }`;
+                  }
+                } catch (e) {
+                  // If parsing fails, use default
+                }
+              }
+            }
           }
         }
 
@@ -2196,22 +2256,22 @@ function initApp() {
           .map((key) => {
             const palette = colorPalettes[key];
             return `
-              <div style="margin-bottom: 12px; padding: 8px; border: 1px solid #808080; background: #e0e0e0; display: flex; align-items: center; gap: 12px;">
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1;">
+              <div class="palette-option">
+                <label class="palette-label">
                   <input type="radio" name="color-palette" value="${key}" ${
               key === "default" ? "checked" : ""
             } style="cursor: pointer;">
                   <strong>${palette.name}</strong>
-                  <div style="display: flex; gap: 4px; margin-left: auto;">
+                  <div class="palette-color-swatches">
                     ${palette.colors
                       .map(
                         (color) =>
-                          `<div style="width: 24px; height: 24px; background: ${color}; border: 1px solid #808080;"></div>`
+                          `<div class="palette-color-swatch" style="background: ${color};"></div>`
                       )
                       .join("")}
                   </div>
                 </label>
-                <button class="palette-apply-btn" data-palette="${key}" style="padding: 4px 12px; background: #c0c0c0; border: 2px outset #c0c0c0; cursor: pointer; font-size: 0.9em; white-space: nowrap;">Apply</button>
+                <button class="palette-apply-btn" data-palette="${key}">Apply</button>
               </div>
             `;
           })
