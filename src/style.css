@@ -459,7 +459,7 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
   gap: 8px !important;
 }
 
-/* Override fixed button widths - make buttons flexible */
+/* Override fixed button widths - make buttons flexible for smaller screens */
 .window-projects .tab-pane[data-tab-content="all"] .social-btn {
   width: auto !important;
   min-width: 100px !important;
@@ -475,6 +475,42 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
   min-width: 100px !important;
   flex: 1 1 auto !important;
   max-width: 100% !important;
+}
+
+/* For larger screens (> 1300px), make buttons constant width */
+@media screen and (min-width: 1301px) {
+  /* Project list buttons - constant width: 120px when both buttons exist */
+  .window-projects .tab-pane[data-tab-content="all"] .social-btn {
+    width: 120px !important;
+    flex: 0 0 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+  }
+  
+  /* When only one button exists (it's the only child), make it 248px (space of two buttons) */
+  .window-projects .tab-pane[data-tab-content="all"] .social-btn:only-child {
+    width: 248px !important;
+    flex: 0 0 248px !important;
+    min-width: 248px !important;
+    max-width: 248px !important;
+  }
+  
+  /* Individual project tab buttons - constant width: 240px when both buttons exist */
+  .window-projects .tab-pane:not([data-tab-content="all"]) .social-btn {
+    width: 240px !important;
+    flex: 0 0 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+  }
+  
+  /* When only one button exists in expanded view, make it 488px (space of two buttons) */
+  .window-projects .tab-pane:not([data-tab-content="all"]) .social-btn:only-child {
+    width: 488px !important;
+    flex: 0 0 488px !important;
+    min-width: 488px !important;
+    max-width: 488px !important;
+  }
+  
 }
 
 .window-projects
@@ -590,6 +626,7 @@ win98-window {
 /* Tablets and small laptops (under 1300px) */
 @media screen and (min-width: 1065px) and (max-width: 1300px) {
   /* Resize and reposition windows to the left - override classes without !important */
+
   .window-about-me {
     left: 120px;
     width: 40vw;
@@ -687,15 +724,12 @@ win98-window {
 }
 
 /* Larger desktops (1920px to 2303px) */
-@media screen and (min-width: 1920px) and (max-width: 2303px) {
+@media screen and (min-width: 1920px) {
   /* Adjust positioning only - windows and text stay the same size */
   /* More spacing around windows on very large screens */
-}
-
-/* Very large desktops (2304px and above) */
-@media screen and (min-width: 2304px) {
-  /* Adjust positioning only - windows and text stay the same size */
-  /* Maximum spacing around windows on very large screens */
+    .window-body p {
+      font-size: 2.8em;
+    }
 }
 
 /* Touch device optimizations */
