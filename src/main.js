@@ -48,16 +48,17 @@ const content = {
   },
   projects: [
     {
-      title: "stop! don't go on.",
-      description: "Water Sprayer that stops bad habits.",
-      front: "React, Vite, TypeScript",
-      back: "Python + Flask, OpenCV, PySerial, Pygame",
-      image: "stop_dont_go_on_grey",
-      github: "https://github.com/Jeremyliu-621/stop-dont-go-on", // Add your GitHub URL here, or leave as null for no button
+      title: "UFC Index website",
+      description: "A website that shows scraped stats for UFC Fighters.",
+      front: "Next.js, React, Typescript, Tailwind",
+      back: "Python, Pandas, BeautifulSoup",
+      image: "ufc-search",
+      github: "https://github.com/Jeremyliu-621/UFC-Elo-Calculator", // Add your GitHub URL here, or leave as null for no button
+      website: "https://ufc-elo-calculator.vercel.app/",
       additionalInfo:
-        "Used Arduino to spray water and email.js to email friends and family to incentivize users away from continuing bad habits." +
-        " Integrated OpenCV with a python backend to the arduino so users could be tracked with precision." +
-        " Created a dynamic UI that allowed user input and real-time computer feedback using React, Vite, and Typescript",
+        "A website that calculates and ranks statistics for UFC Fighters." +
+        " Organized Pandas dataframes with information scraped from the UFC website by Beautifulsoup." +
+        " Used React, Javascript, and TailwindCSS to build an aesthetic UI that interacts with user's cursors.",
     },
     {
       title: "Binder",
@@ -72,21 +73,10 @@ const content = {
         " Built responsive UI components using React, TypeScript and TailwindCSS.",
     },
     {
-      title: "UFC Index website",
-      description: "A website that shows scraped stats for UFC Fighters.",
-      front: "Next.js, React, Typescript, Tailwind",
-      back: "Python, Pandas, BeautifulSoup",
-      image: "ufc_elo",
-      github: "https://github.com/Jeremyliu-621/UFC-Elo-Calculator", // Add your GitHub URL here, or leave as null for no button
-      additionalInfo:
-        "A website that calculates and ranks statistics for UFC Fighters." +
-        " Organized Pandas dataframes with information scraped from the UFC website by Beautifulsoup." +
-        " Used React, Javascript, and TailwindCSS to build an aesthetic UI that interacts with user's cursors.",
-    },
-    {
-      title: "Portfolio Website 1",
+      title: "My First Portfolio Website",
       description: "A page that displays everything about me.",
-      image: "portfolio-website-cover",
+      image: "portfolio-works-gif",
+      website: "https://jeremy-liu.vercel.app/",
       github: "https://github.com/Jeremyliu-621/portfolio-works", // Add your GitHub URL here, or leave as null for no button
       additionalInfo:
         "Built purely using HTML and CSS, using Bootstrap components for some styling." +
@@ -94,9 +84,33 @@ const content = {
         " No AI used.",
     },
     {
+      title: "stop! don't go on.",
+      description: "Water Sprayer that stops bad habits.",
+      front: "React, Vite, TypeScript",
+      back: "Python + Flask, OpenCV, PySerial, Pygame",
+      image: "stop_dont_go_on_grey",
+      github: "https://github.com/Jeremyliu-621/stop-dont-go-on", // Add your GitHub URL here, or leave as null for no button
+      additionalInfo:
+        "Used Arduino to spray water and email.js to email friends and family to incentivize users away from continuing bad habits." +
+        " Integrated OpenCV with a python backend to the arduino so users could be tracked with precision." +
+        " Created a dynamic UI that allowed user input and real-time computer feedback using React, Vite, and Typescript",
+    },
+    {
+      title: "j-space", // this project
+      description: "A space that focuses on my creativity and ideas.",
+      front: "HTML, CSS, JavaScript, Vite",
+      image: "j-space-gif",
+      website: "https://j-space.vercel.app/",
+      github: "https://github.com/Jeremyliu-621/j-space",
+      additionalInfo:
+        "Used HTML, CSS, JavaScript, and Vite to build an interactive space that gets my creativity into the computer" +
+        " Experimented with the lengths that different AIs can go to to help with coding projects" +
+        " Used the open-source98-components library and cursor.ai to try and replicate that nostalgic feel to old websites.",
+    },
+    {
       title: "Cookie Clicker Bot",
       description: "Bot that clicks cookies and buys upgrades!",
-      image: "do you even",
+      image: "cookie-clicker-bot",
       github: "https://github.com/Jeremyliu-621/cookie-clicker", // Add your GitHub URL here, or leave as null for no button
     },
     {
@@ -312,7 +326,9 @@ function applyColorPalette(paletteKey) {
 
       // Apply to buttons and interactive elements - use darker colors (index 0 or 1) with lighter text
       document
-        .querySelectorAll("button, .social-btn, a[href*='github']")
+        .querySelectorAll(
+          "button, .social-btn, a[href*='github'], a[href*='http']"
+        )
         .forEach((btn) => {
           btn.style.backgroundColor = colors[0] || "#c0c0c0"; // Darkest color
           btn.style.color = colors[3] || "#ffffff"; // Lightest color for text
@@ -335,16 +351,35 @@ function createProjectHTML(project, index) {
     html += `
       <p style="margin: 3px 0 0 0; color: #666;">
         ${project.front ? `<strong>Front:</strong> ${project.front}<br>` : ""}
-        ${project.back ? `<strong>BACK.</strong> ${project.back}` : ""}
+        ${project.back ? `<strong>Back: </strong> ${project.back}` : ""}
       </p>`;
   }
 
-  // Add GitHub button if github URL is provided
-  if (project.github) {
+  // Add website and GitHub buttons if URLs are provided
+  if (project.website || project.github) {
+    const hasBothButtons = project.website && project.github;
+    const buttonWidth = hasBothButtons ? "120px" : "248px"; // 120px + 8px gap + 120px = 248px
     html += `
-      <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; margin-top: 6px; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px;">
-        View on GitHub
-      </a>`;
+      <div style="display: flex; gap: 8px; margin-top: 6px;">
+        ${
+          project.website
+            ? `
+          <a href="${project.website}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
+            Website
+          </a>
+        `
+            : ""
+        }
+        ${
+          project.github
+            ? `
+          <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
+            GitHub
+          </a>
+        `
+            : ""
+        }
+      </div>`;
   }
 
   html += `</div>`;
@@ -402,12 +437,31 @@ function createSingleProjectHTML(project) {
       </div>`;
   }
 
-  // GitHub button
-  if (project.github) {
+  // Website and GitHub buttons
+  if (project.website || project.github) {
+    const hasBothButtons = project.website && project.github;
+    const buttonWidth = hasBothButtons ? "120px" : "248px"; // 120px + 8px gap + 120px = 248px
     html += `
-      <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; margin-top: 20px; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 1.15em; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; font-size:20px;">
-        View on GitHub
-      </a>`;
+      <div style="display: flex; gap: 8px; margin-top: 20px;">
+        ${
+          project.website
+            ? `
+          <a href="${project.website}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 20px; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
+            Website
+          </a>
+        `
+            : ""
+        }
+        ${
+          project.github
+            ? `
+          <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="social-btn" style="display: flex; align-items: center; justify-content: center; padding: 10px 8px; background: #c0c0c0; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-bottom: 2px solid #808080; border-right: 2px solid #808080; text-decoration: none; color: #000; font-size: 20px; cursor: pointer; font-family: 'Jersey 10', sans-serif; box-sizing: border-box; gap: 6px; width: ${buttonWidth};">
+            GitHub
+          </a>
+        `
+            : ""
+        }
+      </div>`;
   }
 
   html += `</div>`;
@@ -573,8 +627,8 @@ function initApp() {
                 (project, index) => `
               <button class="project-tab" data-tab="${index}" style="padding: 6px 12px; background: #c0c0c0; border: none; border-right: 1px solid #808080; cursor: pointer; font-family: 'Jersey 10', sans-serif; font-size: 1em; white-space: nowrap; min-width: 80px;">
                 ${
-                  project.title.length > 15
-                    ? project.title.substring(0, 15) + "..."
+                  project.title.length > 12
+                    ? project.title.substring(0, 12) + "..."
                     : project.title
                 }
               </button>
