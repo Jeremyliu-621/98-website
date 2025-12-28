@@ -404,7 +404,7 @@ win98-window {
 @media screen and (max-width: 1300px) {
   /* Resize and reposition windows to the left - override classes without !important */
   .window-about-me {
-    left: 10vw;
+    left: 120px;
     width: 40vw;
     max-width: 300px;
     height: 370px;
@@ -415,23 +415,23 @@ win98-window {
   }
 
   .window-skills {
-    left: 65vw;
+    left: 795px;
     width: 250px;
   }
 
   .window-hobbies {
-    left: 65.5vw;
+    left: 800px;
     width: 250px;
   }
 
   .window-projects {
-    left: 35.5vw;
+    left: 431px;
     width: 350px;
   }
 
   .window-interactive {
     bottom: 12vh;
-    left: 17vw;
+    left: 200px;
     width: 180px;
   }
 
