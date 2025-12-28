@@ -1017,7 +1017,7 @@ win98-window {
 
 /* For larger screens (1301px+), when projects window is narrow, stack image below title */
 /* Make it trigger earlier - at wider screen sizes */
-@media screen and (min-width: 1301px) and (max-width: 1919px) {
+@media screen and (min-width: 1301px) and (max-width: 1535px) {
   .window-projects .tab-pane[data-tab-content="all"] > div {
     flex-direction: column !important;
   }
@@ -1028,7 +1028,7 @@ win98-window {
     float: none !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: auto !important;
+    height: 150px !important;
     margin-top: 8px !important;
     margin-bottom: 8px !important;
     margin-left: 0 !important;
@@ -1190,6 +1190,26 @@ win98-window {
   margin-top: 12px;
   line-height: 1.5;
   font-size: 1.3em;
+}
+
+@media screen and (min-width: 1535px) and (max-width: 1600px) {
+  /* Color scheme is handled by 98.css */
+
+  /* Make project buttons in "all" tab smaller so they wrap into two rows */
+  .window-projects .tab-pane[data-tab-content="all"] .social-btn {
+    padding: 6px 8px !important; /* Reduced padding */
+    width: auto !important; /* Allow auto width */
+    min-width: 80px !important; /* Smaller minimum width */
+    max-width: 90px !important; /* Smaller maximum width to force wrapping */
+    flex: 0 1 auto !important; /* Allow flexbox to shrink */
+  }
+
+  /* Keep images but make them smaller */
+  .window-projects .project-card-buttons .social-btn img {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 4px !important;
+  }
 }
 
 /* Color scheme is handled by 98.css */
