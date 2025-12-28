@@ -394,7 +394,7 @@ function createProjectHTML(project, index) {
   html += `</div>`;
 
   if (imgUrl) {
-    html += `<img src="${imgUrl}" style="width: 250px; min-width: 200px; height: 180px; border: 1px solid #808080; object-fit: cover; object-position: center; flex-shrink: 0;" alt="${project.title}">`;
+    html += `<img src="${imgUrl}" class="project-list-image" style="border: 1px solid #808080; object-fit: cover; object-position: center; flex-shrink: 0;" alt="${project.title}">`;
   }
 
   html += `</div>`;
@@ -544,7 +544,7 @@ function initApp() {
       </div>
 
       <!-- About Me Window - Left -->
-      <win98-window title="About Me.exe" resizable style="top: 12vh; left: 28vh; width: 55vh; height: 430px;">
+      <win98-window title="About Me.exe" resizable class="window-about-me">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
           <h2 style="margin-top: 0; font-size: 2.8em; font-weight: bold; margin-bottom: 3px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; color: var(--palette-color-1, #000000);">${
             content.aboutMe.name
@@ -585,7 +585,7 @@ function initApp() {
       </win98-window>
 
       <!-- Skills Window - Middle Top -->
-      <win98-window title="Skills.exe" resizable style="bottom: 43vh; left: 165vh; width: 300px; height: calc(35vh);">
+      <win98-window title="Skills.exe" resizable class="window-skills">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px; font-weight: bold; font-size: 1.4em;; color: var(--palette-color-1, #000000">Languages</h3>
           <p style="margin: 3px 0;">${content.skills.languages}</p>
@@ -610,7 +610,7 @@ function initApp() {
       </win98-window>
 
       <!-- Hobbies Window - Middle Bottom -->
-      <win98-window title="Hobbies.exe" resizable style="bottom: 18vh; left: 167vh; width: 300px; height: 22vh;">
+      <win98-window title="Hobbies.exe" resizable class="window-hobbies">
         <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; min-height: 0;">
           <h3 style="margin-top: 0; margin-bottom: 5px;">Outside of Academics</h3>
           <p style="margin: 5px 0; line-height: 1.3;">${content.hobbies}</p>
@@ -640,7 +640,7 @@ function initApp() {
       </win98-window>
 
       <!-- Projects Window - Right -->
-      <win98-window title="My Projects.exe" resizable style="top: 20px; left: 85.5vh; width: 35vw; height: 88vh;">
+      <win98-window title="My Projects.exe" resizable class="window-projects">
         <div class="window-body" style="padding: 0; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; min-height: 0; display: flex; flex-direction: column;">
           <!-- Tabs -->
           <div class="projects-tabs" style="display: flex; background: #c0c0c0; border-bottom: 1px solid #808080; overflow-x: auto; overflow-y: hidden; flex-shrink: 0;">
@@ -685,7 +685,7 @@ function initApp() {
       </win98-window>
 
       <!-- Interactive Window -->
-      <win98-window title="Interactive.exe" resizable style="bottom: 10vh; left: 48vh; width: 200px; height: 120px;">
+      <win98-window title="Interactive.exe" resizable class="window-interactive">
         <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box; display: flex; align-items: center; gap: 10px;">
           <p style="margin: 0; font-size: 1.15em; flex: 1;">you can interact with windows!</p>
           <img src="${

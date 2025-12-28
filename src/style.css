@@ -140,6 +140,49 @@ win98-window[resizable] {
   --resize-border-width: 12px;
 }
 
+/* Window initial positions - using classes instead of inline styles */
+.window-about-me {
+  top: 12vh;
+  left: 28vh;
+  width: 55vh;
+  height: 430px;
+}
+
+.window-skills {
+  bottom: 43vh;
+  left: 165vh;
+  width: 300px;
+  height: calc(35vh);
+}
+
+.window-hobbies {
+  bottom: 18vh;
+  left: 167vh;
+  width: 300px;
+  height: 22vh;
+}
+
+.window-projects {
+  top: 20px;
+  left: 85.5vh;
+  width: 35vw;
+  height: 88vh;
+}
+
+.window-interactive {
+  bottom: 10vh;
+  left: 48vh;
+  width: 200px;
+  height: 120px;
+}
+
+/* Project list images in "All" tab - default sizes */
+.project-list-image {
+  width: 250px;
+  min-width: 200px;
+  height: 180px;
+}
+
 win98-window .window-body {
   box-sizing: border-box;
   overflow-y: auto;
@@ -357,22 +400,67 @@ win98-window {
   /* Windows stay the same size, just repositioned */
 }
 
-/* Tablets and small laptops (1100px - 1300px) */
-@media screen and (min-width: 1100px) and (max-width: 1300px) {
-  /* Adjust positioning only - windows and text stay the same size */
-  /* More spacing around windows on smaller screens */
-}
+/* Tablets and small laptops (under 1300px) */
+@media screen and (max-width: 1300px) {
+  /* Resize and reposition windows to the left - override classes without !important */
+  .window-about-me {
+    left: 10vw;
+    width: 40vw;
+    max-width: 300px;
+    height: 370px;
+  }
 
-/* Tablets and small laptops (1300px - 1500px) */
-@media screen and (min-width: 1300px) and (max-width: 1500px) {
-  /* Adjust positioning only - windows and text stay the same size */
-  /* More spacing around windows on medium screens */
-}
+  .window-about-me p {
+    display: none;
+  }
 
-/* Standard desktops (1500px - 1919px) */
-@media screen and (min-width: 1500px) and (max-width: 1919px) {
-  /* Adjust positioning only - windows and text stay the same size */
-  /* More spacing around windows on larger screens */
+  .window-skills {
+    left: 65vw;
+    width: 250px;
+  }
+
+  .window-hobbies {
+    left: 65.5vw;
+    width: 250px;
+  }
+
+  .window-projects {
+    left: 35.5vw;
+    width: 350px;
+  }
+
+  .window-interactive {
+    bottom: 12vh;
+    left: 17vw;
+    width: 180px;
+  }
+
+  /* Make "My Projects" text smaller */
+  .window-projects .window-body h1 {
+    font-size: 3em;
+  }
+
+  /* Make project images smaller in the "All" tab list view - you can adjust these values */
+  .window-projects .project-list-image {
+    width: 100px;
+    min-width: 0px;
+    max-width: auto;
+    height: 130px;
+  }
+
+  /* Make project images smaller in individual project tabs */
+  .window-projects .tab-pane:not([data-tab-content="all"]) img {
+    max-width: 400px;
+    height: 140px;
+  }
+
+  /* Hide icons in all buttons */
+  .social-btn img,
+  button img,
+  a[href*="github"] img,
+  a[href*="http"] img {
+    display: none;
+  }
 }
 
 /* Larger desktops (1920px to 2303px) */
