@@ -814,6 +814,201 @@ function initApp() {
       subtree: true,
     });
 
+    // ============================================
+    // MOBILE TOUCH SUPPORT FOR WINDOW DRAGGING AND RESIZING
+    // ============================================
+    const setupTouchSupport = () => {
+      const windows = document.querySelectorAll("win98-window[resizable]");
+      windows.forEach((window) => {
+        if (window.dataset.touchSetup === "true") return;
+        window.dataset.touchSetup = "true";
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let initialLeft = 0;
+        let initialTop = 0;
+        let initialWidth = 0;
+        let initialHeight = 0;
+        let isDragging = false;
+        let isResizing = false;
+        let resizeEdge = null;
+        let activeTouch = null;
+
+        const getWindowRect = () => {
+          const rect = window.getBoundingClientRect();
+          const style = window.style;
+          return {
+            left: parseInt(style.left) || rect.left,
+            top: parseInt(style.top) || rect.top,
+            width: parseInt(style.width) || rect.width,
+            height: parseInt(style.height) || rect.height,
+          };
+        };
+
+        const getTouch = (e) => {
+          if (activeTouch === null && e.touches.length > 0) {
+            activeTouch = e.touches[0].identifier;
+            return e.touches[0];
+          }
+          for (let touch of e.touches) {
+            if (touch.identifier === activeTouch) {
+              return touch;
+            }
+          }
+          return e.touches[0];
+        };
+
+        const getResizeEdge = (touchX, touchY, rect) => {
+          const edgeSize = 20; // Touch area size for edges
+          const cornerSize = 30; // Touch area size for corners
+
+          const left = touchX - rect.left;
+          const right = rect.right - touchX;
+          const top = touchY - rect.top;
+          const bottom = rect.bottom - touchY;
+
+          // Check corners first (they take priority)
+          if (left < cornerSize && top < cornerSize) return "nw";
+          if (right < cornerSize && top < cornerSize) return "ne";
+          if (left < cornerSize && bottom < cornerSize) return "sw";
+          if (right < cornerSize && bottom < cornerSize) return "se";
+
+          // Check edges
+          if (left < edgeSize) return "w";
+          if (right < edgeSize) return "e";
+          if (top < edgeSize) return "n";
+          if (bottom < edgeSize) return "s";
+
+          return null;
+        };
+
+        const handleTouchStart = (e) => {
+          const touch = getTouch(e);
+          if (!touch) return;
+
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+
+          // Try to find title bar in shadow DOM or use window element
+          const target = e.target;
+          let titleBar = null;
+
+          // Check if click is on title bar or window element
+          if (window.shadowRoot) {
+            titleBar = window.shadowRoot.querySelector(".title-bar");
+          }
+
+          // Check if we clicked on the title bar area (top portion of window)
+          const rect = getWindowRect();
+          const touchY = touch.clientY;
+          const windowTop = window.getBoundingClientRect().top;
+          const titleBarHeight = 30; // Approximate title bar height
+
+          if (touchY - windowTop < titleBarHeight && !isResizing) {
+            // Starting drag
+            isDragging = true;
+            initialLeft = rect.left;
+            initialTop = rect.top;
+            e.preventDefault();
+          } else {
+            // Check if we're on a resize edge
+            const resizeRect = window.getBoundingClientRect();
+            resizeEdge = getResizeEdge(
+              touch.clientX,
+              touch.clientY,
+              resizeRect
+            );
+            if (resizeEdge) {
+              isResizing = true;
+              initialLeft = rect.left;
+              initialTop = rect.top;
+              initialWidth = rect.width;
+              initialHeight = rect.height;
+              e.preventDefault();
+            }
+          }
+        };
+
+        const handleTouchMove = (e) => {
+          const touch = getTouch(e);
+          if (!touch || (!isDragging && !isResizing)) return;
+
+          e.preventDefault();
+
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+
+          if (isDragging) {
+            // Move window
+            const newLeft = initialLeft + deltaX;
+            const newTop = Math.max(0, initialTop + deltaY); // Prevent going above viewport
+            window.style.left = `${newLeft}px`;
+            window.style.top = `${newTop}px`;
+          } else if (isResizing && resizeEdge) {
+            // Resize window
+            const style = window.style;
+            let newWidth = initialWidth;
+            let newHeight = initialHeight;
+            let newLeft = initialLeft;
+            let newTop = initialTop;
+
+            if (resizeEdge.includes("e")) {
+              newWidth = Math.max(200, initialWidth + deltaX);
+            }
+            if (resizeEdge.includes("w")) {
+              newWidth = Math.max(200, initialWidth - deltaX);
+              newLeft = initialLeft + deltaX;
+            }
+            if (resizeEdge.includes("s")) {
+              newHeight = Math.max(200, initialHeight + deltaY);
+            }
+            if (resizeEdge.includes("n")) {
+              newHeight = Math.max(200, initialHeight - deltaY);
+              newTop = Math.max(0, initialTop + deltaY);
+            }
+
+            style.width = `${newWidth}px`;
+            style.height = `${newHeight}px`;
+            if (resizeEdge.includes("w")) style.left = `${newLeft}px`;
+            if (resizeEdge.includes("n")) style.top = `${newTop}px`;
+          }
+        };
+
+        const handleTouchEnd = (e) => {
+          if (isDragging || isResizing) {
+            isDragging = false;
+            isResizing = false;
+            resizeEdge = null;
+            activeTouch = null;
+            constrainWindowPositions();
+          }
+        };
+
+        // Add touch event listeners
+        window.addEventListener("touchstart", handleTouchStart, {
+          passive: false,
+        });
+        window.addEventListener("touchmove", handleTouchMove, {
+          passive: false,
+        });
+        window.addEventListener("touchend", handleTouchEnd);
+        window.addEventListener("touchcancel", handleTouchEnd);
+      });
+    };
+
+    // Setup touch support on initial load
+    setTimeout(setupTouchSupport, 200);
+
+    // Monitor for dynamically added windows and setup touch support
+    const touchSupportObserver = new MutationObserver(() => {
+      setTimeout(setupTouchSupport, 50);
+    });
+
+    touchSupportObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
     // Monitor for dynamically added windows
     const windowObserver = new MutationObserver(() => {
       constrainWindowPositions();
