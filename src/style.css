@@ -167,6 +167,36 @@ win98-window[resizable] {
   --resize-border-width: 12px;
 }
 
+/* Initially hide windows - they will be made visible */
+.window-about-me,
+.window-skills,
+.window-hobbies,
+.window-projects,
+.window-interactive {
+  opacity: 0;
+}
+
+/* Subtle fade-in animation */
+@keyframes subtleFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Simple retro style - windows fade in subtly */
+.window-about-me.window-pop-open,
+.window-skills.window-pop-open,
+.window-hobbies.window-pop-open,
+.window-projects.window-pop-open,
+.window-interactive.window-pop-open {
+  animation: subtleFadeIn 0.3s ease-in forwards;
+  display: block !important;
+  visibility: visible !important;
+}
+
 /* Window initial positions - using classes instead of inline styles */
 .window-about-me {
   top: 12vh;

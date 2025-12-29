@@ -1382,15 +1382,62 @@ function initApp() {
       }
     }
 
-    // Animate all elements with class "animate-title-fast" (faster speed: 40-80ms per char)
-    document.querySelectorAll(".animate-title-fast").forEach((element) => {
-      animateElement(element, 40, 40, 0.1, () => 30 + Math.random() * 30);
-    });
+    // Function to pop open a window and start its typing animation
+    function popOpenWindow(windowSelector, typingSelectors, delay) {
+      setTimeout(() => {
+        const window = document.querySelector(windowSelector);
+        if (window) {
+          window.classList.add("window-pop-open");
 
-    // Animate all elements with class "animate-title-slow" (slower speed: 120-270ms per char, choppier)
-    document.querySelectorAll(".animate-title-slow").forEach((element) => {
-      animateElement(element, 120, 150, 0.2, () => 50 + Math.random() * 50);
-    });
+          // Start typing animations after window pops open (wait for animation to complete)
+          setTimeout(() => {
+            typingSelectors.forEach((selector) => {
+              const element = document.querySelector(selector);
+              if (element) {
+                // Check if it's a fast or slow animation
+                if (element.classList.contains("animate-title-fast")) {
+                  animateElement(
+                    element,
+                    40,
+                    40,
+                    0.1,
+                    () => 30 + Math.random() * 30
+                  );
+                } else if (element.classList.contains("animate-title-slow")) {
+                  animateElement(
+                    element,
+                    120,
+                    150,
+                    0.2,
+                    () => 50 + Math.random() * 50
+                  );
+                }
+              }
+            });
+          }, 50); // Start typing shortly after window appears
+        }
+      }, delay);
+    }
+
+    // Pop open windows sequentially, with "My Projects" opening last
+    // Wait a bit for DOM to be fully ready
+    setTimeout(() => {
+      // Window order: About Me -> Skills -> Hobbies -> Interactive -> My Projects (last)
+      popOpenWindow(".window-about-me", ["#about-me-name"], 200);
+
+      popOpenWindow(
+        ".window-skills",
+        ["#skills-languages", "#skills-frameworks", "#skills-tools"],
+        700
+      );
+
+      popOpenWindow(".window-hobbies", ["#hobbies-title"], 1000);
+
+      popOpenWindow(".window-interactive", ["#interactive-text"], 1500);
+
+      // My Projects window opens last
+      popOpenWindow(".window-projects", ["#my-projects-title"], 2000);
+    }, 100);
 
     // Projects window tab switching - now in ./components/projects.js
     initProjectTabs();
