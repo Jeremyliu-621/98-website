@@ -319,129 +319,269 @@ win98-window[resizable] {
   visibility: visible !important;
 }
 
-/* Window initial positions - using classes instead of inline styles */
-.window-about-me {
-  top: 12vh;
-  left: 26.5vh;
-  width: 55vh;
-  height: 440px;
-}
-
-.window-skills {
-  bottom: 43vh;
-  right: 12vh;
-  width: 42vh;
-  height: 35vh;
-}
-
-.window-hobbies {
-  bottom: 16vh;
-  right: 15vh;
-  width: 38vh;
-  height: 24vh;
-}
-
-.window-projects {
-  top: 20px;
-  left: 85.5vh;
-  width: 35vw;
-  height: 88vh;
-}
-
-.window-interactive {
-  bottom: 8vh;
-  left: 44vh;
-  width: 32vh;
-  height: 18.5vh;
-}
-
 /* ============================================
    RESPONSIVE LAYOUT - Easily editable breakpoints
+   Organized by screen width: Largest to Smallest
    ============================================ */
 
-/* Medium screens (tablets and smaller desktops) */
-@media (max-width: 1400px) {
+/* ============================================
+   DEFAULT WINDOW POSITIONS (Large Screens)
+   Only applies to screens wider than 1536px
+   This allows window resizing to work properly on smaller screens
+   ============================================ */
+@media screen and (min-width: 1536px) {
   .window-about-me {
     top: 12vh;
-    left: 20vh;
+    left: 26.5vh;
     width: 55vh;
+    height: 440px;
   }
 
   .window-skills {
     bottom: 43vh;
-    right: 2vh;
-    width: 38vh;
+    left: 1446px; /* Fixed position - calculated for typical large screen (1920px wide: 1920 - 12vh - 42vh ≈ 1446px at 1080px height) */
+    width: 42vh;
+    height: 35vh;
   }
 
   .window-hobbies {
     bottom: 16vh;
-    right: 2vh;
-    width: 35vh;
+    left: 1462px; /* Fixed position - calculated for typical large screen (1920px wide: 1920 - 15vh - 38vh ≈ 1462px at 1080px height) */
+    width: 38vh;
+    height: 24vh;
   }
 
   .window-projects {
     top: 20px;
-    left: 77vh;
-    width: calc(100vw - 62vh);
-    max-width: 40vw;
+    left: 85.5vh;
+    width: 35vw;
+    height: 88vh;
   }
 
   .window-interactive {
-    bottom: 2vh;
-    left: 40vh;
-    width: 28vh;
+    bottom: 8vh;
+    left: 44vh;
+    width: 32vh;
+    height: 18.5vh;
   }
 }
 
-/* Small screens (narrow tablets) */
-@media (max-width: 1100px) {
+/* ============================================
+   BREAKPOINT 1: Medium-Large Screens
+   (1301px - 1400px)
+   ============================================ */
+@media screen and (min-width: 1290px) and (max-width: 1535px) {
   .window-about-me {
-    top: 2vh;
-    left: 2vh;
-    width: calc(50% - 3vh);
-    max-width: 45vh;
+    top: 96px; /* 12vh ≈ 96px */
+    left: 160px; /* 20vh ≈ 160px */
+    width: 330px; /* 55vh ≈ 440px */
+    min-width: 250px;
+    max-width: none;
   }
 
   .window-skills {
-    top: 2vh;
-    right: 2vh;
-    left: auto;
-    bottom: auto;
-    width: calc(50% - 3vh);
-    max-width: 38vh;
-    height: 30vh;
+    bottom: 294px; /* 43vh ≈ 344px */
+    left: 966px; /* 141vh ≈ 1128px */
+    width: 304px; /* 38vh ≈ 304px */
+    height: 244px;
+    /* Positions are fixed px values - won't change on browser resize */
+    /* Inline styles from component can still override for manual dragging/resizing */
   }
 
   .window-hobbies {
-    top: 35vh;
-    right: 2vh;
-    left: auto;
-    bottom: auto;
-    width: calc(50% - 3vh);
-    max-width: 35vh;
-    height: 20vh;
+    bottom: 74px; /* 16vh ≈ 128px */
+    left: 966px; /* 142vh ≈ 1136px */
+    width: 240px; /* 35vh ≈ 280px */
+    height: 200px;
+    /* Positions are fixed px values - won't change on browser resize */
+    /* Inline styles from component can still override for manual dragging/resizing */
   }
 
   .window-projects {
-    top: 2vh;
-    left: calc(50% + 1vh);
-    width: calc(50% - 3vh);
-    max-width: 45vh;
-    height: 60vh;
+    top: 20px;
+    left: 506px; /* 77vh ≈ 616px */
+    width: 446px; /* 62vh ≈ 496px */
+    height: 600px;
   }
 
   .window-interactive {
-    top: 58vh;
-    left: calc(50% + 1vh);
-    bottom: auto;
-    width: calc(50% - 3vh);
-    max-width: 28vh;
-    height: 15vh;
+    bottom: 35px; /* 2vh ≈ 16px */
+    left: 250px; /* 40vh ≈ 320px */
+    width: 224px; /* 28vh ≈ 224px */
   }
 }
 
-/* Very small screens (mobile landscape / small tablets) */
-@media (max-width: 800px) {
+/* ============================================
+   BREAKPOINT 2: Medium Screens (Tablets/Laptops)
+   (1065px - 1300px)
+   ============================================ */
+@media screen and (min-width: 1065px) and (max-width: 1289px) {
+  .window-about-me {
+    left: 140px;
+    width: 280px;
+    height: 320px;
+    min-height: 200px;
+    top: 73px;
+  }
+
+  .window-about-me p {
+    display: none;
+  }
+
+  .window-skills {
+    left: 170px;
+    width: 250px;
+    bottom: 65px;
+    height: 190px;
+  }
+
+  .window-hobbies {
+    left: 849px;
+    width: 200px;
+    top: 140px;
+    height: 200px;
+  }
+
+  .window-projects {
+    left: 435px;
+    width: 400px;
+    height: 600px;
+    top: 10px;
+  }
+
+  .window-interactive {
+    bottom: 156px;
+    left: 855px;
+    width: 180px;
+  }
+
+  /* Make "My Projects" text smaller */
+  .window-projects .window-body h1 {
+    font-size: 3em;
+  }
+
+  /* Stack project images below title */
+  .window-projects .tab-pane[data-tab-content="all"] > div {
+    flex-direction: column !important;
+  }
+
+  /* Project images - stacked layout */
+  .window-projects .project-list-image {
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    margin-left: 0 !important;
+    max-height: 180px !important;
+    object-fit: cover !important;
+  }
+
+  /* Blog images responsive */
+  .window-blog .blog-category-image {
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    margin-left: 0 !important;
+    max-height: 180px !important;
+    object-fit: cover !important;
+  }
+
+  .window-blog .blog-post-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 180px !important;
+    object-fit: cover !important;
+  }
+
+  /* Individual project tab images */
+  .window-projects .tab-pane:not([data-tab-content="all"]) img {
+    max-width: 400px;
+    height: 140px;
+  }
+
+  /* Hide icons in all buttons */
+  .social-btn img,
+  button img,
+  a[href*="github"] img,
+  a[href*="http"] img {
+    display: none;
+  }
+}
+
+/* ============================================
+   BREAKPOINT 3: Small-Medium Screens
+   (801px - 1064px)
+   ============================================ */
+@media screen and (min-width: 840px) and (max-width: 1064px) {
+  .window-about-me {
+    top: 10px;
+    left: 120px;
+    width: 300px;
+    height: 300px;
+  }
+
+  .window-about-me img,
+  .window-projects img {
+    display: none !important;
+  }
+
+  .window-projects {
+    top: 10px;
+    left: 430px;
+    width: 400px;
+    height: 400px;
+  }
+
+  .window-skills {
+    top: 323px;
+    left: 165px;
+    width: 250px;
+    height: 200px;
+  }
+
+  .window-interactive {
+    top: 423px;
+    left: 643px;
+    width: 160px;
+  }
+
+  .window-interactive img {
+    width: 40%;
+    height: 40%;
+  }
+
+  .window-hobbies {
+    top: 425px;
+    left: 430px;
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Make "My Projects" text smaller */
+  .window-projects .window-body h1 {
+    font-size: 3em;
+  }
+
+  /* Hide icons in all buttons */
+  .social-btn img,
+  button img,
+  a[href*="github"] img,
+  a[href*="http"] img {
+    display: none;
+  }
+}
+
+/* ============================================
+   BREAKPOINT 4: Small Screens (Mobile Landscape)
+   (601px - 800px)
+   ============================================ */
+@media screen and (min-width: 601px) and (max-width: 839px) {
   .window-about-me {
     top: 1vh;
     left: 1vh;
@@ -453,7 +593,7 @@ win98-window[resizable] {
   .window-skills {
     top: 27vh;
     left: 1vh;
-    right: auto;
+    bottom: auto;
     width: calc(50% - 1.5vh);
     max-width: none;
     height: 25vh;
@@ -462,7 +602,7 @@ win98-window[resizable] {
   .window-hobbies {
     top: 27vh;
     left: calc(50% + 0.5vh);
-    right: auto;
+    bottom: auto;
     width: calc(50% - 1.5vh);
     max-width: none;
     height: 25vh;
@@ -477,11 +617,88 @@ win98-window[resizable] {
   }
 
   .window-interactive {
-    top: 89vh;
+    display: none;
+  }
+
+  /* Make "My Projects" text smaller */
+  .window-projects .window-body h1 {
+    font-size: 3em;
+  }
+
+  /* Hide icons in all buttons */
+  .social-btn img,
+  button img,
+  a[href*="github"] img,
+  a[href*="http"] img {
+    display: none;
+  }
+}
+
+/* ============================================
+   BREAKPOINT 5: Very Small Screens (Mobile Portrait)
+   (max-width: 600px)
+   ============================================ */
+@media screen and (max-width: 600px) {
+  .window-about-me {
+    top: 1vh;
     left: 1vh;
     width: calc(100% - 2vh);
     max-width: none;
-    height: 10vh;
+    height: 25vh;
+  }
+
+  .window-skills {
+    top: 27vh;
+    left: 1vh;
+    bottom: auto;
+    width: calc(50% - 1.5vh);
+    max-width: none;
+    height: 25vh;
+  }
+
+  .window-hobbies {
+    top: 27vh;
+    left: calc(50% + 0.5vh);
+    bottom: auto;
+    width: calc(50% - 1.5vh);
+    max-width: none;
+    height: 25vh;
+  }
+
+  .window-projects {
+    top: 53vh;
+    left: 1vh;
+    width: calc(100% - 2vh);
+    max-width: none;
+    height: 35vh;
+  }
+
+  .window-interactive {
+    display: none !important;
+  }
+
+  /* Make "My Projects" text smaller */
+  .window-projects .window-body h1 {
+    font-size: 3em;
+  }
+
+  /* Hide icons in all buttons */
+  .social-btn img,
+  button img,
+  a[href*="github"] img,
+  a[href*="http"] img {
+    display: none;
+  }
+
+  /* Blog images stack vertically on very small screens */
+  .blog-post-images {
+    flex-direction: column;
+  }
+
+  .blog-post-images .blog-post-image {
+    max-width: 100% !important;
+    min-width: 100% !important;
+    flex: 1 1 auto !important;
   }
 }
 
@@ -1030,8 +1247,12 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
   min-height: 400px;
 }
 
-/* When projects window is narrow, stack image below title for better layout */
-/* For narrow windows (under ~450px width), move image below title */
+/* ============================================
+   WINDOW-WIDTH SPECIFIC QUERIES
+   (For narrow windows regardless of screen size)
+   ============================================ */
+
+/* Narrow windows (under 450px width) - stack images below title */
 @media screen and (max-width: 450px) {
   .window-projects .tab-pane[data-tab-content="all"] > div {
     flex-direction: column !important;
@@ -1142,43 +1363,6 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
   max-width: 100% !important;
 }
 
-/* For larger screens (> 1300px), make buttons constant width */
-@media screen and (min-width: 1301px) {
-  /* Project list buttons - constant width: 120px when both buttons exist */
-  .window-projects .tab-pane[data-tab-content="all"] .social-btn {
-    width: 120px !important;
-    flex: 0 0 120px !important;
-    min-width: 120px !important;
-    max-width: 120px !important;
-  }
-
-  /* When only one button exists (it's the only child), make it 248px (space of two buttons) */
-  .window-projects .tab-pane[data-tab-content="all"] .social-btn:only-child {
-    width: 248px !important;
-    flex: 0 0 248px !important;
-    min-width: 248px !important;
-    max-width: 248px !important;
-  }
-
-  /* Individual project tab buttons - constant width: 140px when both buttons exist */
-  .window-projects .tab-pane:not([data-tab-content="all"]) .social-btn {
-    width: 140px !important;
-    flex: 0 0 140px !important;
-    min-width: 140px !important;
-    max-width: 140px !important;
-  }
-
-  /* When only one button exists in expanded view, make it 288px (space of two buttons: 140px + 8px gap + 140px) */
-  .window-projects
-    .tab-pane:not([data-tab-content="all"])
-    .social-btn:only-child {
-    width: 288px !important;
-    flex: 0 0 288px !important;
-    min-width: 288px !important;
-    max-width: 288px !important;
-  }
-}
-
 /* Buttons in project cards and single views should wrap when needed */
 .window-projects .project-card-buttons,
 .window-projects .project-single-buttons {
@@ -1186,8 +1370,7 @@ win98-window[title="Hobbies.exe"] .window-body img:last-child {
 }
 
 /* ============================================
-   RESPONSIVE TEXT SIZES ONLY
-   Windows maintain fixed sizes, only text scales
+   ADDITIONAL RESPONSIVE ADJUSTMENTS
    ============================================ */
 
 /* Base responsive adjustments - windows keep their sizes */
@@ -1196,222 +1379,22 @@ win98-window {
   max-height: 100vh;
 }
 
+/* ============================================
+   HEIGHT-BASED QUERIES
+   ============================================ */
 @media screen and (max-height: 695px) {
   #desktop-thanks {
     top: 380px !important;
   }
 }
 
-/* Mobile devices (phones) - up to 768px */
-@media screen and (max-width: 768px) {
-  /* Adjust positioning only - no size changes */
-  /* Windows stay the same size, just repositioned */
-}
+/* ============================================
+   LARGER SCREEN QUERIES (1500px+)
+   (For specific adjustments on larger screens)
+   ============================================ */
 
-/* Tablets and small laptops (under 1300px) */
-@media screen and (max-width: 1170px) {
-  /* Resize and reposition windows to the left - override classes without !important */
-  .window-about-me {
-    left: 120px;
-    width: 40vw;
-    max-width: 250px;
-    height: 370px;
-    top: 10px;
-  }
-
-  .window-about-me p {
-    display: none !important;
-  }
-
-  .window-skills {
-    left: 120px;
-    top: 390px;
-    width: 250px;
-  }
-
-  .window-hobbies {
-    left: 390px;
-    top: 450px;
-    width: 250px;
-    height: 200px;
-  }
-
-  .window-projects {
-    left: 390px;
-    top: 10px;
-    width: 355px;
-    height: 420px;
-  }
-
-  .window-interactive {
-    top: 445px;
-    left: 660px;
-    width: 180px;
-  }
-
-  /* Make "My Projects" text smaller */
-  .window-projects .window-body h1 {
-    font-size: 3em;
-  }
-
-  /* Make project images appear under the title instead of side by side */
-  /* Target the project item container divs - override inline flex-direction */
-  .window-projects .tab-pane[data-tab-content="all"] > div {
-    flex-direction: column !important;
-  }
-
-  /* Image is now inside content div, so it naturally appears after title in narrow windows */
-  /* Make image smaller when stacked */
-  .window-projects .project-list-image {
-    float: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-    margin-left: 0 !important;
-    max-height: 160px !important;
-    object-fit: cover !important;
-  }
-
-  /* Blog images responsive - mobile */
-  .window-blog .blog-category-image {
-    float: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-    margin-left: 0 !important;
-    max-height: 160px !important;
-    object-fit: cover !important;
-  }
-
-  .window-blog .blog-post-image {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 160px !important;
-    object-fit: cover !important;
-  }
-
-  /* Make project images smaller in individual project tabs */
-  .window-projects .tab-pane:not([data-tab-content="all"]) img {
-    max-width: 400px;
-    height: 140px;
-  }
-
-  /* Hide icons in all buttons */
-  .social-btn img,
-  button img,
-  a[href*="github"] img,
-  a[href*="http"] img {
-    display: none;
-  }
-}
-
-/* Tablets and small laptops (under 1300px) */
-@media screen and (min-width: 1065px) and (max-width: 1300px) {
-  /* Resize and reposition windows to the left - override classes without !important */
-
-  .window-about-me {
-    left: 120px;
-    width: 40vw;
-    max-width: 300px;
-    height: 370px;
-  }
-
-  .window-about-me p {
-    display: none;
-  }
-
-  .window-projects {
-    left: 431px;
-    width: 350px;
-  }
-
-  /* For narrow projects window in this range, stack image below title */
-  .window-projects .tab-pane[data-tab-content="all"] > div {
-    flex-direction: column !important;
-  }
-
-  /* Image is now inside content div, so it naturally appears after title */
-  /* Make image smaller when stacked */
-  .window-projects .project-list-image {
-    float: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-    margin-left: 0 !important;
-    max-height: 180px !important;
-    object-fit: cover !important;
-  }
-
-  /* Blog images responsive - tablets */
-  .window-blog .blog-category-image {
-    float: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-    margin-left: 0 !important;
-    max-height: 180px !important;
-    object-fit: cover !important;
-  }
-
-  .window-blog .blog-post-image {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 180px !important;
-    object-fit: cover !important;
-  }
-
-  .window-skills {
-    left: 793px !important;
-    width: 250px;
-  }
-
-  .window-hobbies {
-    left: 796px !important;
-    width: 250px;
-  }
-
-  .window-interactive {
-    bottom: 2vh;
-    left: 200px;
-    width: 180px;
-  }
-
-  /* Make "My Projects" text smaller */
-  .window-projects .window-body h1 {
-    font-size: 3em;
-  }
-
-  /* Project images in "All" tab - already handled by column layout rule above */
-  /* Image size is controlled by the column layout rule */
-
-  /* Make project images smaller in individual project tabs */
-  .window-projects .tab-pane:not([data-tab-content="all"]) img {
-    max-width: 400px;
-    height: 140px;
-  }
-
-  /* Hide icons in all buttons */
-  .social-btn img,
-  button img,
-  a[href*="github"] img,
-  a[href*="http"] img {
-    display: none;
-  }
-}
-
-/* For larger screens (1301px+), when projects window is narrow, stack image below title */
-/* Make it trigger earlier - at wider screen sizes */
-@media screen and (min-width: 1504px) and (max-width: 1535px) {
+/* Large screens (1504px - 1535px) - stack images for narrow windows */
+@media screen and (min-width: 1506px) and (max-width: 1535px) {
   .window-projects .tab-pane[data-tab-content="all"] > div {
     flex-direction: column !important;
   }
@@ -1430,7 +1413,7 @@ win98-window {
     object-fit: cover !important;
   }
 
-  /* Blog images responsive - small screens */
+  /* Blog images responsive */
   .window-blog .blog-category-image {
     float: none !important;
     width: 100% !important;
@@ -1452,32 +1435,9 @@ win98-window {
   }
 }
 
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-  /* Larger touch targets */
-  .desktop-folder {
-    min-width: 80px !important;
-    min-height: 80px !important;
-    padding: 8px !important;
-  }
-
-  .project-tab {
-    min-height: 44px !important;
-    padding: 8px 12px !important;
-  }
-
-  .social-btn {
-    min-height: 44px !important;
-    padding: 12px 10px !important;
-  }
-
-  /* Prevent text selection on touch */
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
-}
-
-/* Touch device optimizations */
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
 @media (hover: none) and (pointer: coarse) {
   /* Larger touch targets */
   .desktop-folder {
@@ -1588,28 +1548,55 @@ win98-window {
   min-width: 150px;
 }
 
-/* For narrow windows, stack images vertically */
-@media screen and (max-width: 600px) {
-  .blog-post-images {
-    flex-direction: column;
-  }
-
-  .blog-post-images .blog-post-image {
-    max-width: 100% !important;
-    min-width: 100% !important;
-    flex: 1 1 auto !important;
-  }
-}
-
 .blog-post-text {
   margin-top: 12px;
   line-height: 1.5;
   font-size: 1.3em;
 }
 
-@media screen and (min-width: 1535px) and (max-width: 1600px) {
-  /* Color scheme is handled by 98.css */
+/* ============================================
+   BUTTON SIZING QUERIES
+   ============================================ */
 
+/* Large screens (1301px+) - constant button widths */
+@media screen and (min-width: 1301px) {
+  /* Project list buttons - constant width: 120px when both buttons exist */
+  .window-projects .tab-pane[data-tab-content="all"] .social-btn {
+    width: 120px !important;
+    flex: 0 0 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+  }
+
+  /* When only one button exists (it's the only child), make it 248px (space of two buttons) */
+  .window-projects .tab-pane[data-tab-content="all"] .social-btn:only-child {
+    width: 248px !important;
+    flex: 0 0 248px !important;
+    min-width: 248px !important;
+    max-width: 248px !important;
+  }
+
+  /* Individual project tab buttons - constant width: 140px when both buttons exist */
+  .window-projects .tab-pane:not([data-tab-content="all"]) .social-btn {
+    width: 140px !important;
+    flex: 0 0 140px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
+  }
+
+  /* When only one button exists in expanded view, make it 288px (space of two buttons: 140px + 8px gap + 140px) */
+  .window-projects
+    .tab-pane:not([data-tab-content="all"])
+    .social-btn:only-child {
+    width: 288px !important;
+    flex: 0 0 288px !important;
+    min-width: 288px !important;
+    max-width: 288px !important;
+  }
+}
+
+/* Very large screens (1535px - 1600px) - smaller buttons for wrapping */
+@media screen and (min-width: 1535px) and (max-width: 1600px) {
   /* Make project buttons in "all" tab smaller so they wrap into two rows */
   .window-projects .tab-pane[data-tab-content="all"] .social-btn {
     padding: 6px 8px !important; /* Reduced padding */
