@@ -363,8 +363,8 @@ win98-window[resizable] {
 @media (max-width: 1400px) {
   .window-about-me {
     top: 12vh;
-    left: 2vh;
-    width: 45vh;
+    left: 20vh;
+    width: 55vh;
   }
 
   .window-skills {
@@ -381,14 +381,14 @@ win98-window[resizable] {
 
   .window-projects {
     top: 20px;
-    left: 50vh;
-    width: calc(100vw - 52vh);
+    left: 77vh;
+    width: calc(100vw - 62vh);
     max-width: 40vw;
   }
 
   .window-interactive {
-    bottom: 8vh;
-    left: 2vh;
+    bottom: 2vh;
+    left: 40vh;
     width: 28vh;
   }
 }
@@ -1371,17 +1371,17 @@ win98-window {
   }
 
   .window-skills {
-    left: 794px;
+    left: 793px !important;
     width: 250px;
   }
 
   .window-hobbies {
-    left: 797px;
+    left: 796px !important;
     width: 250px;
   }
 
   .window-interactive {
-    bottom: 12vh;
+    bottom: 2vh;
     left: 200px;
     width: 180px;
   }
