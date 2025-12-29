@@ -199,14 +199,19 @@ export const content = {
       link: "https://lostlove.neocities.org/",
     },
     {
-      name: "buttered_official",
-      description: "For giving me the idea for a windows 98 website.",
-      link: "https://www.instagram.com/buttered_official/",
+      name: "Ethan Yang",
+      description: "For the Binder and Stop! Don't Go On! gifs.",
+      link: "https://github.com/e-yang6",
     },
     {
       name: "colorhunt.co",
       description: "For giving me cool colour palettes for this project.",
       link: "https://colorhunt.co/",
+    },
+    {
+      name: "buttered_official",
+      description: "For giving me the idea for a windows 98 website.",
+      link: "https://www.instagram.com/buttered_official/",
     },
     {
       name: "Kibuns",
