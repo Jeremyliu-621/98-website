@@ -117,6 +117,7 @@ export const content = {
       front: "React, Vite, TypeScript",
       back: "Python + Flask, OpenCV, PySerial, Pygame",
       image: "stop_dont_go_on_grey",
+      website: "https://stop-dont-go-on.vercel.app/",
       github: "https://github.com/Jeremyliu-621/stop-dont-go-on",
       additionalInfo:
         "Used Arduino to spray water and email.js to email friends and family to incentivize users away from continuing bad habits." +
