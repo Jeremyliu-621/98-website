@@ -170,7 +170,7 @@ export const content = {
       description: "Random thoughts, ideas, and miscellaneous content.",
       image: "directory_computer",
       posts: [
-        {
+    {
           title: "Welcome to Misc",
           date: "January 2025",
           image: "j-gif-space",
@@ -211,15 +211,15 @@ export const content = {
       posts: [
         {
           title: "Website Launch",
-          date: "January 2025",
-          image: [
-            { filename: "j-gif-space", size: "small" },
-            { filename: "ascii-gif", size: "small" },
-            { filename: "website-icon", size: "small" },
+      date: "January 2025",
+      image: [
+        { filename: "j-gif-space", size: "small" },
+        { filename: "ascii-gif", size: "small" },
+        { filename: "website-icon", size: "small" },
           ],
           text: "Just launched this Windows 98 themed website! Built with 98-components and lots of help from AI assistants.\n\nAlso just finished first semester at UofT. It was quite rough, but I'm glad I made it through and want to make the most of my time there. Coding more nowadays because i'm locked in.",
         },
-      ],
+  ],
     },
   },
   // ============================================
@@ -1165,7 +1165,7 @@ function initApp() {
           // Add appropriate state class
           if (isMinimized) {
             button.classList.add("minimized");
-          } else {
+      } else {
             // Window is open - check if it's the active window
             const allWindows = document.querySelectorAll("win98-window");
             let isActive = false;
@@ -1425,7 +1425,7 @@ function initApp() {
             // Just remove right positioning to allow CSS to take over
             winElement.style.right = "auto";
             return;
-          }
+      }
 
           // Get the original CSS values from the stylesheet
           // Skills: right: 12vh, width: 42vh
@@ -1941,7 +1941,7 @@ function initApp() {
 
           // Check if it's a fast or slow animation
           if (element.classList.contains("animate-title-fast")) {
-            animateElement(element, 40, 40, 0.1, () => 30 + Math.random() * 30);
+      animateElement(element, 40, 40, 0.1, () => 30 + Math.random() * 30);
           } else if (element.classList.contains("animate-title-slow")) {
             animateElement(
               element,
@@ -2037,54 +2037,54 @@ function initApp() {
 
     // Desktop folder icon click handling
 
-    // Function to open folder window
-    function openFolderWindow() {
-      // Check if window already exists
-      let folderWindow = document.querySelector(
-        'win98-window[title="Folder.exe"]'
-      );
+      // Function to open folder window
+      function openFolderWindow() {
+        // Check if window already exists
+        let folderWindow = document.querySelector(
+          'win98-window[title="Folder.exe"]'
+        );
 
-      if (!folderWindow) {
-        // Source code files
-        const sourceFiles = [
-          {
-            name: "main.js",
-            description: "Main application logic and content",
-          },
-          { name: "style.css", description: "Custom styles and overrides" },
-          { name: "index.html", description: "Main HTML file" },
-          { name: "package.json", description: "Project dependencies" },
-        ];
+        if (!folderWindow) {
+          // Source code files
+          const sourceFiles = [
+            {
+              name: "main.js",
+              description: "Main application logic and content",
+            },
+            { name: "style.css", description: "Custom styles and overrides" },
+            { name: "index.html", description: "Main HTML file" },
+            { name: "package.json", description: "Project dependencies" },
+          ];
 
-        // Build images HTML with data attributes for navigation
+          // Build images HTML with data attributes for navigation
         const imagesHTML = ASSET_IMAGES.map((img, index) => {
-          const imgUrl = getImageUrl(img.split(".")[0]);
-          return `
+              const imgUrl = getImageUrl(img.split(".")[0]);
+              return `
               <div class="folder-image-item" style="display: inline-block; margin: 8px; text-align: center; vertical-align: top; width: 100px; cursor: pointer;">
                 <img src="${
                   imgUrl || ""
                 }" alt="${img}" data-image-index="${index}" data-image-name="${img}" data-image-url="${
-            imgUrl || ""
-          }" style="width: 64px; height: 64px; object-fit: contain; border: 1px solid #808080; background: #fff; padding: 2px; display: block; margin: 0 auto 4px auto;">
+                imgUrl || ""
+              }" style="width: 64px; height: 64px; object-fit: contain; border: 1px solid #808080; background: #fff; padding: 2px; display: block; margin: 0 auto 4px auto;">
                 <span style="font-size: 0.85em; color: #000; display: block; word-break: break-word;">${img}</span>
               </div>
             `;
         }).join("");
 
-        // Build source files HTML
-        const filesHTML = sourceFiles
-          .map(
-            (file) => `
+          // Build source files HTML
+          const filesHTML = sourceFiles
+            .map(
+              (file) => `
             <div style="padding: 4px 8px; border-bottom: 1px solid #c0c0c0; display: flex; align-items: center; gap: 8px;">
               <span style="font-weight: bold; min-width: 120px;">${file.name}</span>
               <span style="color: #666; font-size: 0.9em;">${file.description}</span>
             </div>
           `
-          )
-          .join("");
+            )
+            .join("");
 
-        // Create window HTML
-        const windowHTML = `
+          // Create window HTML
+          const windowHTML = `
             <win98-window title="Folder.exe" resizable show-minimize style="top: 100px; left: 100px; width: 600px; height: 500px; z-index: 1000;">
               <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; border: 2px solid #808080;">
                 <h3 style="margin-top: 0; margin-bottom: 8px; font-weight: bold;">Images</h3>
@@ -2099,66 +2099,66 @@ function initApp() {
             </win98-window>
           `;
 
-        // Insert window into desktop
-        const desktop = document.querySelector("win98-desktop");
-        if (desktop) {
-          desktop.insertAdjacentHTML("beforeend", windowHTML);
-          folderWindow = document.querySelector(
-            'win98-window[title="Folder.exe"]'
+          // Insert window into desktop
+          const desktop = document.querySelector("win98-desktop");
+          if (desktop) {
+            desktop.insertAdjacentHTML("beforeend", windowHTML);
+            folderWindow = document.querySelector(
+              'win98-window[title="Folder.exe"]'
+            );
+          }
+        }
+
+        // Add double-click handlers to images (whether new or existing window)
+        if (folderWindow) {
+          // Remove old handlers if any
+          const imageItems = folderWindow.querySelectorAll(
+            ".folder-image-item img"
           );
+          imageItems.forEach((img) => {
+            // Clone to remove all event listeners
+            const newImg = img.cloneNode(true);
+            img.parentNode.replaceChild(newImg, img);
+
+            // Add new double-click handler
+            let clickTimer = null;
+            newImg.addEventListener("click", (e) => {
+              e.stopPropagation();
+              if (clickTimer) {
+                clearTimeout(clickTimer);
+                clickTimer = null;
+                // Double click - open image viewer
+                const imageIndex = parseInt(
+                  newImg.getAttribute("data-image-index")
+                );
+                const imageName = newImg.getAttribute("data-image-name");
+                const imageUrl = newImg.getAttribute("data-image-url");
+              openImageViewer(ASSET_IMAGES, imageIndex, imageName, imageUrl);
+              } else {
+                clickTimer = setTimeout(() => {
+                  clickTimer = null;
+                }, 300);
+              }
+            });
+          });
+        }
+
+        // Show and bring to front
+        if (folderWindow) {
+          bringWindowToFront(folderWindow);
         }
       }
 
-      // Add double-click handlers to images (whether new or existing window)
-      if (folderWindow) {
-        // Remove old handlers if any
-        const imageItems = folderWindow.querySelectorAll(
-          ".folder-image-item img"
-        );
-        imageItems.forEach((img) => {
-          // Clone to remove all event listeners
-          const newImg = img.cloneNode(true);
-          img.parentNode.replaceChild(newImg, img);
-
-          // Add new double-click handler
-          let clickTimer = null;
-          newImg.addEventListener("click", (e) => {
-            e.stopPropagation();
-            if (clickTimer) {
-              clearTimeout(clickTimer);
-              clickTimer = null;
-              // Double click - open image viewer
-              const imageIndex = parseInt(
-                newImg.getAttribute("data-image-index")
-              );
-              const imageName = newImg.getAttribute("data-image-name");
-              const imageUrl = newImg.getAttribute("data-image-url");
-              openImageViewer(ASSET_IMAGES, imageIndex, imageName, imageUrl);
-            } else {
-              clickTimer = setTimeout(() => {
-                clickTimer = null;
-              }, 300);
-            }
-          });
-        });
-      }
-
-      // Show and bring to front
-      if (folderWindow) {
-        bringWindowToFront(folderWindow);
-      }
-    }
-
-    // Function to open image viewer window
+      // Function to open image viewer window
     function openImageViewer(imageList, currentIndex, currentName, currentUrl) {
-      // Check if viewer already exists
-      let viewerWindow = document.querySelector(
-        'win98-window[title="Image Viewer.exe"]'
-      );
+        // Check if viewer already exists
+        let viewerWindow = document.querySelector(
+          'win98-window[title="Image Viewer.exe"]'
+        );
 
-      if (!viewerWindow) {
-        // Create viewer window HTML
-        const viewerHTML = `
+        if (!viewerWindow) {
+          // Create viewer window HTML
+          const viewerHTML = `
             <win98-window title="Image Viewer.exe" resizable show-minimize style="top: 150px; left: 200px; width: 700px; height: 600px; z-index: 2000;">
               <div class="window-body" style="padding: 8px; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column;">
                 <div class="viewer-image-container" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; position: relative; overflow: hidden; padding: 8px;">
@@ -2182,124 +2182,124 @@ function initApp() {
             </win98-window>
           `;
 
-        // Insert viewer window
-        const desktop = document.querySelector("win98-desktop");
-        if (desktop) {
-          desktop.insertAdjacentHTML("beforeend", viewerHTML);
-          viewerWindow = document.querySelector(
-            'win98-window[title="Image Viewer.exe"]'
-          );
+          // Insert viewer window
+          const desktop = document.querySelector("win98-desktop");
+          if (desktop) {
+            desktop.insertAdjacentHTML("beforeend", viewerHTML);
+            viewerWindow = document.querySelector(
+              'win98-window[title="Image Viewer.exe"]'
+            );
 
-          // Apply current theme to the image viewer window
-          const savedPalette =
-            localStorage.getItem("colorPalette") || "default";
-          applyColorPalette(savedPalette);
-        }
-      }
-
-      // Update viewer content
-      if (viewerWindow) {
-        const mainImage = viewerWindow.querySelector("#viewer-main-image");
-        const imageName = viewerWindow.querySelector("#viewer-image-name");
-        const imageCounter = viewerWindow.querySelector(
-          "#viewer-image-counter"
-        );
-        const prevBtn = viewerWindow.querySelector("#viewer-prev-btn");
-        const nextBtn = viewerWindow.querySelector("#viewer-next-btn");
-
-        // Store current index in the window element
-        let viewerCurrentIndex = currentIndex;
-
-        // Update current image
-        function updateImage(index) {
-          const imgName = imageList[index];
-          const imgUrl = getImageUrl(imgName.split(".")[0]);
-          if (mainImage) mainImage.src = imgUrl || "";
-          if (imageName) imageName.textContent = imgName;
-          if (imageCounter)
-            imageCounter.textContent = `${index + 1} / ${imageList.length}`;
-
-          // Update button states
-          if (prevBtn) prevBtn.disabled = index === 0;
-          if (nextBtn) nextBtn.disabled = index === imageList.length - 1;
-
-          viewerCurrentIndex = index;
-        }
-
-        // Set initial image
-        updateImage(currentIndex);
-
-        // Navigation handlers
-        if (prevBtn) {
-          prevBtn.onclick = () => {
-            if (viewerCurrentIndex > 0) {
-              updateImage(viewerCurrentIndex - 1);
-            }
-          };
-        }
-
-        if (nextBtn) {
-          nextBtn.onclick = () => {
-            if (viewerCurrentIndex < imageList.length - 1) {
-              updateImage(viewerCurrentIndex + 1);
-            }
-          };
-        }
-
-        // Keyboard navigation
-        const handleKeyPress = (e) => {
-          if (viewerWindow && viewerWindow.style.display !== "none") {
-            if (e.key === "ArrowLeft" && viewerCurrentIndex > 0) {
-              updateImage(viewerCurrentIndex - 1);
-            } else if (
-              e.key === "ArrowRight" &&
-              viewerCurrentIndex < imageList.length - 1
-            ) {
-              updateImage(viewerCurrentIndex + 1);
-            }
+            // Apply current theme to the image viewer window
+            const savedPalette =
+              localStorage.getItem("colorPalette") || "default";
+            applyColorPalette(savedPalette);
           }
-        };
-        document.addEventListener("keydown", handleKeyPress);
+        }
 
-        // Show and bring to front
-        viewerWindow.style.display = "block";
-        const allWindows = document.querySelectorAll("win98-window");
-        let maxZ = 0;
-        allWindows.forEach((w) => {
-          const z = parseInt(w.style.zIndex) || 0;
-          if (z > maxZ) maxZ = z;
-        });
-        viewerWindow.style.zIndex = (maxZ + 1).toString();
+        // Update viewer content
+        if (viewerWindow) {
+          const mainImage = viewerWindow.querySelector("#viewer-main-image");
+          const imageName = viewerWindow.querySelector("#viewer-image-name");
+          const imageCounter = viewerWindow.querySelector(
+            "#viewer-image-counter"
+          );
+          const prevBtn = viewerWindow.querySelector("#viewer-prev-btn");
+          const nextBtn = viewerWindow.querySelector("#viewer-next-btn");
+
+          // Store current index in the window element
+          let viewerCurrentIndex = currentIndex;
+
+          // Update current image
+          function updateImage(index) {
+            const imgName = imageList[index];
+            const imgUrl = getImageUrl(imgName.split(".")[0]);
+            if (mainImage) mainImage.src = imgUrl || "";
+            if (imageName) imageName.textContent = imgName;
+            if (imageCounter)
+              imageCounter.textContent = `${index + 1} / ${imageList.length}`;
+
+            // Update button states
+            if (prevBtn) prevBtn.disabled = index === 0;
+            if (nextBtn) nextBtn.disabled = index === imageList.length - 1;
+
+            viewerCurrentIndex = index;
+          }
+
+          // Set initial image
+          updateImage(currentIndex);
+
+          // Navigation handlers
+          if (prevBtn) {
+            prevBtn.onclick = () => {
+              if (viewerCurrentIndex > 0) {
+                updateImage(viewerCurrentIndex - 1);
+              }
+            };
+          }
+
+          if (nextBtn) {
+            nextBtn.onclick = () => {
+              if (viewerCurrentIndex < imageList.length - 1) {
+                updateImage(viewerCurrentIndex + 1);
+              }
+            };
+          }
+
+          // Keyboard navigation
+          const handleKeyPress = (e) => {
+            if (viewerWindow && viewerWindow.style.display !== "none") {
+              if (e.key === "ArrowLeft" && viewerCurrentIndex > 0) {
+                updateImage(viewerCurrentIndex - 1);
+              } else if (
+                e.key === "ArrowRight" &&
+                viewerCurrentIndex < imageList.length - 1
+              ) {
+                updateImage(viewerCurrentIndex + 1);
+              }
+            }
+          };
+          document.addEventListener("keydown", handleKeyPress);
+
+          // Show and bring to front
+          viewerWindow.style.display = "block";
+          const allWindows = document.querySelectorAll("win98-window");
+          let maxZ = 0;
+          allWindows.forEach((w) => {
+            const z = parseInt(w.style.zIndex) || 0;
+            if (z > maxZ) maxZ = z;
+          });
+          viewerWindow.style.zIndex = (maxZ + 1).toString();
+        }
       }
-    }
 
     // Function to open chatbox window
-    function openChatboxWindow() {
-      let chatboxWindow = document.querySelector(
-        'win98-window[title="Chatbox.exe"]'
-      );
+      function openChatboxWindow() {
+        let chatboxWindow = document.querySelector(
+          'win98-window[title="Chatbox.exe"]'
+        );
 
-      if (!chatboxWindow) {
-        const windowHTML = `
+        if (!chatboxWindow) {
+          const windowHTML = `
           <win98-window title="Chatbox.exe" resizable show-minimize style="top: 100px; left: 100px; width: 600px; height: 550px; z-index: 1000;">
-            <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box;">
-              <iframe src="https://www3.cbox.ws/box/?boxid=3551058&boxtag=a6HwaA" width="100%" height="100%" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="border: 1px solid #808080; background: #fff;"></iframe>
-            </div>
-          </win98-window>
-        `;
+              <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box;">
+                <iframe src="https://www3.cbox.ws/box/?boxid=3551058&boxtag=a6HwaA" width="100%" height="100%" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="border: 1px solid #808080; background: #fff;"></iframe>
+              </div>
+            </win98-window>
+          `;
 
-        const desktop = document.querySelector("win98-desktop");
-        if (desktop) {
-          desktop.insertAdjacentHTML("beforeend", windowHTML);
-          chatboxWindow = document.querySelector(
-            'win98-window[title="Chatbox.exe"]'
-          );
+          const desktop = document.querySelector("win98-desktop");
+          if (desktop) {
+            desktop.insertAdjacentHTML("beforeend", windowHTML);
+            chatboxWindow = document.querySelector(
+              'win98-window[title="Chatbox.exe"]'
+            );
         }
-      }
+          }
 
-      if (chatboxWindow) {
-        bringWindowToFront(chatboxWindow);
-      }
+          if (chatboxWindow) {
+            bringWindowToFront(chatboxWindow);
+          }
     }
 
     // Helper function to bring window to front
@@ -2500,7 +2500,10 @@ function initApp() {
 
     // Setup desktop icons (all functions are now defined)
     setupDesktopIcon("#desktop-folder", openFolderWindow);
-    setupDesktopIcon("#desktop-blog", openBlogWindow);
+    setupDesktopIcon("#desktop-blog", () => {
+      // Open blog as a separate website
+      window.location.href = "/blog/index.html";
+    });
     setupDesktopIcon("#desktop-chatbox", openChatboxWindow);
     setupDesktopIcon("#desktop-theme", openSettingsWindow);
     setupDesktopIcon("#desktop-thanks", openThanksWindow);
@@ -2563,10 +2566,10 @@ function initApp() {
 
           if (aboutMeWindow) {
             aboutMeWindow.classList.add("window-pop-open");
-            // Apply current theme to the window
-            const savedPalette =
-              localStorage.getItem("colorPalette") || "default";
-            applyColorPalette(savedPalette);
+          // Apply current theme to the window
+          const savedPalette =
+            localStorage.getItem("colorPalette") || "default";
+          applyColorPalette(savedPalette);
             // Trigger typing animation
             setTimeout(() => {
               triggerTypingAnimation(["#about-me-name"]);
@@ -2629,10 +2632,10 @@ function initApp() {
 
           if (skillsWindow) {
             skillsWindow.classList.add("window-pop-open");
-            // Apply current theme to the window
-            const savedPalette =
-              localStorage.getItem("colorPalette") || "default";
-            applyColorPalette(savedPalette);
+          // Apply current theme to the window
+          const savedPalette =
+            localStorage.getItem("colorPalette") || "default";
+          applyColorPalette(savedPalette);
             // Trigger typing animation
             setTimeout(() => {
               triggerTypingAnimation([
@@ -2704,10 +2707,10 @@ function initApp() {
 
           if (hobbiesWindow) {
             hobbiesWindow.classList.add("window-pop-open");
-            // Apply current theme to the window
-            const savedPalette =
-              localStorage.getItem("colorPalette") || "default";
-            applyColorPalette(savedPalette);
+          // Apply current theme to the window
+          const savedPalette =
+            localStorage.getItem("colorPalette") || "default";
+          applyColorPalette(savedPalette);
             // Trigger typing animation
             setTimeout(() => {
               triggerTypingAnimation(["#hobbies-title"]);
@@ -2745,17 +2748,17 @@ function initApp() {
 
           if (projectsWindow) {
             projectsWindow.classList.add("window-pop-open");
-            // Apply current theme to the window
-            const savedPalette =
-              localStorage.getItem("colorPalette") || "default";
-            applyColorPalette(savedPalette);
+          // Apply current theme to the window
+          const savedPalette =
+            localStorage.getItem("colorPalette") || "default";
+          applyColorPalette(savedPalette);
 
-            // Initialize project tabs after window is created
-            setTimeout(() => {
-              initProjectTabs();
+          // Initialize project tabs after window is created
+          setTimeout(() => {
+            initProjectTabs();
               // Trigger typing animation
               triggerTypingAnimation(["#my-projects-title"]);
-            }, 100);
+          }, 100);
           }
         }
       }
@@ -2795,10 +2798,10 @@ function initApp() {
 
           if (interactiveWindow) {
             interactiveWindow.classList.add("window-pop-open");
-            // Apply current theme to the window
-            const savedPalette =
-              localStorage.getItem("colorPalette") || "default";
-            applyColorPalette(savedPalette);
+          // Apply current theme to the window
+          const savedPalette =
+            localStorage.getItem("colorPalette") || "default";
+          applyColorPalette(savedPalette);
             // Trigger typing animation
             setTimeout(() => {
               triggerTypingAnimation(["#interactive-text"]);
@@ -2826,7 +2829,10 @@ function initApp() {
       "menu-projects": () => openProjectsWindow(),
       "menu-interactive": () => openInteractiveWindow(),
       "menu-folder": () => openFolderWindow(),
-      "menu-blog": () => openBlogWindow(),
+      "menu-blog": () => {
+        // Open blog as a separate website
+        window.location.href = "/blog/index.html";
+      },
       "menu-chatbox": () => openChatboxWindow(),
       "menu-thanks": () => openThanksWindow(),
       "menu-theme-editor": () => openSettingsWindow(),
