@@ -1354,6 +1354,7 @@ function initApp() {
     }
 
     // Convert windows positioned with 'right' to 'left' for proper resizing
+    // Uses CSS calc() with original vh values to maintain zoom-independent positioning
     function convertRightPositionedWindows() {
       document
         .querySelectorAll(".window-skills, .window-hobbies")
@@ -1362,32 +1363,18 @@ function initApp() {
           if (winElement.dataset.convertedToLeft) return;
           winElement.dataset.convertedToLeft = "true";
 
-          // Get current computed styles
-          const computedStyle = getComputedStyle(winElement);
-          const currentRight = computedStyle.right;
-          const currentWidth = computedStyle.width;
-          const currentBottom = computedStyle.bottom;
+          // Get the original CSS values from the stylesheet
+          // Skills: right: 12vh, width: 42vh
+          // Hobbies: right: 15vh, width: 38vh
+          const isSkills = winElement.classList.contains("window-skills");
+          const rightVh = isSkills ? 12 : 15;
+          const widthVh = isSkills ? 42 : 38;
 
-          // Only convert if currently using right positioning
-          if (currentRight !== "auto" && currentRight !== "0px") {
-            // Calculate left position from right and width
-            const rightValue = parseFloat(currentRight);
-            const widthValue = parseFloat(currentWidth);
-            const viewportWidth = document.documentElement.clientWidth;
-
-            // Convert to left-based positioning
-            const leftValue = viewportWidth - rightValue - widthValue;
-
-            // Apply left positioning and remove right
-            winElement.style.right = "auto";
-            winElement.style.left = `${leftValue}px`;
-            winElement.style.width = `${widthValue}px`;
-
-            // Keep bottom positioning if it exists
-            if (currentBottom !== "auto" && currentBottom !== "0px") {
-              winElement.style.bottom = currentBottom;
-            }
-          }
+          // Use CSS calc() to convert: left = 100vw - right - width
+          // This maintains relative positioning that scales with zoom
+          winElement.style.right = "auto";
+          winElement.style.left = `calc(100vw - ${rightVh}vh - ${widthVh}vh)`;
+          // Width stays as set in CSS (42vh or 38vh)
         });
     }
 

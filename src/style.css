@@ -320,7 +320,7 @@ win98-window[resizable] {
   bottom: 43vh;
   right: 12vh;
   width: 42vh;
-  height: calc(35vh);
+  height: 35vh;
 }
 
 .window-hobbies {
