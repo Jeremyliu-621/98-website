@@ -607,22 +607,22 @@ function initApp() {
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
            <img src="${
              getImageUrl("conormcgregor") || ""
-           }" alt="Conor McGregor" style="max-width: 50px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+           }" alt="Conor McGregor" style="max-width: 50px; width: auto; height: auto; object-fit: contain; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
           <img src="${
             getImageUrl("animation") || ""
-          }" alt="Pretty Animation" style="max-width: 50px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          }" alt="Pretty Animation" style="max-width: 50px; width: auto; height: auto; object-fit: contain; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
           <img src="${
             getImageUrl("bjj-grappling") || ""
-          }" alt="BJJ Grappling" style="max-width: 50px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          }" alt="BJJ Grappling" style="max-width: 50px; width: auto; height: auto; object-fit: contain; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
           <img src="${
             getImageUrl("Happy") || ""
-          }" alt="Charles Oliviera" style="max-width: 200px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          }" alt="Charles Oliviera" style="max-width: 200px; width: auto; height: auto; object-fit: contain; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
           <img src="${
             getImageUrl("Rodney") || ""
-          }" alt="Skating" style="max-width: 100px; width: 40px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          }" alt="Skating" style="max-width: 100px; width: auto; height: auto; object-fit: contain; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
           <img src="${
             getImageUrl("stop") || ""
-          }" alt="graffiti" style="max-width: 100px; width: 40px; height: auto; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
+          }" alt="graffiti" style="max-width: 100px; width: auto; height: auto; object-fit: contain; display: block; margin: 8px 0 0 0; border: 2px solid #808080;">
           
           </div>
       
