@@ -223,6 +223,42 @@ win98-window {
   box-shadow: 12px 12px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Make title bar responsive - truncate title text when window is narrow */
+win98-window::part(title-bar),
+win98-window .title-bar {
+  display: flex !important;
+  align-items: center !important;
+  min-width: 0 !important; /* Allow shrinking */
+}
+
+/* Title text should truncate with ellipsis */
+win98-window::part(title-bar-text),
+win98-window .title-bar-text {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  margin-right: 4px !important;
+}
+
+/* Title bar controls should stay on the right and not shrink */
+win98-window::part(title-bar-controls),
+win98-window .title-bar-controls {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  gap: 2px !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* Hide minimized windows */
+win98-window.minimized,
+win98-window[data-minimized="true"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 /* Increase resize handle area for easier window resizing */
 /* Set CSS custom properties to increase resize handle size */
 win98-window[resizable] {

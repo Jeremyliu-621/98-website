@@ -484,7 +484,7 @@ function initApp() {
       </div>
 
       <!-- About Me Window - Left -->
-      <win98-window title="About Me.exe" resizable class="window-about-me">
+      <win98-window title="About Me.exe" resizable show-minimize class="window-about-me">
         <div class="window-body">
           <h2 id="about-me-name" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">J</em>eremy <em style="font-size: 1.2em;">L</em>iu</h2>
           <p class="bold-title">${content.aboutMe.title}</p>
@@ -521,7 +521,7 @@ function initApp() {
       </win98-window>
 
       <!-- Skills Window - Middle Top -->
-      <win98-window title="Skills.exe" resizable class="window-skills">
+      <win98-window title="Skills.exe" resizable show-minimize class="window-skills">
         <div class="window-body">
           <h3 id="skills-languages" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Languages</em></h3>
           <p style="margin: 3px 0;">${content.skills.languages}</p>
@@ -546,7 +546,7 @@ function initApp() {
       </win98-window>
 
       <!-- Hobbies Window - Middle Bottom -->
-      <win98-window title="Hobbies.exe" resizable class="window-hobbies">
+      <win98-window title="Hobbies.exe" resizable show-minimize class="window-hobbies">
         <div class="window-body">
           <h3 id="hobbies-title" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><span style="font-size: 1.2em;">Outside</span> of Academics</h3>
           <p>${content.hobbies}</p>
@@ -578,7 +578,7 @@ function initApp() {
       ${generateProjectsWindowHTML(projectsHTML)}
 
       <!-- Interactive Window -->
-      <win98-window title="Interactive.exe" resizable class="window-interactive">
+      <win98-window title="Interactive.exe" resizable show-minimize class="window-interactive">
         <div class="window-body" style="overflow: hidden; display: flex; align-items: center; gap: 10px;">
           <p id="interactive-text" class="animate-title-fast" style="margin: 0; font-size: 1.15em; flex: 1; visibility: hidden;">you can interact with windows!</p>
           <img src="${
@@ -619,6 +619,10 @@ function initApp() {
 
   // Helper function to bring window to front (needed by window opening functions)
   function bringWindowToFront(window) {
+    // Update taskbar button to show active state when window is brought to front
+    if (window && !window.hasAttribute("data-minimized")) {
+      updateTaskbarButton(window, false);
+    }
     if (window) {
       window.style.display = "block";
       window.style.visibility = "visible";
@@ -1056,6 +1060,8 @@ function initApp() {
     // Monitor for dynamically added windows
     const windowObserver = new MutationObserver(() => {
       constrainWindowPositions();
+      ensureMinimizeButtons();
+      fixLeftResizeForRightPositionedWindows();
     });
 
     const desktop = document.querySelector("win98-desktop");
@@ -1067,6 +1073,347 @@ function initApp() {
 
       // Background wallpaper is now handled by applyColorPalette based on selected theme
       // This ensures dark theme gets dark background, others get default background
+    }
+
+    // ============================================
+    // WINDOW MINIMIZE FUNCTIONALITY
+    // ============================================
+    // The 98-components library has built-in minimize functionality!
+    // Windows automatically have minimize buttons (unless show-help is set)
+    // The desktop component handles minimize/restore automatically via events
+    // We need to ensure windows are properly registered with the desktop
+
+    // Ensure all windows have show-minimize attribute (enabled by default, but explicit is better)
+    function ensureMinimizeButtons() {
+      document.querySelectorAll("win98-window").forEach((window) => {
+        // Only add if not already set and not showing help
+        if (
+          !window.hasAttribute("show-help") &&
+          !window.hasAttribute("show-minimize")
+        ) {
+          window.setAttribute("show-minimize", "");
+        }
+      });
+    }
+
+    // Function to update taskbar button state (accessible globally)
+    function updateTaskbarButton(window, isMinimized) {
+      const taskbar = document.querySelector("win98-taskbar");
+      if (!taskbar || !taskbar.shadowRoot) return;
+
+      const windowTitle = window.getAttribute("title");
+      const buttons = taskbar.shadowRoot.querySelectorAll(".task-button");
+
+      buttons.forEach((button) => {
+        if (button.textContent?.trim() === windowTitle) {
+          // Remove existing state classes
+          button.classList.remove("active", "minimized");
+
+          // Add appropriate state class
+          if (isMinimized) {
+            button.classList.add("minimized");
+          } else {
+            // Window is open - check if it's the active window
+            const allWindows = document.querySelectorAll("win98-window");
+            let isActive = false;
+            let highestZ = -1;
+
+            allWindows.forEach((w) => {
+              if (!w.hasAttribute("data-minimized")) {
+                const z = parseInt(w.style.zIndex || "0");
+                if (z > highestZ) {
+                  highestZ = z;
+                  isActive = w === window;
+                }
+              }
+            });
+
+            if (isActive || highestZ === -1) {
+              button.classList.add("active");
+            }
+          }
+        }
+      });
+    }
+
+    // Ensure windows are registered with the desktop component
+    function ensureWindowsRegistered() {
+      const desktopEl = document.querySelector("win98-desktop");
+      if (!desktopEl) return;
+
+      // The desktop component should auto-register windows, but we can trigger it manually
+      // by accessing the registerWindows method if available
+      if (
+        desktopEl.registerWindows &&
+        typeof desktopEl.registerWindows === "function"
+      ) {
+        desktopEl.registerWindows();
+      }
+    }
+
+    // Use a global click handler with composedPath to catch shadow DOM clicks
+    document.addEventListener(
+      "click",
+      (e) => {
+        // Get the full path of the click (including shadow DOM)
+        const path = e.composedPath();
+
+        // Find if any element in the path is a minimize button
+        const minimizeButton = path.find(
+          (el) =>
+            el.getAttribute?.("aria-label") === "Minimize" ||
+            (el.tagName === "BUTTON" && el.textContent?.trim() === "—")
+        );
+
+        if (minimizeButton) {
+          // Find the window that contains this button
+          const window = path.find((el) => el.tagName === "WIN98-WINDOW");
+
+          if (window) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Hide the window forcefully
+            window.style.setProperty("display", "none", "important");
+            window.style.setProperty("visibility", "hidden", "important");
+            window.setAttribute("data-minimized", "true");
+
+            // Also add a class to help with CSS targeting
+            window.classList.add("minimized");
+
+            // Update taskbar button to show minimized state
+            updateTaskbarButton(window, true);
+
+            console.log("Window minimized:", window.getAttribute("title"));
+          }
+        }
+      },
+      true
+    ); // Capture phase
+
+    // Also directly attach handlers to minimize buttons in shadow DOM
+    function attachMinimizeHandlers() {
+      document.querySelectorAll("win98-window").forEach((window) => {
+        if (window.dataset.minimizeHandlerAttached) return;
+
+        const tryAttach = () => {
+          if (!window.shadowRoot) {
+            setTimeout(tryAttach, 50);
+            return;
+          }
+
+          const minimizeBtn = window.shadowRoot.querySelector(
+            '[aria-label="Minimize"]'
+          );
+          if (minimizeBtn && !minimizeBtn.dataset.handlerAttached) {
+            minimizeBtn.dataset.handlerAttached = "true";
+            window.dataset.minimizeHandlerAttached = "true";
+
+            minimizeBtn.addEventListener(
+              "click",
+              (e) => {
+                // Hide the window forcefully
+                window.style.setProperty("display", "none", "important");
+                window.style.setProperty("visibility", "hidden", "important");
+                window.setAttribute("data-minimized", "true");
+                window.classList.add("minimized");
+
+                // Update taskbar button to show minimized state
+                updateTaskbarButton(window, true);
+
+                console.log(
+                  "Window minimized (direct):",
+                  window.getAttribute("title")
+                );
+              },
+              true
+            );
+          } else if (!minimizeBtn) {
+            setTimeout(tryAttach, 100);
+          }
+        };
+
+        tryAttach();
+      });
+    }
+
+    // Attach handlers after a delay to ensure shadow DOM is ready
+    setTimeout(attachMinimizeHandlers, 300);
+    setTimeout(attachMinimizeHandlers, 1000); // Try again in case components load late
+
+    // Handle window restore (when clicking taskbar or programmatically)
+    function setupRestoreHandlers() {
+      // Listen for window-restored events from the library
+      document.addEventListener("window-restored", (e) => {
+        const windowTitle = e.detail?.title || e.target?.getAttribute("title");
+        if (windowTitle) {
+          const window = document.querySelector(
+            `win98-window[title="${windowTitle}"]`
+          );
+          if (window && window.hasAttribute("data-minimized")) {
+            window.style.removeProperty("display");
+            window.style.removeProperty("visibility");
+            window.removeAttribute("data-minimized");
+            window.classList.remove("minimized");
+            window.classList.add("window-pop-open");
+            bringWindowToFront(window);
+
+            // Update taskbar button to show active state
+            updateTaskbarButton(window, false);
+          }
+        }
+      });
+
+      // Also listen for clicks on taskbar buttons to restore windows
+      const taskbar = document.querySelector("win98-taskbar");
+      if (taskbar && taskbar.shadowRoot) {
+        // Use event delegation for taskbar clicks
+        taskbar.shadowRoot.addEventListener("click", (e) => {
+          const button = e.target.closest("button, [role='button']");
+          if (button && !button.classList.contains("start-button")) {
+            const windowTitle =
+              button.textContent?.trim() || button.getAttribute("title");
+            if (windowTitle) {
+              const window = document.querySelector(
+                `win98-window[title="${windowTitle}"]`
+              );
+              if (window && window.hasAttribute("data-minimized")) {
+                // Restore the window
+                window.style.removeProperty("display");
+                window.style.removeProperty("visibility");
+                window.removeAttribute("data-minimized");
+                window.classList.remove("minimized");
+                window.classList.add("window-pop-open");
+                bringWindowToFront(window);
+
+                // Update taskbar button to show active state
+                updateTaskbarButton(window, false);
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // Make title bars responsive - truncate title text when window is narrow
+    function makeTitleBarsResponsive() {
+      document.querySelectorAll("win98-window").forEach((window) => {
+        if (window.dataset.titleBarResponsive) return;
+        window.dataset.titleBarResponsive = "true";
+
+        const setupTitleBar = () => {
+          if (!window.shadowRoot) {
+            setTimeout(setupTitleBar, 50);
+            return;
+          }
+
+          const titleBar = window.shadowRoot.querySelector(".title-bar");
+          const titleText = window.shadowRoot.querySelector(".title-bar-text");
+          const titleControls = window.shadowRoot.querySelector(
+            ".title-bar-controls"
+          );
+
+          if (titleBar && titleText && titleControls) {
+            // Add styles to make title bar responsive
+            if (
+              !window.shadowRoot.querySelector("#responsive-title-bar-styles")
+            ) {
+              const style = document.createElement("style");
+              style.id = "responsive-title-bar-styles";
+              style.textContent = `
+                .title-bar {
+                  display: flex !important;
+                  align-items: center !important;
+                  min-width: 0 !important;
+                }
+                .title-bar-text {
+                  flex: 1 1 auto !important;
+                  min-width: 0 !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                  white-space: nowrap !important;
+                  margin-right: 4px !important;
+                }
+                .title-bar-controls {
+                  flex: 0 0 auto !important;
+                  display: flex !important;
+                  gap: 2px !important;
+                  margin-left: auto !important;
+                  flex-shrink: 0 !important;
+                }
+              `;
+              window.shadowRoot.appendChild(style);
+            }
+          } else {
+            setTimeout(setupTitleBar, 100);
+          }
+        };
+
+        setupTitleBar();
+      });
+    }
+
+    // Convert windows positioned with 'right' to 'left' for proper resizing
+    function convertRightPositionedWindows() {
+      document
+        .querySelectorAll(".window-skills, .window-hobbies")
+        .forEach((winElement) => {
+          // Only convert once
+          if (winElement.dataset.convertedToLeft) return;
+          winElement.dataset.convertedToLeft = "true";
+
+          // Get current computed styles
+          const computedStyle = getComputedStyle(winElement);
+          const currentRight = computedStyle.right;
+          const currentWidth = computedStyle.width;
+          const currentBottom = computedStyle.bottom;
+
+          // Only convert if currently using right positioning
+          if (currentRight !== "auto" && currentRight !== "0px") {
+            // Calculate left position from right and width
+            const rightValue = parseFloat(currentRight);
+            const widthValue = parseFloat(currentWidth);
+            const viewportWidth = document.documentElement.clientWidth;
+
+            // Convert to left-based positioning
+            const leftValue = viewportWidth - rightValue - widthValue;
+
+            // Apply left positioning and remove right
+            winElement.style.right = "auto";
+            winElement.style.left = `${leftValue}px`;
+            winElement.style.width = `${widthValue}px`;
+
+            // Keep bottom positioning if it exists
+            if (currentBottom !== "auto" && currentBottom !== "0px") {
+              winElement.style.bottom = currentBottom;
+            }
+          }
+        });
+    }
+
+    // Setup minimize buttons and registration for existing windows
+    setTimeout(() => {
+      ensureMinimizeButtons();
+      ensureWindowsRegistered();
+      setupRestoreHandlers();
+      convertRightPositionedWindows();
+      makeTitleBarsResponsive();
+    }, 300);
+
+    // Re-register when new windows are added
+    const minimizeObserver = new MutationObserver(() => {
+      ensureMinimizeButtons();
+      ensureWindowsRegistered();
+      convertRightPositionedWindows();
+      makeTitleBarsResponsive();
+    });
+
+    const desktopForMinimize = document.querySelector("win98-desktop");
+    if (desktopForMinimize) {
+      minimizeObserver.observe(desktopForMinimize, {
+        childList: true,
+        subtree: true,
+      });
     }
 
     // ============================================
@@ -1672,7 +2019,7 @@ function initApp() {
 
         // Create window HTML
         const windowHTML = `
-            <win98-window title="Folder.exe" resizable style="top: 100px; left: 100px; width: 600px; height: 500px; z-index: 1000;">
+            <win98-window title="Folder.exe" resizable show-minimize style="top: 100px; left: 100px; width: 600px; height: 500px; z-index: 1000;">
               <div class="window-body" style="padding: 8px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; border: 2px solid #808080;">
                 <h3 style="margin-top: 0; margin-bottom: 8px; font-weight: bold;">Images</h3>
                 <div style="margin-bottom: 20px; padding: 8px; background: #e0e0e0; border: 1px solid #c0c0c0;">
@@ -1746,7 +2093,7 @@ function initApp() {
       if (!viewerWindow) {
         // Create viewer window HTML
         const viewerHTML = `
-            <win98-window title="Image Viewer.exe" resizable style="top: 150px; left: 200px; width: 700px; height: 600px; z-index: 2000;">
+            <win98-window title="Image Viewer.exe" resizable show-minimize style="top: 150px; left: 200px; width: 700px; height: 600px; z-index: 2000;">
               <div class="window-body" style="padding: 8px; height: calc(100% - 54px); box-sizing: border-box; display: flex; flex-direction: column;">
                 <div class="viewer-image-container" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; position: relative; overflow: hidden; padding: 8px;">
                   <div class="viewer-image-inner" style="padding: 8px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; box-sizing: border-box;">
@@ -1868,7 +2215,7 @@ function initApp() {
 
       if (!chatboxWindow) {
         const windowHTML = `
-          <win98-window title="Chatbox.exe" resizable style="top: 100px; left: 100px; width: 600px; height: 550px; z-index: 1000;">
+          <win98-window title="Chatbox.exe" resizable show-minimize style="top: 100px; left: 100px; width: 600px; height: 550px; z-index: 1000;">
             <div class="window-body" style="padding: 8px; overflow: hidden; height: calc(100% - 54px); box-sizing: border-box;">
               <iframe src="https://www3.cbox.ws/box/?boxid=3551058&boxtag=a6HwaA" width="100%" height="100%" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="border: 1px solid #808080; background: #fff;"></iframe>
             </div>
@@ -1942,7 +2289,7 @@ function initApp() {
           .join("");
 
         const windowHTML = `
-          <win98-window title="Settings.exe" resizable style="top: 100px; left: 100px; width: 500px; height: 530px; z-index: 1000;">
+          <win98-window title="Settings.exe" resizable show-minimize style="top: 100px; left: 100px; width: 500px; height: 530px; z-index: 1000;">
             <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box; padding-bottom: 20px;">
               <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.5em;">Settings</h2>
               
@@ -2055,7 +2402,7 @@ function initApp() {
 
         // Create thanks window HTML
         const windowHTML = `
-          <win98-window title="Thank you!.exe" resizable style="top: 50px; left: 50px; width: 600px; height: 500px; z-index: 1000;">
+          <win98-window title="Thank you!.exe" resizable show-minimize style="top: 50px; left: 50px; width: 600px; height: 500px; z-index: 1000;">
             <div class="window-body" style="padding: 12px; overflow-y: auto; height: calc(100% - 54px); box-sizing: border-box;">
               <h2 style="margin-top: 0; margin-bottom: 20px; font-weight: bold; font-size: 1.8em; text-align: center;">Thank You!</h2>
               <div style="max-width: 100%;">
@@ -2104,7 +2451,7 @@ function initApp() {
           .join("");
 
         const windowHTML = `
-          <win98-window title="About Me.exe" resizable class="window-about-me">
+          <win98-window title="About Me.exe" resizable show-minimize class="window-about-me">
             <div class="window-body">
               <h2 id="about-me-name" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">J</em>eremy <em style="font-size: 1.2em;">L</em>iu</h2>
               <p class="bold-title">${content.aboutMe.title}</p>
@@ -2182,7 +2529,7 @@ function initApp() {
           .join("");
 
         const windowHTML = `
-          <win98-window title="Skills.exe" resizable class="window-skills">
+          <win98-window title="Skills.exe" resizable show-minimize class="window-skills">
             <div class="window-body">
               <h3 id="skills-languages" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Languages</em></h3>
               <p style="margin: 3px 0;">${content.skills.languages}</p>
@@ -2252,7 +2599,7 @@ function initApp() {
 
       if (!hobbiesWindow) {
         const windowHTML = `
-          <win98-window title="Hobbies.exe" resizable class="window-hobbies">
+          <win98-window title="Hobbies.exe" resizable show-minimize class="window-hobbies">
             <div class="window-body">
               <h3 id="hobbies-title" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><span style="font-size: 1.2em;">Outside</span> of Academics</h3>
               <p>${content.hobbies}</p>
@@ -2363,7 +2710,7 @@ function initApp() {
 
       if (!interactiveWindow) {
         const windowHTML = `
-          <win98-window title="Interactive.exe" resizable class="window-interactive">
+          <win98-window title="Interactive.exe" resizable show-minimize class="window-interactive">
             <div class="window-body" style="overflow: hidden; display: flex; align-items: center; gap: 10px;">
               <p id="interactive-text" class="animate-title-fast" style="margin: 0; font-size: 1.15em; flex: 1; visibility: hidden;">you can interact with windows!</p>
               <img src="${

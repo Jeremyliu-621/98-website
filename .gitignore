@@ -25,3 +25,6 @@ dist-ssr
 
 src/assets/j-space-gif.gif
 
+# Temporary directories
+temp-98-components
+
