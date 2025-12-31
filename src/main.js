@@ -65,19 +65,19 @@ export const content = {
     ],
   },
   skills: {
-    languages: "Python, JavaScript, TypeScript, C, MATLAB, HTML, CSS, Swift",
+    languages: "Python, JavaScript, C, MATLAB, TypeScript, HTML, CSS, Swift",
     frameworks:
       "React, Next.js, Node.js, Express.js, Bootstrap, Tailwind CSS, Matplotlib, Tkinter, Email.js",
     libraries: "OpenCV, Pandas, NumPy, Selenium, BeautifulSoup, jQuery",
     tools:
-      "Git, PostgreSQL, AWS, Arduino, Visual Studio Code, Google Cloud Platform, Cursor.ai",
-  },
-  improvingBy: [
-    "Applying knowledge to create useful projects",
-    "Learning more back-end frameworks",
-    "Using AI to create smarter applications",
-  ],
+      "AWS, Git, PostgreSQL, Arduino, Visual Studio Code, Google Cloud Platform, Cursor.ai",
 
+    improvingBy: [
+      "Applying knowledge to create useful projects",
+      "Learning more back-end frameworks",
+      "Using AI to create smarter applications",
+    ],
+  },
   projects: [
     {
       title: "UFC Index website",
