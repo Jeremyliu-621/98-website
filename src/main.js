@@ -552,8 +552,8 @@ function initApp() {
             getImageUrl("cruisesunset") || ""
           }" alt="Cruise Sunset" style="width: 60%; height: 100px; margin: 8px 2px; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
           <img src="${
-            getImageUrl("armbar") || ""
-          }" alt="Cruise Sunset" style="width: 60%; height: 100px; margin: 8px 2px; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
+            getImageUrl("pixelbjj") || ""
+          }" alt="bjj pixel art" style="width: 60%; height: 100px; margin: 8px 2px; border: 2px solid #808080; box-sizing: border-box; display: block; object-fit: cover; object-position: center;">
           </div>
           <div class="social-buttons-grid">
             <a href="https://www.linkedin.com/in/jmyl" target="_blank" class="social-btn"><img src="${
