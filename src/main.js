@@ -2536,7 +2536,7 @@ function initApp() {
     setupDesktopIcon("#desktop-folder", openFolderWindow);
     setupDesktopIcon("#desktop-blog", () => {
       // Open blog as a separate website
-      window.open("https://your-blog-url.com", "_blank");
+      window.open("https://more-jeremy.vercel.app/", "_blank");
     });
     setupDesktopIcon("#desktop-chatbox", openChatboxWindow);
     setupDesktopIcon("#desktop-theme", openSettingsWindow);
