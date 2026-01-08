@@ -668,9 +668,9 @@ function initApp() {
 
   // Wait for custom elements to be defined
   setTimeout(() => {
-    // Always pick a random theme on every page load (excluding "default")
+    // Always pick a random theme on every page load (excluding "default" and "dark")
     const paletteKeys = Object.keys(colorPalettes).filter(
-      (key) => key !== "default"
+      (key) => key !== "default" && key !== "dark"
     );
     const randomKey =
       paletteKeys[Math.floor(Math.random() * paletteKeys.length)];
