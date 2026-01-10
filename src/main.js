@@ -99,17 +99,6 @@ export const content = {
         " Built responsive UI components using React, TypeScript and TailwindCSS.",
     },
     {
-      title: "My First Portfolio Website",
-      description: "A page that displays everything about me.",
-      image: "portfolio-works-gif",
-      website: "https://jeremy-liu.vercel.app/",
-      github: "https://github.com/Jeremyliu-621/portfolio-works",
-      additionalInfo:
-        "Built purely using HTML and CSS, using Bootstrap components for some styling." +
-        " My first ever website, and I'm proud of it." +
-        " No AI used.",
-    },
-    {
       title: "stop! don't go on.",
       description: "Water Sprayer that stops bad habits.",
       front: "React, Vite, TypeScript",
@@ -135,8 +124,21 @@ export const content = {
         " Used the open-source98-components library and cursor.ai to try and replicate that nostalgic feel to old websites.",
     },
     {
+      title: "My First Portfolio Website",
+      description: "A page that displays everything about me.",
+      front: "HTML, CSS, Javascript, Bootstrap",
+      image: "portfolio-works-gif",
+      website: "https://jeremy-liu.vercel.app/",
+      github: "https://github.com/Jeremyliu-621/portfolio-works",
+      additionalInfo:
+        "Built purely using HTML and CSS, using Bootstrap components for some styling." +
+        " My first ever website, and I'm proud of it." +
+        " No AI used.",
+    },
+    {
       title: "Cookie Clicker Bot",
       description: "Bot that clicks cookies and buys upgrades!",
+      back: "Python, selenium",
       image: "cookie-clicker-bot",
       github: "https://github.com/Jeremyliu-621/cookie-clicker",
       additionalInfo:
