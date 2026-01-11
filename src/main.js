@@ -128,7 +128,7 @@ export const content = {
       description: "A page that displays everything about me.",
       front: "HTML, CSS, Javascript, Bootstrap",
       image: "portfolio-works-gif",
-      website: "https://jeremy-liu.vercel.app/",
+      website: "https://jeremyliu.vercel.app/",
       github: "https://github.com/Jeremyliu-621/portfolio-works",
       additionalInfo:
         "Built purely using HTML and CSS, using Bootstrap components for some styling." +
@@ -440,8 +440,8 @@ function initApp() {
 
       <!-- Desktop Blog Icon -->
       <div class="desktop-folder" id="desktop-blog">
-        <img src="${getImageUrl("user-world") || ""}" alt="Blog">
-        <span>Blog</span>
+        <img src="${getImageUrl("user-world") || ""}" alt="See More Jeremy!">
+        <span>See More Jeremy!</span>
       </div>
 
       <!-- Desktop Chatbox Icon -->
@@ -589,7 +589,7 @@ function initApp() {
           <li id="menu-interactive">✨ Interactive</li>
           <hr>
           <li id="menu-folder">📂 Folder</li>
-          <li id="menu-blog">📝 Blog</li>
+          <li id="menu-blog">📝 See More Jeremy!</li>
           <li id="menu-chatbox">💬 Chatbox</li>
           <li id="menu-thanks">🙏 Thank you!</li>
           <hr>
@@ -2874,7 +2874,7 @@ function initApp() {
       "menu-folder": () => openFolderWindow(),
       "menu-blog": () => {
         // Open blog as a separate website
-        window.open("https://your-blog-url.com", "_blank");
+        window.open("https://more-jeremy.vercel.app", "_blank");
       },
       "menu-chatbox": () => openChatboxWindow(),
       "menu-thanks": () => openThanksWindow(),
