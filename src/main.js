@@ -59,12 +59,11 @@ export const content = {
     ],
   },
   skills: {
-    languages: "Python, JavaScript, C, MATLAB, TypeScript, HTML, CSS, Swift",
-    frameworks:
-      "React, Next.js, Node.js, Express.js, Bootstrap, Tailwind CSS, Matplotlib, Tkinter, Email.js",
-    libraries: "OpenCV, Pandas, NumPy, Selenium, BeautifulSoup, jQuery",
-    tools:
-      "AWS, Git, PostgreSQL, Arduino, Visual Studio Code, Google Cloud Platform, Cursor.ai",
+    programmingLanguages: "Python, C, JavaScript, TypeScript, MATLAB, SQL",
+    webUI: "React, Next.js, HTML, CSS, Bootstrap, Tailwind, Vite",
+    roboticsSystems: "ROS2, Linux (Ubuntu), Arduino, OpenCV",
+    dataML: "Pytorch, Scikit-learn, Matplotlib, Pandas, NumPy, OpenCV, BeautifulSoup, Selenium",
+    developerTools: "Git, Node.js, AWS, PostgreSQL, Postman, VS Code, Claude, Cursor.ai",
 
     improvingBy: [
       "Applying knowledge to create useful projects",
@@ -502,23 +501,28 @@ function initApp() {
       <!-- Skills Window - Middle Top -->
       <win98-window title="Skills.exe" resizable show-minimize class="window-skills">
         <div class="window-body">
-          <h3 id="skills-languages" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Languages</em></h3>
-          <p style="margin: 3px 0;">${content.skills.languages}</p>
+          <h3 id="skills-programming-languages" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Programming Languages</em></h3>
+          <p style="margin: 3px 0;">${content.skills.programmingLanguages}</p>
           
           <hr style="margin: 8px 0;">
           
-          <h3 id="skills-frameworks" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Frameworks</em></h3>
-          <p style="margin: 3px 0;">${content.skills.frameworks}</p>
-          
-          <hr style="margin: 8px 0;">
-
-          <h3 id="skills-libraries" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Libraries</em></h3>
-          <p style="margin: 3px 0;">${content.skills.libraries}</p>
+          <h3 id="skills-web-ui" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Web & UI</em></h3>
+          <p style="margin: 3px 0;">${content.skills.webUI}</p>
           
           <hr style="margin: 8px 0;">
 
-          <h3 id="skills-tools" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Tools</em></h3>
-          <p style="margin: 3px 0;">${content.skills.tools}</p>
+          <h3 id="skills-robotics-systems" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Robotics & Systems</em></h3>
+          <p style="margin: 3px 0;">${content.skills.roboticsSystems}</p>
+          
+          <hr style="margin: 8px 0;">
+          
+          <h3 id="skills-data-ml" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Data & ML</em></h3>
+          <p style="margin: 3px 0;">${content.skills.dataML}</p>
+          
+          <hr style="margin: 8px 0;">
+          
+          <h3 id="skills-developer-tools" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Developer Tools</em></h3>
+          <p style="margin: 3px 0;">${content.skills.developerTools}</p>
           
           <hr style="margin: 8px 0;">
           
@@ -2008,10 +2012,11 @@ function initApp() {
       popOpenWindow(
         ".window-skills",
         [
-          "#skills-languages",
-          "#skills-frameworks",
-          "#skills-libraries",
-          "#skills-tools",
+          "#skills-programming-languages",
+          "#skills-web-ui",
+          "#skills-robotics-systems",
+          "#skills-data-ml",
+          "#skills-developer-tools",
         ],
         700
       );
@@ -2636,23 +2641,28 @@ function initApp() {
         const windowHTML = `
           <win98-window title="Skills.exe" resizable show-minimize class="window-skills">
             <div class="window-body">
-              <h3 id="skills-languages" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Languages</em></h3>
-              <p style="margin: 3px 0;">${content.skills.languages}</p>
+              <h3 id="skills-programming-languages" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Programming Languages</em></h3>
+              <p style="margin: 3px 0;">${content.skills.programmingLanguages}</p>
               
               <hr style="margin: 8px 0;">
               
-              <h3 id="skills-frameworks" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Frameworks</em></h3>
-              <p style="margin: 3px 0;">${content.skills.frameworks}</p>
+              <h3 id="skills-web-ui" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Web & UI</em></h3>
+              <p style="margin: 3px 0;">${content.skills.webUI}</p>
               
               <hr style="margin: 8px 0;">
 
-              <h3 id="skills-libraries" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Libraries</em></h3>
-              <p style="margin: 3px 0;">${content.skills.libraries}</p>
+              <h3 id="skills-robotics-systems" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Robotics & Systems</em></h3>
+              <p style="margin: 3px 0;">${content.skills.roboticsSystems}</p>
           
               <hr style="margin: 8px 0;">
               
-              <h3 id="skills-tools" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Tools</em></h3>
-              <p style="margin: 3px 0;">${content.skills.tools}</p>
+              <h3 id="skills-data-ml" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Data & ML</em></h3>
+              <p style="margin: 3px 0;">${content.skills.dataML}</p>
+              
+              <hr style="margin: 8px 0;">
+              
+              <h3 id="skills-developer-tools" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Developer Tools</em></h3>
+              <p style="margin: 3px 0;">${content.skills.developerTools}</p>
               
               <hr style="margin: 8px 0;">
               
@@ -2680,10 +2690,11 @@ function initApp() {
             // Trigger typing animation
             setTimeout(() => {
               triggerTypingAnimation([
-                "#skills-languages",
-                "#skills-frameworks",
-                "#skills-libraries",
-                "#skills-tools",
+                "#skills-programming-languages",
+                "#skills-web-ui",
+                "#skills-robotics-systems",
+                "#skills-data-ml",
+                "#skills-developer-tools",
               ]);
             }, 50);
           }
@@ -2695,10 +2706,11 @@ function initApp() {
         // Trigger typing animation if window already exists
         setTimeout(() => {
           triggerTypingAnimation([
-            "#skills-languages",
-            "#skills-frameworks",
-            "#skills-libraries",
-            "#skills-tools",
+            "#skills-programming-languages",
+            "#skills-web-ui",
+            "#skills-robotics-systems",
+            "#skills-data-ml",
+            "#skills-developer-tools",
           ]);
         }, 50);
       }
