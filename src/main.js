@@ -73,6 +73,19 @@ export const content = {
   },
   projects: [
     {
+      title: "LockBlock",
+      description: "A smart security system using Arduino and computer vision to block deadbolts when unknown faces are detected.",
+      front: "JavaScript, Phantom Wallet",
+      back: "Python, Flask, OpenCV, Solana, SQLite, Arduino",
+      image: "lockblock",
+      github: "https://github.com/Jeremyliu-621/lockblock",
+      additionalInfo:
+        "Designed a smart security system using Arduino and CV to block two deadbolts when unknown faces are detected. " +
+        "Used OpenCV YuNet (face detection) and SFace (embedding similarity) to classify known vs unknown faces locally with no cloud dependency for faster processing. " +
+        "Developed a Flask backend with SQLite-based face embedding storage, whitelist management, and REST endpoints coordinating CV inference, authentication, and lock state. " +
+        "Integrated a Solana wallet authentication using Ed25519 signature verification to allow doors to unlock remotely.",
+    },
+    {
       title: "UFC Index website",
       description: "A website that shows scraped stats for UFC Fighters.",
       front: "Next.js, React, Typescript, Tailwind",
