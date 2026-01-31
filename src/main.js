@@ -516,21 +516,21 @@ function initApp() {
         <div class="window-body">
           <h3 id="skills-programming-languages" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Programming Languages</em></h3>
           <p style="margin: 3px 0;">${content.skills.programmingLanguages}</p>
+
+          <hr style="margin: 8px 0;">
+          
+          <h3 id="skills-data-ml" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Data & ML</em></h3>
+          <p style="margin: 3px 0;">${content.skills.dataML}</p>
           
           <hr style="margin: 8px 0;">
           
-          <h3 id="skills-web-ui" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Web & UI</em></h3>
+          <h3 id="skills-web-ui" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Web & UI</em></h3>
           <p style="margin: 3px 0;">${content.skills.webUI}</p>
           
           <hr style="margin: 8px 0;">
 
           <h3 id="skills-robotics-systems" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Robotics & Systems</em></h3>
           <p style="margin: 3px 0;">${content.skills.roboticsSystems}</p>
-          
-          <hr style="margin: 8px 0;">
-          
-          <h3 id="skills-data-ml" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Data & ML</em></h3>
-          <p style="margin: 3px 0;">${content.skills.dataML}</p>
           
           <hr style="margin: 8px 0;">
           
@@ -2659,7 +2659,7 @@ function initApp() {
               
               <hr style="margin: 8px 0;">
               
-              <h3 id="skills-web-ui" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Web & UI</em></h3>
+              <h3 id="skills-web-ui" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Web & UI</em></h3>
               <p style="margin: 3px 0;">${content.skills.webUI}</p>
               
               <hr style="margin: 8px 0;">
@@ -2669,7 +2669,7 @@ function initApp() {
           
               <hr style="margin: 8px 0;">
               
-              <h3 id="skills-data-ml" class="animate-title-fast" style="visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Data & ML</em></h3>
+              <h3 id="skills-data-ml" class="animate-title-fast" style="color: var(--palette-color-1, #000000); visibility: hidden; min-height: 1.2em;"><em style="font-size: 1.2em;">Data & ML</em></h3>
               <p style="margin: 3px 0;">${content.skills.dataML}</p>
               
               <hr style="margin: 8px 0;">
@@ -2679,7 +2679,7 @@ function initApp() {
               
               <hr style="margin: 8px 0;">
               
-              <h3>Currently improving by:</h3>
+              <h3 style="color: var(--palette-color-1, #000000);">Currently improving by:</h3>
               <ul style="text-align: left; margin: 3px 0 0 0; padding-left: 20px; line-height: 1.4;">
                 ${improvingHTML}
               </ul>
