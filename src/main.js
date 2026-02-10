@@ -73,6 +73,19 @@ export const content = {
   },
   projects: [
     {
+      title: "Sinatra",
+      description: "A DAW that turns your voice into any instrument of your choice.",
+      front: "React, TypeScript, Vite, Tailwind CSS, Three.js",
+      back: "Python, FastAPI, Supabase (PostgreSQL, Auth), Spotify Basic Pitch, Gradium",
+      image: "sinatra",
+      github: "https://github.com/e-yang6/sinatra",
+      website: "https://sinatra-daw.vercel.app/",
+      additionalInfo:
+        "Built an AI-assisted DAW that turns voices into instrument tracks with BPM-alignment and chord generation." +
+        "Implemented a FastAPI pipeline that detects drum BPM (librosa), transcribes vocals to MIDI (Spotify’s Basic Pitch), and renders MIDI to WAV (FluidSynth)." +
+        "Used Gradium speech-to-text and Gemini API to create “Frank”, an in-app assistant that responds to natural-language prompts to create chord progressions, rearrange music, and give compositional feedback",
+    },
+    {
       title: "LockBlock",
       description: "A smart security system using Arduino and computer vision to block deadbolts when unknown faces are detected.",
       front: "JavaScript, Phantom Wallet",
